@@ -1,3 +1,3 @@
 export default function Page() {
-  return <>메인</>;
+  return <>내 서재</>;
 }

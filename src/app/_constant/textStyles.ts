@@ -34,16 +34,21 @@ interface TextStyle {
     fontSize: number;
     fontWeight: number;
     lineHeight: string;
+    fontFamily: string;
   };
   Mobile: {
     fontSize: number;
     fontWeight: number;
     lineHeight: string;
+    fontFamily: string;
   };
 }
 
 const LINE_HEIGHT_RATIO = '120%';
 const LINE_HEIGHT_RATIO_BIG = '150%';
+
+const FONT_PRETENDARD = 'pretendard';
+const FONT_KOPUB = 'KoPubWorldBatang';
 
 /**
  * web 폰트 스타일 지정해주는 객체.
@@ -54,11 +59,13 @@ export const TEXT_STYLES: Record<TextStyleName, TextStyle> = {
       fontSize: 36,
       fontWeight: 700,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
     Mobile: {
       fontSize: 30,
       fontWeight: 700,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
   },
   [TEXT_STYLE_NAME.title2B]: {
@@ -66,11 +73,13 @@ export const TEXT_STYLES: Record<TextStyleName, TextStyle> = {
       fontSize: 28,
       fontWeight: 700,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
     Mobile: {
       fontSize: 22,
       fontWeight: 700,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
   },
   [TEXT_STYLE_NAME.title3B]: {
@@ -78,11 +87,13 @@ export const TEXT_STYLES: Record<TextStyleName, TextStyle> = {
       fontSize: 22,
       fontWeight: 700,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
     Mobile: {
       fontSize: 18,
       fontWeight: 700,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
   },
   [TEXT_STYLE_NAME.title3R]: {
@@ -90,11 +101,13 @@ export const TEXT_STYLES: Record<TextStyleName, TextStyle> = {
       fontSize: 22,
       fontWeight: 400,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
     Mobile: {
       fontSize: 18,
       fontWeight: 400,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
   },
   [TEXT_STYLE_NAME.title4B]: {
@@ -102,11 +115,13 @@ export const TEXT_STYLES: Record<TextStyleName, TextStyle> = {
       fontSize: 18,
       fontWeight: 600,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
     Mobile: {
       fontSize: 16,
       fontWeight: 600,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
   },
   [TEXT_STYLE_NAME.body1B]: {
@@ -114,11 +129,13 @@ export const TEXT_STYLES: Record<TextStyleName, TextStyle> = {
       fontSize: 18,
       fontWeight: 600,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
     Mobile: {
       fontSize: 16,
       fontWeight: 600,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
   },
   [TEXT_STYLE_NAME.body1R]: {
@@ -126,11 +143,13 @@ export const TEXT_STYLES: Record<TextStyleName, TextStyle> = {
       fontSize: 18,
       fontWeight: 400,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
     Mobile: {
       fontSize: 16,
       fontWeight: 400,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
   },
   [TEXT_STYLE_NAME.body2B]: {
@@ -138,11 +157,13 @@ export const TEXT_STYLES: Record<TextStyleName, TextStyle> = {
       fontSize: 16,
       fontWeight: 600,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
     Mobile: {
       fontSize: 14,
       fontWeight: 600,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
   },
   [TEXT_STYLE_NAME.body2R]: {
@@ -150,11 +171,13 @@ export const TEXT_STYLES: Record<TextStyleName, TextStyle> = {
       fontSize: 16,
       fontWeight: 400,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
     Mobile: {
       fontSize: 14,
       fontWeight: 400,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
   },
   [TEXT_STYLE_NAME.body2L]: {
@@ -162,11 +185,13 @@ export const TEXT_STYLES: Record<TextStyleName, TextStyle> = {
       fontSize: 16,
       fontWeight: 300,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
     Mobile: {
       fontSize: 14,
       fontWeight: 300,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
   },
   [TEXT_STYLE_NAME.body3B]: {
@@ -174,11 +199,13 @@ export const TEXT_STYLES: Record<TextStyleName, TextStyle> = {
       fontSize: 14,
       fontWeight: 600,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
     Mobile: {
       fontSize: 12,
       fontWeight: 600,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
   },
   [TEXT_STYLE_NAME.body3R]: {
@@ -186,11 +213,13 @@ export const TEXT_STYLES: Record<TextStyleName, TextStyle> = {
       fontSize: 14,
       fontWeight: 400,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
     Mobile: {
       fontSize: 12,
       fontWeight: 400,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
   },
   [TEXT_STYLE_NAME.cap1L]: {
@@ -198,11 +227,13 @@ export const TEXT_STYLES: Record<TextStyleName, TextStyle> = {
       fontSize: 14,
       fontWeight: 300,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
     Mobile: {
       fontSize: 12,
       fontWeight: 300,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
   },
   [TEXT_STYLE_NAME.cap2B]: {
@@ -210,11 +241,13 @@ export const TEXT_STYLES: Record<TextStyleName, TextStyle> = {
       fontSize: 12,
       fontWeight: 600,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
     Mobile: {
       fontSize: 10,
       fontWeight: 600,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
   },
   [TEXT_STYLE_NAME.cap2R]: {
@@ -222,11 +255,13 @@ export const TEXT_STYLES: Record<TextStyleName, TextStyle> = {
       fontSize: 12,
       fontWeight: 400,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
     Mobile: {
       fontSize: 10,
       fontWeight: 400,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
   },
   [TEXT_STYLE_NAME.cap2L]: {
@@ -234,11 +269,13 @@ export const TEXT_STYLES: Record<TextStyleName, TextStyle> = {
       fontSize: 12,
       fontWeight: 300,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
     Mobile: {
       fontSize: 10,
       fontWeight: 300,
       lineHeight: LINE_HEIGHT_RATIO,
+      fontFamily: FONT_PRETENDARD,
     },
   },
   [TEXT_STYLE_NAME.brand1B]: {
@@ -246,11 +283,13 @@ export const TEXT_STYLES: Record<TextStyleName, TextStyle> = {
       fontSize: 48,
       fontWeight: 700,
       lineHeight: LINE_HEIGHT_RATIO_BIG,
+      fontFamily: FONT_KOPUB,
     },
     Mobile: {
       fontSize: 40,
       fontWeight: 700,
       lineHeight: LINE_HEIGHT_RATIO_BIG,
+      fontFamily: FONT_KOPUB,
     },
   },
   [TEXT_STYLE_NAME.brand2R]: {
@@ -258,11 +297,13 @@ export const TEXT_STYLES: Record<TextStyleName, TextStyle> = {
       fontSize: 40,
       fontWeight: 400,
       lineHeight: LINE_HEIGHT_RATIO_BIG,
+      fontFamily: FONT_KOPUB,
     },
     Mobile: {
       fontSize: 36,
       fontWeight: 400,
       lineHeight: LINE_HEIGHT_RATIO_BIG,
+      fontFamily: FONT_KOPUB,
     },
   },
   [TEXT_STYLE_NAME.brand3R]: {
@@ -270,11 +311,13 @@ export const TEXT_STYLES: Record<TextStyleName, TextStyle> = {
       fontSize: 30,
       fontWeight: 400,
       lineHeight: LINE_HEIGHT_RATIO_BIG,
+      fontFamily: FONT_KOPUB,
     },
     Mobile: {
       fontSize: 26,
       fontWeight: 400,
       lineHeight: LINE_HEIGHT_RATIO_BIG,
+      fontFamily: FONT_KOPUB,
     },
   },
   [TEXT_STYLE_NAME.brand4R]: {
@@ -282,11 +325,13 @@ export const TEXT_STYLES: Record<TextStyleName, TextStyle> = {
       fontSize: 20,
       fontWeight: 400,
       lineHeight: LINE_HEIGHT_RATIO_BIG,
+      fontFamily: FONT_KOPUB,
     },
     Mobile: {
       fontSize: 16,
       fontWeight: 400,
       lineHeight: LINE_HEIGHT_RATIO_BIG,
+      fontFamily: FONT_KOPUB,
     },
   },
   [TEXT_STYLE_NAME.brand5R]: {
@@ -294,11 +339,13 @@ export const TEXT_STYLES: Record<TextStyleName, TextStyle> = {
       fontSize: 16,
       fontWeight: 400,
       lineHeight: LINE_HEIGHT_RATIO_BIG,
+      fontFamily: FONT_KOPUB,
     },
     Mobile: {
       fontSize: 12,
       fontWeight: 400,
       lineHeight: LINE_HEIGHT_RATIO_BIG,
+      fontFamily: FONT_KOPUB,
     },
   },
   [TEXT_STYLE_NAME.brand6R]: {
@@ -306,11 +353,13 @@ export const TEXT_STYLES: Record<TextStyleName, TextStyle> = {
       fontSize: 12,
       fontWeight: 400,
       lineHeight: LINE_HEIGHT_RATIO_BIG,
+      fontFamily: FONT_KOPUB,
     },
     Mobile: {
       fontSize: 10,
       fontWeight: 400,
       lineHeight: LINE_HEIGHT_RATIO_BIG,
+      fontFamily: FONT_KOPUB,
     },
   },
 };
