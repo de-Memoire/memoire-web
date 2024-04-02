@@ -282,13 +282,13 @@ export const TEXT_STYLES: Record<TextStyleName, TextStyle> = {
     PC: {
       fontSize: 48,
       fontWeight: 700,
-      lineHeight: LINE_HEIGHT_RATIO_BIG,
+      lineHeight: LINE_HEIGHT_RATIO,
       fontFamily: FONT_KOPUB,
     },
     Mobile: {
       fontSize: 40,
       fontWeight: 700,
-      lineHeight: LINE_HEIGHT_RATIO_BIG,
+      lineHeight: LINE_HEIGHT_RATIO,
       fontFamily: FONT_KOPUB,
     },
   },
