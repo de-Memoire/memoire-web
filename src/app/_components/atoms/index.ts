@@ -4,4 +4,6 @@ export { default as LoginButton } from './LoginButton';
 export { default as ProgressBar } from './ProgressBar';
 export { default as StoryTextInput } from './StoryTextInput';
 export { default as DropdownItem } from './DropdownItem';
-export { default as Footer } from './Footer';
+export { default as AssistantContent } from './Assistant/AssistantContent';
+export { default as AssistantInput } from './Assistant/AssistantInput';
+export { default as Popup } from './Popup';
