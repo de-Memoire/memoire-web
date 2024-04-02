@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import * as styles from './Nav.css';
 import { useAuth } from '@/app/_hooks/useAuth';
@@ -8,19 +10,27 @@ import { Dropdown } from '../../molecules';
 import { DropdownItem } from '../../atoms';
 import { useRouter } from 'next/navigation';
 
-const Nav = () => {
+export type UserInfoConfigType = {
+  [key: string]: {
+    title: string;
+    goNavi: () => void;
+  };
+};
+
+export type NavProps = {
+  /** 컴포넌트로 생성할 요소의 클래스명 */
+  className?: string;
+};
+
+/**
+ * 레이아웃 파일에서 사용할 네비 컴포넌트
+ */
+const Nav = ({ className }: NavProps) => {
   const isAuthenticated = useAuth();
   const router = useRouter();
   const [isOpenUserMenu, setIsOpenUserMenu] = useState(false);
 
-  type UserInfoDataType = {
-    [key: string]: {
-      title: string;
-      goNavi: () => void;
-    };
-  };
-
-  const UserInfoData: UserInfoDataType = {
+  const UserInfoConfigType: UserInfoConfigType = {
     library: {
       title: '내 서재',
       goNavi: () => router.push(`/library`),
@@ -30,9 +40,10 @@ const Nav = () => {
       goNavi: () => router.push(`/setting`),
     },
   };
+  // } as const satisfies UserInfoDataType; //TODO
 
   return (
-    <div className={styles.wrap}>
+    <div className={`${styles.wrap} ${className}`}>
       <div className={styles.logo}>
         <Logo />
       </div>
@@ -47,11 +58,11 @@ const Nav = () => {
       {isOpenUserMenu && (
         <div className={styles.absoluteBox}>
           <Dropdown>
-            {Object.keys(UserInfoData).map((key) => (
+            {Object.keys(UserInfoConfigType).map((key) => (
               <DropdownItem
                 key={key}
-                onClick={UserInfoData[key].goNavi}
-                title={UserInfoData[key].title}
+                onClick={UserInfoConfigType[key].goNavi}
+                title={UserInfoConfigType[key].title}
               />
             ))}
           </Dropdown>
