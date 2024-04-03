@@ -7,6 +7,8 @@ import { createSupabaseServerComponentClient } from './_utils/supabase/server';
 
 const inter = Inter({ subsets: ['latin'] });
 
+export const runtime = 'edge';
+
 export const metadata: Metadata = {
   title: 'memoire',
   description: 'memoire app',
