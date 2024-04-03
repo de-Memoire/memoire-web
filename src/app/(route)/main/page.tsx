@@ -21,12 +21,10 @@ import Popup from '@/app/_components/atoms/Popup';
 import FeedbackTagList from '@/app/_components/molecules/FeedbackTag/FeedbackTagList';
 import { titleType } from './main.css';
 import SelectedFeedbackTagList from '@/app/_components/molecules/FeedbackTag/SelectedFeedbackTagList';
-import { useRecoilValue } from 'recoil';
-import { selectedFeedbackTagStateAtom } from '@/app/_recoil/selectedFeedbackTagState';
 import { shareHandler } from '@/app/utils';
 import { MainServiceButtonProps } from '@/app/_components/molecules/MainServiceButton';
 import { StoryServiceButtonProps } from '@/app/_components/molecules/StoryServiceButton';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const MAIN_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 const FEEDBACK_TEXT = '아름다운 글을 쓰는\n지고의 노력을\n같이 응원해주세요.';
@@ -37,10 +35,10 @@ export default function Page() {
   const { isShowing, toggle } = useModal();
 
   // feedback tag list state
-  const [selectedTagList, setSelectedTagList] = useState<string[]>([]); 
+  const [selectedTagList, setSelectedTagList] = useState<string[]>([]);
   const handleTagSelect = (selectedTag: string) => {
     if (selectedTagList.includes(selectedTag)) {
-      setSelectedTagList((prev) => prev.filter(tag => tag !== selectedTag));
+      setSelectedTagList((prev) => prev.filter((tag) => tag !== selectedTag));
     } else {
       setSelectedTagList((prev) => [...prev, selectedTag]);
     }
@@ -111,7 +109,12 @@ export default function Page() {
       {/* 스토리 */}
       <div className={`${style.scroll} ${isScroll ? style.column : style.row}`}>
         <div className={style.imgContainer}>
-          <Image src='/assets/bg.png' width={1280} height={430} alt="배경이미지"  />
+          <Image
+            src="/assets/bg.png"
+            width={1280}
+            height={430}
+            alt="배경이미지"
+          />
         </div>
         <div
           className={`${style.contentContainer} ${isScroll && style.maxWidth}`}
@@ -147,15 +150,16 @@ export default function Page() {
       <Modal
         isShowing={isShowing}
         content={
-          <Popup
-            onClose={toggle}
-          >
+          <Popup onClose={toggle}>
             <div className={titleType['feedback']}>{FEEDBACK_TEXT}</div>
             <FeedbackTagList
               feedbackTagList={feedbackTag}
               onSelect={handleTagSelect}
             />
-            <SelectedFeedbackTagList selectedFeedbackTagList={selectedTagList} isSelected={true} />
+            <SelectedFeedbackTagList
+              selectedFeedbackTagList={selectedTagList}
+              isSelected={true}
+            />
           </Popup>
         }
       />
