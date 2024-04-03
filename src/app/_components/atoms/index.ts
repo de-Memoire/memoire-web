@@ -3,6 +3,7 @@ export { default as FeedbackTag } from './FeedbackTag';
 export { default as LoginButton } from './LoginButton';
 export { default as ProgressBar } from './ProgressBar';
 export { default as StoryTextInput } from './StoryTextInput';
+export { default as StoryTextArea } from './StoryTextArea';
 export { default as DropdownItem } from './DropdownItem';
 export { default as AssistantContent } from './Assistant/AssistantContent';
 export { default as AssistantInput } from './Assistant/AssistantInput';
