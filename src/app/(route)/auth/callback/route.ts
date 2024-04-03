@@ -7,7 +7,6 @@ export async function GET(request: Request) {
   const next = searchParams.get('next') ?? '/login-test';
 
   if (code) {
-    console.log(code);
     const supabase = createSupabaseServerClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) {
