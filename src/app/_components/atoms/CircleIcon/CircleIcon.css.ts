@@ -11,6 +11,6 @@ export const base = style({
 });
 
 export const wrap = styleVariants({
-  black: [base, { background: COLORS.grayscale.gray8 }],
-  white: [base, { background: COLORS.grayscale.gray1 }],
+  dark: [base, { background: COLORS.grayscale.gray8 }],
+  bright: [base, { background: COLORS.grayscale.gray1 }],
 });

@@ -8,4 +8,6 @@ export const wrap = style({
   display: 'inline-block',
   width: '205px',
   overflow: 'hidden',
+  zIndex: '1',
+  background: COLORS.grayscale.white,
 });

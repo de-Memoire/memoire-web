@@ -6,6 +6,7 @@ export const wrap = style({
   display: 'flex',
   justifyContent: 'flex-end',
   width: '100%',
+  paddingBottom: '10px',
 });
 
 export const base = style({
