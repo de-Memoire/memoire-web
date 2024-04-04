@@ -13,7 +13,7 @@ const Page = () => {
     stop,
   } = useCompletion({
     api: '/ai/completion',
-    body: { type: AICompletionType.EXPRESSIVENESS },
+    body: { type: AICompletionType.NEXT_SENTENCE },
   });
 
   return (
@@ -24,7 +24,9 @@ const Page = () => {
           placeholder="Enter your prompt..."
           onChange={handleInputChange}
         />
-        <p>Completion result: {completion}</p>
+        {completion.split('\n').map((item) => (
+          <p key={item}>{item}</p>
+        ))}
         <button type="button" onClick={stop}>
           Stop
         </button>
