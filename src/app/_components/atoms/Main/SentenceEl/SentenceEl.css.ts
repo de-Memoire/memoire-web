@@ -9,6 +9,7 @@ export const wrap = style({
   justifyContent: 'center',
   height: '255px',
   padding: '20px',
+  opacity: '0',
 });
 
 export const wrapType = styleVariants({

@@ -5,6 +5,7 @@ export const wrap = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '10px',
+  opacity: '0',
 });
 
 export const imgContainer = style({
