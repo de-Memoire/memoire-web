@@ -12,11 +12,36 @@ import { sentence, story } from '../_data/storydummy';
 import Layout from '../_components/atoms/Main/Layout';
 import * as styles from './page.css';
 import SentenceList from '../_components/molecules/Main/SentenceList';
-import { FeedbackTag } from '../_components/atoms';
+
+import MainServiceButton from '../_components/molecules/MainServiceButton';
+import { MainServiceButtonProps } from '../_components/molecules/MainServiceButton';
+import Write from '/public/icon/write.svg';
+import Sentence from '/public/icon/sentence.svg';
 
 export const STORY_TEXT = '타인에게서\n자신의 이야기를 발견하세요.';
 export const SENTENCE_TEXT = '타인에게서 자신의 이야기를 발견하세요.';
 export const MAIN_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
+
+const MainServiceButtonConfigs: MainServiceButtonProps[] = [
+  {
+    title: '문장 보관하기',
+    styleType: 'bright',
+    icon: <Sentence />,
+    navi: 'sentence',
+  },
+  {
+    title: '스토리 쓰기',
+    styleType: 'dark',
+    icon: <Write />,
+    navi: 'write',
+  },
+  {
+    title: '문장 쓰기',
+    styleType: 'dark',
+    icon: <Write />,
+    navi: 'write',
+  },
+];
 
 export default function App() {
   const router = useRouter();
@@ -34,7 +59,19 @@ export default function App() {
       className="mySwiper"
     >
       <SwiperSlide>
-        <Layout title={STORY_TEXT} type="big"></Layout>
+        <Layout title={MAIN_TEXT} type="big">
+          <div className={`${styles.buttonContainer}`}>
+            {MainServiceButtonConfigs.map((btn) => (
+              <MainServiceButton
+                key={btn.title}
+                styleType={btn.styleType}
+                title={btn.title}
+                icon={btn.icon}
+                navi={btn.navi}
+              />
+            ))}
+          </div>
+        </Layout>
       </SwiperSlide>
       <SwiperSlide>
         <Layout title={STORY_TEXT} type="big">
