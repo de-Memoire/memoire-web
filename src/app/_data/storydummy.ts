@@ -10,7 +10,7 @@ export const story: Story[] = [
   {
     id: 0,
     img: '/assets/bg.png',
-    title: '아름다운 추억1',
+    title: '아름다운 추억0',
     author: '고광서',
     content: `추억은 커피를 마실 때처럼 처음엔 씁쓸하지만 뒷맛을 천천히 음미하면서 지속시키면 순수하고 향기로워진다. 
         이처럼 청춘의 책 한권에도 추억이 내용으로 되면 풍요로워 질 것이며 그 단순하고 아름답던 좋은 기억들이 잊혀지지 않을 
@@ -32,7 +32,7 @@ export const story: Story[] = [
   {
     id: 1,
     img: '/assets/bg.png',
-    title: '아름다운 추억2',
+    title: '아름다운 추억1',
     author: '권시경',
     content: `추억은 커피를 마실 때처럼 처음엔 씁쓸하지만 뒷맛을 천천히 음미하면서 지속시키면 순수하고 향기로워진다. 
         이처럼 청춘의 책 한권에도 추억이 내용으로 되면 풍요로워 질 것이며 그 단순하고 아름답던 좋은 기억들이 잊혀지지 않을 
@@ -54,7 +54,7 @@ export const story: Story[] = [
   {
     id: 2,
     img: '/assets/bg.png',
-    title: '아름다운 추억3',
+    title: '아름다운 추억2',
     author: '고광서',
     content: `추억은 커피를 마실 때처럼 처음엔 씁쓸하지만 뒷맛을 천천히 음미하면서 지속시키면 순수하고 향기로워진다. 
         이처럼 청춘의 책 한권에도 추억이 내용으로 되면 풍요로워 질 것이며 그 단순하고 아름답던 좋은 기억들이 잊혀지지 않을 
@@ -76,7 +76,7 @@ export const story: Story[] = [
   {
     id: 3,
     img: '/assets/bg.png',
-    title: '아름다운 추억4',
+    title: '아름다운 추억3',
     author: '권시경',
     content: `추억은 커피를 마실 때처럼 처음엔 씁쓸하지만 뒷맛을 천천히 음미하면서 지속시키면 순수하고 향기로워진다. 
         이처럼 청춘의 책 한권에도 추억이 내용으로 되면 풍요로워 질 것이며 그 단순하고 아름답던 좋은 기억들이 잊혀지지 않을 
@@ -145,13 +145,43 @@ export const admin_sentence: Sentence[] = [
 ];
 
 export interface Feedback {
-  content: string;
+  id: number;
+  content: string[];
 }
 
 export const feedback: Feedback[] = [
-  { content: '글 가독성 높은' },
-  { content: '표현력 아쉬운 가독성 낮은' },
-  { content: '이독성 높은 표현력 낮은' },
+  {
+    id: 0,
+    content: [
+      '글 가독성 높은0',
+      '표현력 아쉬운 가독성 낮은0',
+      '표현력 아쉬운 가독성 낮은0',
+    ],
+  },
+  {
+    id: 1,
+    content: [
+      '글 가독성 높은1',
+      '표현력 아쉬운 가독성 낮은1',
+      '표현력 아쉬운 가독성 낮은1',
+    ],
+  },
+  {
+    id: 2,
+    content: [
+      '글 가독성 높은2',
+      '표현력 아쉬운 가독성 낮은2',
+      '표현력 아쉬운 가독성 낮은2',
+    ],
+  },
+  {
+    id: 3,
+    content: [
+      '글 가독성 높은3',
+      '표현력 아쉬운 가독성 낮은3',
+      '표현력 아쉬운 가독성 낮은3',
+    ],
+  },
 ];
 
 export const feedbackTag = [
