@@ -25,8 +25,7 @@ export const textType = styleVariants({
     base,
     {
       ...TEXT_STYLES.brand6R.PC,
-      minHeight: '80px',
-      maxHeight: '120px',
+      maxHeight: '80px',
       overflow: 'hidden',
     },
   ],

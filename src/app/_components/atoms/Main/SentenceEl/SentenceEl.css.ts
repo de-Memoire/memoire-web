@@ -7,7 +7,7 @@ export const wrap = style({
   gap: '18px',
   alignItems: 'center',
   justifyContent: 'center',
-  height: '255px',
+  height: '100%',
   padding: '20px',
   opacity: '0',
 });
@@ -15,15 +15,15 @@ export const wrap = style({
 export const wrapType = styleVariants({
   dark: [
     wrap,
-    { background: COLORS.grayscale.gray1, width: '33.3%', height: '255px' },
+    { background: COLORS.grayscale.gray1, width: '33.3%', height: '50%' },
   ],
   bright: [
     wrap,
-    { background: COLORS.grayscale.white, width: '33.3%', height: '255px' },
+    { background: COLORS.grayscale.white, width: '33.3%', height: '50%' },
   ],
   admin: [
     wrap,
-    { background: COLORS.grayscale.white, width: '100%', height: '510px' },
+    { background: COLORS.grayscale.white, width: '100%', height: '100%' },
   ],
 });
 
