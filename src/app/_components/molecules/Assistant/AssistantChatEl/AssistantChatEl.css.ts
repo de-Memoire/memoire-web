@@ -15,5 +15,7 @@ export const label = style({
 });
 
 export const result = style({
-  ...TEXT_STYLES.body2B.PC,
+  ...TEXT_STYLES.body2R.PC,
+  lineHeight: '140%',
+  marginTop: '8px',
 });
