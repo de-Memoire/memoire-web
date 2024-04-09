@@ -19,7 +19,7 @@ export const base = style({
 });
 
 export const textType = styleVariants({
-  title: [base, { ...TEXT_STYLES.brand3R.PC }],
+  title: [base, { ...TEXT_STYLES.brand3R.Mobile }],
   author: [base, { ...TEXT_STYLES.brand5R.PC }],
   content: [
     base,

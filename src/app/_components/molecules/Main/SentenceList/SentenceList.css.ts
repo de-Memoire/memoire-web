@@ -4,6 +4,7 @@ import { style, styleVariants } from '@vanilla-extract/css';
 export const wrap = style({
   display: 'flex',
   flex: '1',
+  maxHeight: '500px',
 });
 export const leftContainer = style({
   flex: '3',

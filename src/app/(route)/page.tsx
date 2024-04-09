@@ -33,13 +33,13 @@ const MainServiceButtonConfigs: MainServiceButtonProps[] = [
     title: '스토리 쓰기',
     styleType: 'dark',
     icon: <Write />,
-    navi: 'write',
+    navi: 'write?type=story',
   },
   {
     title: '문장 쓰기',
     styleType: 'dark',
     icon: <Write />,
-    navi: 'write',
+    navi: 'write?type=sentence',
   },
 ];
 
@@ -59,7 +59,7 @@ export default function App() {
       className="mySwiper"
     >
       <SwiperSlide>
-        <Layout title={MAIN_TEXT} type="big">
+        <Layout title={MAIN_TEXT} type="big" bg={true}>
           <div className={`${styles.buttonContainer}`}>
             {MainServiceButtonConfigs.map((btn) => (
               <MainServiceButton

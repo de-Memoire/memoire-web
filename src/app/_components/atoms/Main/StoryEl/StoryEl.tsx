@@ -27,7 +27,7 @@ const StoryEl = ({
       </div>
       <div className={styles.textType.title}>{title}</div>
       <div className={styles.textType.author}>{author}</div>
-      <div className={styles.textType.content}>{content}</div>
+      <div className={`${styles.textType.content} ellipse`}>{content}</div>
     </div>
   );
 };

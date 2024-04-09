@@ -339,3 +339,10 @@ img {
 .swiper-slide.swiper-slide-active .final.ani_leftToRight > div:nth-child(3) {
   animation: leftToRight 5s 2.3s both;
 }
+
+.ellipse {
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
