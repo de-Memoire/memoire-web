@@ -35,6 +35,9 @@ dependencies:
   server-only:
     specifier: 0.0.1
     version: 0.0.1
+  swiper:
+    specifier: ^11.1.0
+    version: 11.1.0
   zod:
     specifier: 3.22.4
     version: 3.22.4
@@ -5808,6 +5811,11 @@ packages:
       css-what: 6.1.0
       csso: 5.0.5
       picocolors: 1.0.0
+    dev: false
+
+  /swiper@11.1.0:
+    resolution: {integrity: sha512-Pm78CgU7Wvg+w/MgIL/1NwMSLgx0XqFof25EnVyX8iZFCYJv5CppH7LHkBj43qW2k5Cp3Iz7FcdBxrox7XX2AQ==}
+    engines: {node: '>= 4.7.0'}
     dev: false
 
   /swr-store@0.10.6:
