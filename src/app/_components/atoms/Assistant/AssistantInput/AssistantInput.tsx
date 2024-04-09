@@ -3,8 +3,8 @@ import * as styles from './AssistantInput.css';
 
 export interface AssistantInputProps
   extends React.DetailedHTMLProps<
-    React.TextareaHTMLAttributes<HTMLTextAreaElement>,
-    HTMLTextAreaElement
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
   > {
   /** 어시스턴트 요소 내 인풋 placeholder */
   placeholder?: string;
@@ -15,7 +15,7 @@ export interface AssistantInputProps
 }
 
 /**
- * 어시스턴트 요소 안에서 사용할 인풋 컴포넌트(textarea)
+ * 어시스턴트 요소 안에서 사용할 인풋 컴포넌트(input)
  */
 const AssistantInput = ({
   placeholder = '',
@@ -24,7 +24,7 @@ const AssistantInput = ({
   ...textareaProps
 }: AssistantInputProps) => {
   const onChange = useCallback(
-    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       textareaProps.onChange?.(e);
       onTextChange?.(e.target.value);
     },
@@ -32,7 +32,7 @@ const AssistantInput = ({
   );
 
   return (
-    <textarea
+    <input
       className={`${styles.styledTextArea} ${className}`}
       placeholder={placeholder}
       onChange={onChange}

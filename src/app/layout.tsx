@@ -28,7 +28,7 @@ export default async function RootLayout({
         <nav>
           <Nav />
         </nav>
-        <section>{children}</section>
+        {children}  
         {/* <footer>
           <Footer text="© 2024 Memoire." />
         </footer> */}

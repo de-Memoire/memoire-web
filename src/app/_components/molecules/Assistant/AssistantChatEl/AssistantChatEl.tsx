@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type ChangeEventHandler } from 'react';
 import * as styles from './AssistantChatEl.css';
 import AssistantInput from '../../../atoms/Assistant/AssistantInput';
 
@@ -13,6 +13,9 @@ export interface AssistantChatElProps {
   result?: string;
   /** 컴포넌트로 생성할 요소의 클래스명 */
   className?: string;
+  onTextChange?: (text: string) => void;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
+  onSubmit?: () => void;
 }
 
 /**
@@ -24,12 +27,28 @@ export const AssistantChatEl = ({
   inputLabel,
   result,
   className,
+  onTextChange,
+  onChange,
+  onSubmit,
 }: AssistantChatElProps) => {
   return (
     <div className={`${styles.wrap} ${className}`}>
       <div className={styles.label}>{inputLabel}</div>
-      <AssistantInput placeholder={placeholder} value={inputValue} />
-      <div className={styles.result}>{result}</div>
+      <AssistantInput
+        placeholder={placeholder}
+        value={inputValue}
+        onTextChange={onTextChange}
+        onChange={onChange}
+        onKeyDown={(e) => {
+          if (e.nativeEvent.isComposing) return;
+          if (e.key === 'Enter') {
+            onSubmit?.();
+          }
+        }}
+      />
+      <div className={styles.result}>
+        {result?.split('\n').map((line, index) => <p key={index}>{line}</p>)}
+      </div>
     </div>
   );
 };

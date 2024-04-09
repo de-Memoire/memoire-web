@@ -1,9 +1,17 @@
 import { TEXT_STYLES, COLORS } from '@/app/_constant';
 import { style, styleVariants } from '@vanilla-extract/css';
 
+export const container = style({
+  width: '100%',
+  flex: 1,
+  display: 'flex',
+  flexDirection: 'column',
+});
+
 export const flexContainer = style({
   display: 'flex',
   gap: '50px',
+  flex: 1,
 });
 export const writeSection = style({
   flex: '10',
