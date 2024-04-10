@@ -92,6 +92,8 @@ export default function Page() {
     }
   }
 
+  function UploadHandler() {}
+
   return (
     <div className={styles.container}>
       <ProgressBar curr={1} />

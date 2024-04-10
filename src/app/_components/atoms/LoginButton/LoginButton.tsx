@@ -2,15 +2,11 @@ import React from 'react';
 import * as styles from './LoginButton.css';
 import Kakao from '/public/icon/kakao.svg';
 import Google from '/public/icon/google.svg';
-
-export enum LoginType {
-  KaKao = 'kakao',
-  Google = 'google',
-}
+import { AuthType } from '@/app/_constant';
 
 export interface LoginButtonProps {
   /** KaKao | Google로 정의된 로그인 타입 */
-  type: LoginType;
+  type: AuthType;
   /** 로그인 버튼 클릭 이벤트 핸들러 */
   onClick: () => void;
   /** 컴포넌트로 생성할 요소의 클래스명 */
@@ -22,11 +18,11 @@ export interface LoginButtonProps {
  */
 const LoginButton = ({ type, onClick, className }: LoginButtonProps) => {
   const LoginTypeConfig = {
-    kakao: {
+    [AuthType.KAKAO]: {
       text: '카카오',
       icon: <Kakao />,
     },
-    google: {
+    [AuthType.GOOGLE]: {
       text: '구글',
       icon: <Google />,
     },

@@ -4,6 +4,7 @@ export const AuthType = {
   GOOGLE: 'GOOGLE',
   KAKAO: 'KAKAO',
 } as const;
+export type AuthType = (typeof AuthType)[keyof typeof AuthType];
 
 export const SocialProviderByAuthType = {
   [AuthType.GOOGLE]: 'google',

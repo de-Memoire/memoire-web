@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { Footer } from './_components/Common';
 import { Nav } from './_components/Common';
 import { createSupabaseServerComponentClient } from './_utils/supabase/server';
 
@@ -28,7 +27,7 @@ export default async function RootLayout({
         <nav>
           <Nav />
         </nav>
-        {children}  
+        {children}
         {/* <footer>
           <Footer text="© 2024 Memoire." />
         </footer> */}
