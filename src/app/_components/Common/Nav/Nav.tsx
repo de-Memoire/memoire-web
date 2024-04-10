@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { Dropdown } from '../../molecules';
 import { DropdownItem } from '../../atoms';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 export type UserInfoConfigType = {
   [key: string]: {
@@ -18,6 +19,7 @@ export type UserInfoConfigType = {
 };
 
 export type NavProps = {
+  profileImageUrl?: string;
   /** 컴포넌트로 생성할 요소의 클래스명 */
   className?: string;
 };
@@ -25,7 +27,7 @@ export type NavProps = {
 /**
  * 레이아웃 파일에서 사용할 네비 컴포넌트
  */
-const Nav = ({ className }: NavProps) => {
+const Nav = ({ className, profileImageUrl }: NavProps) => {
   const isAuthenticated = useAuth();
   const router = useRouter();
   const [isOpenUserMenu, setIsOpenUserMenu] = useState(false);
@@ -47,14 +49,16 @@ const Nav = ({ className }: NavProps) => {
       <div className={styles.logo}>
         <Logo />
       </div>
-      {isAuthenticated && (
-        <div
-          className={styles.user}
-          onClick={() => setIsOpenUserMenu(!isOpenUserMenu)}
-        >
+      <div
+        className={styles.user}
+        onClick={() => setIsOpenUserMenu(!isOpenUserMenu)}
+      >
+        {profileImageUrl ? (
+          <Image src={profileImageUrl} alt="profile image" fill />
+        ) : (
           <User />
-        </div>
-      )}
+        )}
+      </div>
       {isOpenUserMenu && (
         <div className={styles.absoluteBox}>
           <Dropdown>

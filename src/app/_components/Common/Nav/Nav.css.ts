@@ -9,7 +9,13 @@ export const wrap = style({
 
 export const logo = style({});
 
-export const user = style({});
+export const user = style({
+  width: '48px',
+  height: '48px',
+  position: 'relative',
+  borderRadius: '24px',
+  overflow: 'hidden',
+});
 
 export const absoluteBox = style({
   position: 'absolute',
