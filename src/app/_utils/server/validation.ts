@@ -7,13 +7,13 @@ export const parseRequest = <T extends z.ZodTypeAny>(
   schema: T,
   request: z.infer<T>,
 ):
-  | { success: true; data: z.infer<T> }
-  | { success: false; response: NextResponse } => {
+  | { isSuccess: true; data: z.infer<T> }
+  | { isSuccess: false; response: NextResponse } => {
   const parsedResult = schema.safeParse(request);
 
   if (!parsedResult.success) {
     return {
-      success: false,
+      isSuccess: false,
       response: NextResponse.json(
         new ErrorResponse({
           status: 422,
@@ -25,5 +25,5 @@ export const parseRequest = <T extends z.ZodTypeAny>(
     };
   }
 
-  return { success: true, data: parsedResult.data };
+  return { isSuccess: true, data: parsedResult.data };
 };

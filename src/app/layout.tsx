@@ -28,10 +28,10 @@ export default async function RootLayout({
         <nav>
           <Nav />
         </nav>
-        <section>{children}</section>
-        <footer>
+        {children}  
+        {/* <footer>
           <Footer text="© 2024 Memoire." />
-        </footer>
+        </footer> */}
       </body>
     </html>
   );

@@ -1,3 +1,4 @@
+import type { Database } from '@/app/_constant/type/supabase';
 import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 import 'server-only';
@@ -8,7 +9,7 @@ import 'server-only';
 export const createSupabaseServerClient = () => {
   const cookieStore = cookies();
 
-  return createServerClient(
+  return createServerClient<Database>(
     process.env.SUPABASE_URL!,
     process.env.SUPABASE_ANON_KEY!,
     {
@@ -38,7 +39,7 @@ export const createSupabaseServerClient = () => {
 export const createSupabaseServerComponentClient = () => {
   const cookieStore = cookies();
 
-  return createServerClient(
+  return createServerClient<Database>(
     process.env.SUPABASE_URL!,
     process.env.SUPABASE_ANON_KEY!,
     {

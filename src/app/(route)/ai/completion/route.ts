@@ -1,7 +1,9 @@
 import { AICompletionType } from '@/app/_constant/ai';
 import type { UnionToTuple } from '@/app/_constant/type/util';
 import { openai } from '@/app/_utils/openai';
+import { authorize } from '@/app/_utils/server/authorization';
 import { parseRequest } from '@/app/_utils/server/validation';
+import { createSupabaseServerClient } from '@/app/_utils/supabase/server';
 import { OpenAIStream, StreamingTextResponse } from 'ai';
 import { type NextRequest } from 'next/server';
 import { z } from 'zod';
@@ -37,11 +39,18 @@ export async function POST(request: NextRequest) {
   };
 
   const parsedResult = parseRequest(requestBodySchema, bodyToParse);
-  if (!parsedResult.success) {
+  if (!parsedResult.isSuccess) {
     return parsedResult.response;
   }
 
   const body = parsedResult.data;
+
+  const supabase = createSupabaseServerClient();
+
+  const authorizationResult = await authorize(supabase);
+  if (!authorizationResult.isSuccess) {
+    return authorizationResult.response;
+  }
 
   const response = await openai.chat.completions.create({
     model: 'gpt-4-turbo-preview',
