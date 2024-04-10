@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useRouter } from 'next/navigation';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import 'swiper/css/autoplay';
 
-import { Mousewheel, Pagination } from 'swiper/modules';
+import { Mousewheel, Pagination, Autoplay } from 'swiper/modules';
 import StoryList from '../_components/molecules/Main/StoryList';
 import { sentence, story } from '../_data/storydummy';
 import Layout from '../_components/atoms/Main/Layout';
@@ -45,6 +46,7 @@ const MainServiceButtonConfigs: MainServiceButtonProps[] = [
 
 export default function App() {
   const router = useRouter();
+
   return (
     <Swiper
       direction={'vertical'}
@@ -55,8 +57,9 @@ export default function App() {
       pagination={{
         clickable: true,
       }}
-      modules={[Mousewheel, Pagination]}
+      modules={[Mousewheel, Pagination, Autoplay]}
       className="mySwiper"
+      autoplay={{ delay: 5000 }}
     >
       <SwiperSlide>
         <Layout title={MAIN_TEXT} type="big" bg={true}>
