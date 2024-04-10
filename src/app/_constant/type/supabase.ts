@@ -50,7 +50,7 @@ export type Database = {
       }
       feedback: {
         Row: {
-          content: string
+          content: string | null
           created_at: string
           deleted_at: string | null
           id: number
@@ -58,7 +58,7 @@ export type Database = {
           user_id: number
         }
         Insert: {
-          content: string
+          content?: string | null
           created_at?: string
           deleted_at?: string | null
           id?: number
@@ -66,7 +66,7 @@ export type Database = {
           user_id: number
         }
         Update: {
-          content?: string
+          content?: string | null
           created_at?: string
           deleted_at?: string | null
           id?: number
