@@ -1,15 +1,16 @@
 'use client';
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ProgressBar, StoryTextInput } from '@/app/_components/atoms';
 import AssistantSuggestionEl from '@/app/_components/molecules/Assistant/AssistantSuggestionEl';
 import AssistantChatEl from '@/app/_components/molecules/Assistant/AssistantChatEl';
-import { assistantContent } from '@/app/_data/storydummy';
 import * as styles from './write.css';
 import { styledAssistantTitleType } from './write.css';
 import StoryTextArea from '@/app/_components/atoms/StoryTextArea';
 import { useCompletion } from 'ai/react';
 import { AICompletionType } from '@/app/_constant/ai';
+import { useSearchParams } from 'next/navigation';
+import useDebounce from '@/app/_hooks/useDebounce';
 
 interface AssistantSuggestionProps {
   prompt: string;
@@ -75,15 +76,31 @@ const AssistantChat = () => {
 };
 
 export default function Page() {
-  const [select, setSelect] = useState<string>('');
+  const searchParams = useSearchParams();
+  const type = searchParams.get('type');
+
+  const [content, setContent] = useState<string>('');
+  const debouncedContent = useDebounce(content, 2000);
 
   const [assistantEl, setAssistantEl] = useState<JSX.Element[]>([]);
 
-  function generateNewAssistantEl() {
-    const _select = window.getSelection()?.toString();
-    if (_select) {
-      setSelect(_select);
+  useEffect(() => {
+    const contentToAnalyze = debouncedContent.trim();
+    if (contentToAnalyze.length > 0) {
+      const newAssistantSuggestionEl = (
+        <AssistantSuggestion
+          key={new Date().toISOString()}
+          prompt={contentToAnalyze}
+        />
+      );
 
+      setAssistantEl((prev) => [...prev, newAssistantSuggestionEl]);
+    }
+  }, [debouncedContent]);
+
+  function generateNewAssistantEl() {
+    const _select = window.getSelection()?.toString().trim();
+    if (_select && _select.length > 0) {
       const newAssistantSuggestionEl = (
         <AssistantSuggestion key={new Date().toISOString()} prompt={_select} />
       );
@@ -92,26 +109,27 @@ export default function Page() {
     }
   }
 
-  function UploadHandler() {}
-
   return (
     <div className={styles.container}>
       <ProgressBar curr={1} />
       <div className={styles.flexContainer}>
         <div className={styles.writeSection}>
-          <StoryTextInput
-            placeholder="제목을 입력하세요"
-            type="title"
-            onMouseUp={generateNewAssistantEl}
-          />
+          {type === 'story' && (
+            <StoryTextInput
+              placeholder="제목을 입력하세요"
+              type="title"
+              // onMouseUp={generateNewAssistantEl}
+            />
+          )}
           <StoryTextInput
             placeholder="저자를 입력하세요"
             type="author"
-            onMouseUp={generateNewAssistantEl}
+            // onMouseUp={generateNewAssistantEl}
           />
           <StoryTextArea
             placeholder="내용을 입력하세요"
-            onMouseUp={generateNewAssistantEl}
+            onMouseUp={type === 'story' ? generateNewAssistantEl : undefined}
+            onTextChange={setContent}
           />
         </div>
         <div className={styles.assistantSection}>
@@ -124,8 +142,8 @@ export default function Page() {
             </div>
           </div>
           <div className={styles.styledAssistantContent}>
-            {assistantEl}
             <AssistantChat />
+            {[...assistantEl].reverse()}
           </div>
         </div>
       </div>
