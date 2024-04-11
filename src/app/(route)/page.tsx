@@ -19,9 +19,9 @@ import { MainServiceButtonProps } from '../_components/molecules/MainServiceButt
 import Write from '/public/icon/write.svg';
 import Sentence from '/public/icon/sentence.svg';
 
-export const STORY_TEXT = '타인에게서\n자신의 이야기를 발견하세요.';
-export const SENTENCE_TEXT = '타인에게서 자신의 이야기를 발견하세요.';
-export const MAIN_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
+const STORY_TEXT = '타인에게서\n자신의 이야기를 발견하세요.';
+const SENTENCE_TEXT = '타인에게서 자신의 이야기를 발견하세요.';
+const MAIN_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 
 const MainServiceButtonConfigs: MainServiceButtonProps[] = [
   {
