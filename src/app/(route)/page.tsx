@@ -20,7 +20,7 @@ export default async function App() {
   return (
     <MainPage
       sentences={
-        stories.length <= 4 ? stories : getShuffledArray(stories).slice(0, 4)
+        stories.length <= 6 ? stories : getShuffledArray(stories).slice(0, 6)
       }
     />
   );
