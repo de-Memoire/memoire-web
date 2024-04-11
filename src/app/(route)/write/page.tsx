@@ -23,7 +23,7 @@ import useDebounce from '@/app/_hooks/useDebounce';
 import { useCompletion } from 'ai/react';
 import { AICompletionType } from '@/app/_constant/ai';
 
-export const MAIN_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
+const MAIN_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 const INTRO_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 
 interface storyData {
