@@ -1,12 +1,12 @@
 import * as styles from './SentenceList.css';
-import { Sentence } from '@/app/_data/storydummy';
 import SentenceEl from '@/app/_components/atoms/Main/SentenceEl';
 import { useRouter } from 'next/navigation';
 import { admin_sentence } from '@/app/_data/storydummy';
+import type { Story } from '@/app/_constant/type/model';
 
 export interface SentenceListProps {
   /** 문장 내용 데이터 */
-  data: Sentence[];
+  data: Story[];
   /** 컴포넌트로 생성할 요소의 클래스명 */
   className?: string;
 }
@@ -27,7 +27,7 @@ const SentenceList = ({ data, className }: SentenceListProps) => {
         {data.map((el, index) => (
           <SentenceEl
             key={index}
-            sentence={el}
+            sentence={{ content: el.content, author: el.pen_name, id: el.id }}
             bgType={index % 2 == 0 ? 'dark' : 'bright'}
             onClick={() => handleSentenceClick(el.id)}
           />
