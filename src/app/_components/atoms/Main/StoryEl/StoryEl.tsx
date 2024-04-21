@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
+import { Story } from '@/app/_constant/type/model';
 import { textType } from './StoryEl.css';
 import * as styles from './StoryEl.css';
-import { Story } from '@/app/_data/storydummy';
 
 export interface StoryElProps {
   /** 스토리 내용 */
@@ -16,20 +16,18 @@ export interface StoryElProps {
  * 메인에서 사용할 스토리 요소 컴포넌트
  */
 const StoryEl = ({
-  story: { img, title, author, content },
+  story: { cover_image_url, title, pen_name, content },
   onClick,
   className,
-}: StoryElProps) => {
-  return (
-    <div className={`${styles.wrap} ${className}`} onClick={onClick}>
-      <div className={styles.imgContainer}>
-        <img src={img} />
-      </div>
-      <div className={styles.textType.title}>{title}</div>
-      <div className={styles.textType.author}>{author}</div>
-      <div className={`${styles.textType.content} ellipse`}>{content}</div>
+}: StoryElProps) => (
+  <div className={`${styles.wrap} ${className}`} onClick={onClick}>
+    <div className={styles.imgContainer}>
+      <img src={cover_image_url} />
     </div>
-  );
-};
+    <div className={styles.textType.title}>{title}</div>
+    <div className={styles.textType.author}>{pen_name}</div>
+    <div className={`${styles.textType.content} ellipse`}>{content}</div>
+  </div>
+);
 
 export default StoryEl;

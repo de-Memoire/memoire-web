@@ -9,13 +9,13 @@ import 'swiper/css/autoplay';
 
 import { Mousewheel, Pagination, Autoplay } from 'swiper/modules';
 import StoryList from '../_components/molecules/Main/StoryList';
-import { story } from '../_data/storydummy';
 import Layout from '../_components/atoms/Main/Layout';
 import * as styles from './page.css';
 import SentenceList from '../_components/molecules/Main/SentenceList';
 
-import MainServiceButton from '../_components/molecules/MainServiceButton';
-import { MainServiceButtonProps } from '../_components/molecules/MainServiceButton';
+import MainServiceButton, {
+  type MainServiceButtonProps,
+} from '../_components/molecules/MainServiceButton';
 import Write from '/public/icon/write.svg';
 import Sentence from '/public/icon/sentence.svg';
 import { Story } from '../_constant/type/model';
@@ -47,27 +47,28 @@ const MainServiceButtonConfigs: MainServiceButtonProps[] = [
 
 interface MainPageProps {
   sentences: Story[];
+  stories: Story[];
 }
 
-export default function MainPage({ sentences }: MainPageProps) {
+export default function MainPage({ sentences, stories }: MainPageProps) {
   const router = useRouter();
 
   return (
     <Swiper
-      direction={'vertical'}
+      direction="vertical"
       slidesPerView={1}
       spaceBetween={0}
-      mousewheel={true}
+      mousewheel
       speed={2000}
       pagination={{
         clickable: true,
       }}
       modules={[Mousewheel, Pagination, Autoplay]}
       className="mySwiper"
-      autoplay={{ delay: 5000 }}
+      // autoplay={{ delay: 5000 }}
     >
       <SwiperSlide>
-        <Layout title={MAIN_TEXT} type="big" bg={true}>
+        <Layout title={MAIN_TEXT} type="big" bg>
           <div className={`${styles.buttonContainer}`}>
             {MainServiceButtonConfigs.map((btn) => (
               <MainServiceButton
@@ -83,18 +84,18 @@ export default function MainPage({ sentences }: MainPageProps) {
       </SwiperSlide>
       <SwiperSlide>
         <Layout title={STORY_TEXT} type="big">
-          <StoryList data={story} className={'story ani_floating '} />
+          <StoryList data={stories} className="story ani_floating " />
         </Layout>
       </SwiperSlide>
       <SwiperSlide>
         <Layout title={SENTENCE_TEXT} type="small">
-          <SentenceList data={sentences} className={'sentence ani_floating'} />
+          <SentenceList data={sentences} className="sentence ani_floating" />
         </Layout>
       </SwiperSlide>
       <SwiperSlide>
         <div className={`${styles.wrap} final ani_leftToRight`}>
           <div className={styles.text}>{MAIN_TEXT}</div>
-          <div className={styles.line}></div>
+          <div className={styles.line} />
           <div className={styles.btn}>흘려보내기</div>
         </div>
       </SwiperSlide>
