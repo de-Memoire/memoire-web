@@ -4,7 +4,6 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { ProgressBar, StoryTextInput } from '@/app/_components/atoms';
 import AssistantSuggestionEl from '@/app/_components/molecules/Assistant/AssistantSuggestionEl';
 import AssistantChatEl from '@/app/_components/molecules/Assistant/AssistantChatEl';
-import * as styles from './write.css';
 import StoryTextArea from '@/app/_components/atoms/StoryTextArea';
 import { useSearchParams } from 'next/navigation';
 import Arrow from '/public/icon/arrow-black.svg';
@@ -23,6 +22,7 @@ import useDebounce from '@/app/_hooks/useDebounce';
 import { useCompletion } from 'ai/react';
 import { AICompletionType } from '@/app/_constant/ai';
 import { StoryType } from '@/app/_constant/story';
+import * as styles from './write.css';
 
 const MAIN_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 const INTRO_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
@@ -57,6 +57,7 @@ const AssistantSuggestion = ({ prompt }: AssistantSuggestionProps) => {
   useEffect(() => {
     completeExpressiveness(prompt);
     completeReadability(prompt);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prompt]);
 
   return (
@@ -96,7 +97,7 @@ const AssistantChat = () => {
   );
 };
 
-export default function Page() {
+const Page = () => {
   const searchParams = useSearchParams();
   const _type = useMemo(() => searchParams.get('type'), [searchParams]);
 
@@ -110,6 +111,8 @@ export default function Page() {
   });
 
   const debouncedContent = useDebounce(story.content, 2000);
+
+  const debouncedSelect = useDebounce(select, 1000);
 
   useEffect(() => {
     const contentToAnalyze = debouncedContent.trim();
@@ -133,26 +136,31 @@ export default function Page() {
 
   function generateNewAssistantEl() {
     const _select = window.getSelection()?.toString().trim();
-    if (_select) {
+    if (typeof _select === 'string') {
       setSelect(_select);
+    }
+  }
 
+  useEffect(() => {
+    const contentToAnalyze = debouncedSelect;
+    if (_type === 'story' && contentToAnalyze.length > 0) {
       const newAssistantSuggestionEl = (
-        <AssistantSuggestion key={_select} prompt={_select} />
+        <AssistantSuggestion key={contentToAnalyze} prompt={contentToAnalyze} />
       );
 
       setAssistantEl((prev) => [...prev, newAssistantSuggestionEl]);
     }
-  }
+  }, [debouncedSelect]);
 
   function UploadHandler() {}
 
   return (
     <>
-      {step == 1 && (
+      {step === 1 && (
         <div>
           <ProgressBar curr={step} />
           <FlexContainer flexDirection="row">
-            {_type == writeType.STORY ? (
+            {_type === writeType.STORY ? (
               <div className={styles.writeSection}>
                 <StoryTextInput
                   placeholder="제목을 입력하세요"
@@ -208,7 +216,7 @@ export default function Page() {
           </div>
         </div>
       )}
-      {step == 2 && (
+      {step === 2 && (
         <div className={`${styles.snapContainer} scroll`}>
           <div className={`${styles.snapEl}`}>
             <ProgressBar curr={step} />
@@ -267,7 +275,7 @@ export default function Page() {
             <FlexContainer flexDirection="col">
               <div className={`${styles.wrap} final ani_leftToRight`}>
                 <div className={styles.text}>{MAIN_TEXT}</div>
-                <div className={styles.vertiline}></div>
+                <div className={styles.vertiline} />
                 <div
                   className={styles.btn}
                   onClick={async () => {
@@ -306,4 +314,6 @@ export default function Page() {
       )}
     </>
   );
-}
+};
+
+export default Page;
