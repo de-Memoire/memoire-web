@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { ProgressBar, StoryTextInput } from '@/app/_components/atoms';
 import AssistantSuggestionEl from '@/app/_components/molecules/Assistant/AssistantSuggestionEl';
 import AssistantChatEl from '@/app/_components/molecules/Assistant/AssistantChatEl';
@@ -23,6 +23,7 @@ import { useCompletion } from 'ai/react';
 import { AICompletionType } from '@/app/_constant/ai';
 import { StoryType } from '@/app/_constant/story';
 import * as styles from './write.css';
+import { createSupabaseClient } from '@/app/_utils/supabase/client';
 
 const MAIN_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 const INTRO_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
@@ -31,6 +32,10 @@ interface storyData {
   title?: string;
   author?: string;
   content: string;
+  image?: {
+    file: File;
+    dataUrl: string;
+  };
 }
 
 interface AssistantSuggestionProps {
@@ -152,7 +157,13 @@ const Page = () => {
     }
   }, [debouncedSelect]);
 
-  function UploadHandler() {}
+  const imageInputRef = useRef<HTMLInputElement>(null);
+
+  function UploadHandler(isOpened: boolean) {
+    if (isOpened) {
+      imageInputRef.current?.click();
+    }
+  }
 
   return (
     <>
@@ -234,6 +245,28 @@ const Page = () => {
                     children: <SignComponent />,
                   }}
                 />
+                <input
+                  ref={imageInputRef}
+                  type="file"
+                  accept="image/*"
+                  style={{ display: 'none' }}
+                  onChange={async (e) => {
+                    const file = e.currentTarget.files?.[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.readAsDataURL(file);
+                      reader.onloadend = () => {
+                        setStory((prev) => ({
+                          ...prev,
+                          image: {
+                            file,
+                            dataUrl: reader.result! as string,
+                          },
+                        }));
+                      };
+                    }
+                  }}
+                />
                 <WriteUtilEl
                   icon={<ImageIcon />}
                   subtitle="step 02"
@@ -242,6 +275,10 @@ const Page = () => {
                     icon: <File />,
                     title: '파일 찾기',
                     onClick: UploadHandler,
+                    children: story.image ? (
+                      <img src={story.image.dataUrl} alt="" />
+                    ) : undefined,
+                    childrenType: writeUtilElType.MINI,
                   }}
                 />
                 <WriteUtilEl
@@ -255,7 +292,7 @@ const Page = () => {
                     children: (
                       <WriteForm
                         image={{
-                          src: 'bg.png',
+                          src: story.image?.dataUrl ?? '',
                           alt: '배경이미지',
                         }}
                         write={{
@@ -300,6 +337,35 @@ const Page = () => {
                       });
                       const result = await response.json();
                       console.log(result);
+                      if (story.image) {
+                        const supabase = createSupabaseClient();
+                        const imageSuffix = story.image.file.name
+                          .split('.')
+                          .at(-1);
+                        if (imageSuffix) {
+                          const imageUploadResponse = await supabase.storage
+                            .from('memoire-public')
+                            .upload(
+                              `story-cover-image-${result.data.id}.${imageSuffix}`,
+                              story.image.file,
+                            );
+                          if (imageUploadResponse.error) {
+                            console.error(imageUploadResponse.error);
+                          } else {
+                            const { data: imagePublicUrlData } =
+                              supabase.storage
+                                .from('memoire-public')
+                                .getPublicUrl(imageUploadResponse.data.path);
+                            await fetch('/api/story', {
+                              method: 'PATCH',
+                              body: JSON.stringify({
+                                story_id: result.data.id,
+                                cover_image_url: imagePublicUrlData.publicUrl,
+                              }),
+                            });
+                          }
+                        }
+                      }
                     } catch (error) {
                       console.error(error);
                     }

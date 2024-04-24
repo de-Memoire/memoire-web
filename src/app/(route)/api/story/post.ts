@@ -102,30 +102,27 @@ export const postStory = async (request: NextRequest) => {
     b: string[];
   }[];
 
-  const topicTags = new Set<string>();
-  const formTags = new Set<string>();
+  const tagSet = new Set<string>();
+  const tagTypeMap: Record<string, 'topic' | 'form'> = {};
   sentences.forEach((item) => {
-    item.a.forEach((value) => {
-      topicTags.add(value);
-    });
     item.b.forEach((value) => {
-      formTags.add(value);
+      tagSet.add(value);
+      tagTypeMap[value] = 'form';
+    });
+    // 중복되는 경우 topic을 우선시
+    item.a.forEach((value) => {
+      tagSet.add(value);
+      tagTypeMap[value] = 'topic';
     });
   });
 
+  const tagsToInsert = Array.from(tagSet).map(
+    (item) => ({ value: item, type: tagTypeMap[item] }) as const,
+  );
+
   const tagsInsertionPromise = supabase
     .from('sentence_tag')
-    .upsert(
-      [
-        ...Array.from(topicTags).map(
-          (item) => ({ value: item, type: 'topic' }) as const,
-        ),
-        ...Array.from(formTags).map(
-          (item) => ({ value: item, type: 'form' }) as const,
-        ),
-      ],
-      { ignoreDuplicates: true },
-    )
+    .upsert(tagsToInsert, { ignoreDuplicates: true, onConflict: 'value' })
     .select('*');
 
   const sentencesInsertionPromise = supabase
