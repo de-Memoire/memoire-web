@@ -13,10 +13,16 @@ const requestSchema = z.object({
   signature_image_url: z.string().min(1).optional(),
 });
 
-export const patchStory = async (request: NextRequest) => {
+export const patchStory = async (
+  request: NextRequest,
+  { params }: { params: { id: string } },
+) => {
   const body = await request.json();
 
-  const validationResult = parseRequest(requestSchema, body);
+  const validationResult = parseRequest(requestSchema, {
+    ...body,
+    story_id: Number(params.id),
+  });
   if (!validationResult.isSuccess) {
     return validationResult.response;
   }
