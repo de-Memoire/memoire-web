@@ -356,10 +356,9 @@ const Page = () => {
                               supabase.storage
                                 .from('memoire-public')
                                 .getPublicUrl(imageUploadResponse.data.path);
-                            await fetch('/api/story', {
+                            await fetch(`/api/story/${result.data.id}`, {
                               method: 'PATCH',
                               body: JSON.stringify({
-                                story_id: result.data.id,
                                 cover_image_url: imagePublicUrlData.publicUrl,
                               }),
                             });
