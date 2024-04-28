@@ -25,10 +25,19 @@ export const getFeedback = async (request: NextRequest) => {
 
   const result = await supabase
     .from('feedback')
-    .select('*')
+    .select(
+      `
+    *,
+    feedback_tag_log (
+      feedback_tag (
+        id,
+        value
+      )
+    )
+    `,
+    )
     .eq('story_id', storyId)
-    .is('deleted_at', null)
-    .single();
+    .is('deleted_at', null);
 
   if (result.error) {
     return NextResponse.json(
@@ -41,34 +50,16 @@ export const getFeedback = async (request: NextRequest) => {
     );
   }
 
-  const tagsResult = await supabase
-    .from('feedback_tag_log')
-    .select(
-      `feedback_tag (
-        id,
-        value
-    )`,
-    )
-    .eq('feedback_id', result.data.id);
-
-  if (tagsResult.error) {
-    return NextResponse.json(
-      new ErrorResponse({
-        status: tagsResult.status,
-        message: tagsResult.statusText,
-        errorCode: ErrorCode.SUPABASE_ERROR,
-      }),
-      { status: tagsResult.status },
-    );
-  }
-
   return NextResponse.json(
-    new ApiResponse({
-      feedback: result.data,
-      tags: tagsResult.data
-        .map((item) => item.feedback_tag ?? { id: -1, value: '' })
-        .filter((item) => item.id !== -1),
-    }),
+    new ApiResponse(
+      result.data.map((item) => ({
+        ...item,
+        feedback_tag_log: undefined,
+        tags: item.feedback_tag_log
+          .map((tagLog) => tagLog.feedback_tag)
+          .filter((tag) => !!tag),
+      })),
+    ),
     { status: 200 },
   );
 };

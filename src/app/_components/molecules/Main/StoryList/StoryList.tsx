@@ -1,7 +1,7 @@
-import * as styles from './StoryList.css';
-import { Story } from '@/app/_data/storydummy';
 import StoryEl from '@/app/_components/atoms/Main/StoryEl';
+import { Story } from '@/app/_constant/type/model';
 import { useRouter } from 'next/navigation';
+import * as styles from './StoryList.css';
 
 export interface StoryListProps {
   /** 스토리 내용 데이터 */
@@ -24,7 +24,7 @@ const StoryList = ({ data, className }: StoryListProps) => {
     <div className={`${styles.wrap} ${className}`}>
       {data.map((el, index) => (
         <StoryEl
-          key={index}
+          key={el.id}
           story={el}
           onClick={() => handleStoryClick(el.id)}
         />

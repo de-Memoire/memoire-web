@@ -3,7 +3,7 @@ import { authorize } from '@/app/_utils/server/authorization';
 import { createSupabaseServerClient } from '@/app/_utils/supabase/server';
 import { type NextRequest, NextResponse } from 'next/server';
 
-export const getFeedback = async (request: NextRequest) => {
+export const GET = async (request: NextRequest) => {
   const supabase = createSupabaseServerClient();
 
   const authorizationResult = await authorize(supabase);

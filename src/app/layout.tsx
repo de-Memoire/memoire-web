@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { Nav } from './_components/Common';
 import { createSupabaseServerComponentClient } from './_utils/supabase/server';
+import type { User } from './_constant/type/model';
+import { authorize } from './_utils/server/authorization';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -11,6 +13,21 @@ export const runtime = 'edge';
 export const metadata: Metadata = {
   title: 'memoire',
   description: 'memoire app',
+};
+
+const NavServer = async () => {
+  const supabase = createSupabaseServerComponentClient();
+  const result = await authorize(supabase);
+
+  return (
+    <Nav
+      profileImageUrl={
+        result.isSuccess
+          ? result.user.profile_image_url ?? undefined
+          : undefined
+      }
+    />
+  );
 };
 
 export default async function RootLayout({
@@ -25,7 +42,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <nav>
-          <Nav />
+          <NavServer />
         </nav>
         {children}
         {/* <footer>

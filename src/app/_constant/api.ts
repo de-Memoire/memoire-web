@@ -3,6 +3,7 @@ export const ErrorCode = {
   NOT_FOUND: 2,
   UNAUTHORIZED: 3,
   SUPABASE_ERROR: 5,
+  NOT_OWNED_CONTENT: 6,
 } as const;
 export type ErrorCode = (typeof ErrorCode)[keyof typeof ErrorCode];
 

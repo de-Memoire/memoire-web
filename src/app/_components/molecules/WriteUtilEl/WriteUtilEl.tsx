@@ -21,7 +21,7 @@ export interface WriteUtilElProps {
     /** 드롭다운 자식 노드 컴포넌트 */
     children?: ReactNode;
     /** 드롭다운 클릭 핸들러 */
-    onClick?: () => void;
+    onClick?: (isOpened: boolean) => void;
   };
   /** 컴포넌트로 생성할 요소의 클래스명 */
   className?: string;
@@ -40,8 +40,9 @@ const WriteUtilEl = ({
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   function isClickHandler() {
-    setIsOpen(!isOpen);
-    dropDown.onClick;
+    const newState = !isOpen;
+    setIsOpen(newState);
+    dropDown.onClick?.(newState);
   }
 
   return (

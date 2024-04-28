@@ -14,7 +14,9 @@ interface EssayStory extends StoryRow {
   title: string;
 }
 
-export type Story = QuoteStory | EssayStory;
+// export type Story = QuoteStory | EssayStory;
+
+export type Story = StoryRow;
 
 export type Sentence = Database['public']['Tables']['sentence']['Row'];
 

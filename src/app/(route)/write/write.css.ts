@@ -1,17 +1,15 @@
 import { TEXT_STYLES, COLORS } from '@/app/_constant';
 import { style, styleVariants } from '@vanilla-extract/css';
 
-export const container = style({
-  width: '100%',
-  flex: 1,
-  display: 'flex',
-  flexDirection: 'column',
+export const snapContainer = style({
+  overflow: 'auto',
+  scrollSnapType: 'y mandatory',
+  height: 'calc(100vh - 70px - 50px - 15px)',
 });
 
-export const flexContainer = style({
-  display: 'flex',
-  gap: '50px',
-  flex: 1,
+export const snapEl = style({
+  scrollSnapAlign: 'start',
+  scrollSnapStop: 'always',
 });
 
 export const writeSection = style({

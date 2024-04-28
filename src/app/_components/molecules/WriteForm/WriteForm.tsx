@@ -30,12 +30,7 @@ export const WriteForm = ({ image, write, className }: WriteFormProps) => {
   return (
     <>
       <div className={`${styles.imgContainer} ${className}`}>
-        <Image
-          src={`/assets/${image.src}`}
-          width={1280}
-          height={300}
-          alt={image.alt}
-        />
+        <Image src={image.src} width={1280} height={300} alt={image.alt} />
       </div>
       <div className={`${styles.storyContent} ${styles.maxWidth}`}>
         <div className={styles.textType.title}>{write.title}</div>

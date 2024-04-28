@@ -8,11 +8,12 @@ const requestSchema = z.object({
   id: z.number(),
 });
 
-export const getStory = async (request: NextRequest) => {
-  const { searchParams } = new URL(request.url);
-
+export const getStory = async (
+  request: NextRequest,
+  { params }: { params: { id: string } },
+) => {
   const validationResult = parseRequest(requestSchema, {
-    id: Number(searchParams.get('id')),
+    id: Number(params.id),
   });
 
   if (!validationResult.isSuccess) {
