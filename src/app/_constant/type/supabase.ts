@@ -153,6 +153,38 @@ export type Database = {
           },
         ]
       }
+      note: {
+        Row: {
+          content: string
+          created_at: string
+          deleted_at: string | null
+          id: number
+          user_id: number
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          deleted_at?: string | null
+          id?: number
+          user_id: number
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          deleted_at?: string | null
+          id?: number
+          user_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "note_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "user"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       sentence: {
         Row: {
           content: string
