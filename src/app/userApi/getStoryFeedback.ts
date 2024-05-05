@@ -1,17 +1,15 @@
 import { getData } from './common/get';
 
 export interface FeedbackResponse {
-  data: {
-    content: string | null;
-    created_at: string;
-    deleted_at: string | null;
+  content: string | null;
+  created_at: string;
+  deleted_at: string | null;
+  id: number;
+  story_id: number;
+  user_id: number;
+  tags?: {
     id: number;
-    story_id: number;
-    user_id: number;
-    tags?: {
-      id: number;
-      value: string;
-    }[];
+    value: string;
   }[];
 }
 

@@ -74,7 +74,6 @@ const Page = () => {
       // setFeedbackTag(_feedbackTag);
       setFeedbackList(transformedFeedbackList);
       setIsLoading(false);
-      console.log(feedbackList);
     } catch (error) {
       console.error('Error fetching data:', error);
     }

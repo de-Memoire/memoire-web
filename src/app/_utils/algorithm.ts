@@ -10,29 +10,16 @@ export const getShuffledArray = <T extends any[]>(array: T): T => {
   return newArray;
 };
 
-export function generateFeedbackList(jsonData: FeedbackResponse): string[] {
-  const tagsList: string[] = [];
-  for (const item of jsonData.data) {
-    const tags = item.tags;
-    if (tags) {
-      for (const tag of tags) {
-        tagsList.push(tag.value);
-      }
-    }
-  }
-  return tagsList;
-}
-
 export function extractTagValues(data: FeedbackResponse[]): string[] {
   const tagValues: string[] = [];
   data.forEach((item) => {
-    const combinedTags = item.data
-      ?.map((feedbackItem) =>
-        feedbackItem.tags?.map((tag) => tag.value).join(' '),
-      )
-      .join(' ');
-    if (combinedTags) {
-      tagValues.push(combinedTags);
+    if (item.tags) {
+      const combinedTags = item.tags
+        ?.map((tag: FeedbackTagProps) => tag.value)
+        .join(' ');
+      if (combinedTags) {
+        tagValues.push(combinedTags);
+      }
     }
   });
   return tagValues;
