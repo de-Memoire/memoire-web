@@ -22,6 +22,11 @@ body {
   min-height: 100vh;
 }
 
+button {
+  border: 0;
+  background-color: transparent;
+}
+
 .scroll::-webkit-scrollbar {
   display: none;
 }
@@ -243,17 +248,17 @@ img {
   font-display: swap;
 }
 
-.swiper {
+.mySwiper.swiper {
   width: 100%;
   height: calc(100vh - 70px - 50px);
 }
 
-.swiper-slide {
+.mySwiper .swiper-slide {
   overflow: hidden;
 }
 
-.swiper-vertical > .swiper-pagination-bullets,
-.swiper-pagination-vertical.swiper-pagination-bullets {
+.mySwiper .swiper-vertical > .swiper-pagination-bullets,
+.mySwiper .swiper-pagination-vertical.swiper-pagination-bullets {
   top: 40% !important;
 }
 
@@ -268,60 +273,89 @@ img {
   }
 }
 
-.swiper-slide.swiper-slide-active .story.ani_floating > div:nth-child(1) {
+.mySwiper
+  .swiper-slide.swiper-slide-active
+  .story.ani_floating
+  > div:nth-child(1) {
   animation: ani 2s 0.3s both;
 }
-.swiper-slide.swiper-slide-active .story.ani_floating > div:nth-child(2) {
+.mySwiper
+  .swiper-slide.swiper-slide-active
+  .story.ani_floating
+  > div:nth-child(2) {
   animation: ani 2s 0.5s both;
 }
-.swiper-slide.swiper-slide-active .story.ani_floating > div:nth-child(3) {
+.mySwiper
+  .swiper-slide.swiper-slide-active
+  .story.ani_floating
+  > div:nth-child(3) {
   animation: ani 2s 0.7s both;
 }
-.swiper-slide.swiper-slide-active .story.ani_floating > div:nth-child(4) {
+.mySwiper
+  .swiper-slide.swiper-slide-active
+  .story.ani_floating
+  > div:nth-child(4) {
   animation: ani 2s 0.9s both;
 }
 
-.swiper-slide.swiper-slide-active
+.mySwiper
+  .swiper-slide.swiper-slide-active
   .sentence.ani_floating
   > div:nth-child(1)
   > div:nth-child(1) {
   animation: ani 2s 0.3s both;
 }
-.swiper-slide.swiper-slide-active
+.mySwiper
+  .swiper-slide.swiper-slide-active
   .sentence.ani_floating
   > div:nth-child(1)
   > div:nth-child(2) {
   animation: ani 2s 0.5s both;
 }
-.swiper-slide.swiper-slide-active
+.mySwiper
+  .swiper-slide.swiper-slide-active
   .sentence.ani_floating
   > div:nth-child(1)
   > div:nth-child(3) {
   animation: ani 2s 0.7s both;
 }
-.swiper-slide.swiper-slide-active
+.mySwiper
+  .swiper-slide.swiper-slide-active
   .sentence.ani_floating
   > div:nth-child(1)
   > div:nth-child(4) {
   animation: ani 2s 0.9s both;
 }
-.swiper-slide.swiper-slide-active
+.mySwiper
+  .swiper-slide.swiper-slide-active
   .sentence.ani_floating
   > div:nth-child(1)
   > div:nth-child(5) {
   animation: ani 2s 1.1s both;
 }
-.swiper-slide.swiper-slide-active
+.mySwiper
+  .swiper-slide.swiper-slide-active
   .sentence.ani_floating
   > div:nth-child(1)
   > div:nth-child(6) {
   animation: ani 2s 1.3s both;
 }
-.swiper-slide.swiper-slide-active
+.mySwiper
+  .swiper-slide.swiper-slide-active
   .sentence.ani_floating
   > div:nth-child(2)
   > div:nth-child(1) {
   animation: ani 2s 1.5s both;
+}
+
+.ani_floating > div:nth-child(1) {
+  animation: ani 1s 0.3s both;
+}
+.ani_floating > div:nth-child(2) {
+  animation: ani 1s 0.5s both;
+}
+.ani_floating > div:nth-child(3) {
+  animation: ani 1s 0.7s both;
 }
 
 @keyframes leftToRight {
@@ -339,19 +373,45 @@ img {
   }
 }
 
-.swiper-slide.swiper-slide-active .final.ani_leftToRight > div:nth-child(1) {
+.mySwiper
+  .swiper-slide.swiper-slide-active
+  .final.ani_leftToRight
+  > div:nth-child(1) {
   animation: leftToRight 5s 0.3s both;
 }
-.swiper-slide.swiper-slide-active .final.ani_leftToRight > div:nth-child(2) {
+.mySwiper
+  .swiper-slide.swiper-slide-active
+  .final.ani_leftToRight
+  > div:nth-child(2) {
   animation: leftToRight 5s 1.3s both;
 }
-.swiper-slide.swiper-slide-active .final.ani_leftToRight > div:nth-child(3) {
+.mySwiper
+  .swiper-slide.swiper-slide-active
+  .final.ani_leftToRight
+  > div:nth-child(3) {
   animation: leftToRight 5s 2.3s both;
+}
+
+.mySwiper .ellipse {
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+.saveSwipe .swiper-pagination {
+  display: none !important;
+}
+
+.saveSwipe {
+  flex: 1 !important;
+  width: 100%;
 }
 
 .ellipse {
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+  overflow: hidden;
 }
