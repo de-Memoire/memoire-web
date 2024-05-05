@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter, useParams } from 'next/navigation';
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { ProgressBar, StoryTextInput } from '@/app/_components/atoms';
 import AssistantSuggestionEl from '@/app/_components/molecules/Assistant/AssistantSuggestionEl';
@@ -24,9 +25,18 @@ import { AICompletionType } from '@/app/_constant/ai';
 import { StoryType } from '@/app/_constant/story';
 import * as styles from './write.css';
 import { createSupabaseClient } from '@/app/_utils/supabase/client';
+import { WEIGHT } from '@/app/utils';
+import StoryServiceButton from '@/app/_components/molecules/StoryServiceButton';
+import Toast from '@/app/_components/atoms/Toast';
+import List from '/public/icon/list.svg';
+import { CircleIcon } from '@/app/_components/atoms';
+import { postTemporary } from '@/app/userApi/postTemporary';
+import Loading from '@/app/_components/atoms/Loading';
 
 const MAIN_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 const INTRO_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
+const TOAST_TEXT =
+  '임시저장 한 글이 있습니다.\n임시저장 글을 보고 싶으면 ctrl+M을 누르세요.';
 
 interface storyData {
   title?: string;
@@ -105,6 +115,7 @@ const AssistantChat = () => {
 const Page = () => {
   const searchParams = useSearchParams();
   const _type = useMemo(() => searchParams.get('type'), [searchParams]);
+  const router = useRouter();
 
   const [select, setSelect] = useState<string>('');
   const [step, setStep] = useState<number>(1);
@@ -167,9 +178,18 @@ const Page = () => {
 
   return (
     <>
+      <Toast>
+        <div className={styles.toastWrap} onClick={() => router.push(`/store`)}>
+          <CircleIcon type="bright">
+            <List />
+          </CircleIcon>
+          <div className={styles.toastText}>{TOAST_TEXT}</div>
+        </div>
+      </Toast>
+
       {step === 1 && (
-        <div>
-          <ProgressBar curr={step} />
+        <div className={styles.container}>
+          <ProgressBar curr={step} weight={WEIGHT} />
           <FlexContainer flexDirection="row">
             {_type === writeType.STORY ? (
               <div className={styles.writeSection}>
@@ -216,10 +236,26 @@ const Page = () => {
             </div>
           </FlexContainer>
           <div className={styles.btnSection}>
-            <div className={styles.btnWrapper}>
-              <div className={styles.btnText} onClick={() => setStep(2)}>
-                다음 단계
-              </div>
+            <div
+              className={styles.btnWrapperType.bright}
+              onClick={() => {
+                postTemporary({
+                  pen_name:
+                    (story.author?.length ?? 0) > 0 ? story.author : undefined,
+                  content: story.content,
+                  type: _type === 'story' ? StoryType.ESSAY : StoryType.QUOTE,
+                  title:
+                    (story.title?.length ?? 0) > 0 ? story.title : undefined,
+                });
+              }}
+            >
+              <div>임시저장</div>
+            </div>
+            <div
+              className={styles.btnWrapperType.dark}
+              onClick={() => setStep(2)}
+            >
+              <div className={styles.btnText}>다음 단계</div>
               <div className={styles.btnIcon}>
                 <Arrow />
               </div>
@@ -230,7 +266,7 @@ const Page = () => {
       {step === 2 && (
         <div className={`${styles.snapContainer} scroll`}>
           <div className={`${styles.snapEl}`}>
-            <ProgressBar curr={step} />
+            <ProgressBar weight={WEIGHT} curr={step} />
             <FlexContainer flexDirection="col">
               <div className={styles.title}>{INTRO_TEXT}</div>
               <div className={styles.writeUtilElWrapper}>
@@ -308,7 +344,7 @@ const Page = () => {
             </FlexContainer>
           </div>
           <div className={`${styles.snapEl}`}>
-            <ProgressBar curr={3} />
+            <ProgressBar weight={WEIGHT} curr={3} />
             <FlexContainer flexDirection="col">
               <div className={`${styles.wrap} final ani_leftToRight`}>
                 <div className={styles.text}>{MAIN_TEXT}</div>
