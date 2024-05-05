@@ -8,7 +8,7 @@ export interface FeedbackResponse {
     id: number;
     story_id: number;
     user_id: number;
-    tags: {
+    tags?: {
       id: number;
       value: string;
     }[];
