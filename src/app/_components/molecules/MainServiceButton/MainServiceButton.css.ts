@@ -9,6 +9,7 @@ export const wrap = style({
   gap: '34px',
   display: 'flex',
   flexDirection: 'column',
+  cursor: 'pointer',
 });
 
 export const wrapType = styleVariants({

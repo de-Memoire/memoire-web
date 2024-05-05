@@ -16,7 +16,7 @@ export const wrapType = styleVariants({
     wrap,
     {
       background:
-        'url("/assets/main/1.svg") 100% center / 800px 600px no-repeat',
+        'url("/assets/main/2.svg") 100% center / 800px 600px no-repeat',
     },
   ],
 });

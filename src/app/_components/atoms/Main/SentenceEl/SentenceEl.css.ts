@@ -10,6 +10,7 @@ export const wrap = style({
   height: '100%',
   padding: '20px',
   opacity: '0',
+  cursor: 'pointer',
 });
 
 export const wrapType = styleVariants({

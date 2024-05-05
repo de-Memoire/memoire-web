@@ -16,9 +16,10 @@ export const InfoIcon = style({
 export const infoContainer = style({
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'space-between',
+  justifyContent: 'center',
   flex: '5',
   maxHeight: '60px',
+  gap: '5px',
 });
 
 export const infoTitle = style({
@@ -26,7 +27,7 @@ export const infoTitle = style({
 });
 
 export const infoSubTitle = style({
-  ...TEXT_STYLES.title3R.PC,
+  ...TEXT_STYLES.cap1L.PC,
   color: COLORS.brand.secondary,
 });
 
@@ -38,6 +39,7 @@ export const DropdownContent = style({
   alignItems: 'center',
   justifyContent: 'center',
   lineHeight: '60px',
+  cursor: 'pointer',
 });
 export const DropdownIitle = style({
   ...TEXT_STYLES.body2L.PC,

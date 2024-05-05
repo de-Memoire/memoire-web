@@ -22,7 +22,7 @@ const StoryEl = ({
 }: StoryElProps) => (
   <div className={`${styles.wrap} ${className}`} onClick={onClick}>
     <div className={styles.imgContainer}>
-      <img src={cover_image_url} />
+      <img src={cover_image_url || '/assets/main/2.svg'} />
     </div>
     <div className={styles.textType.title}>{title}</div>
     <div className={styles.textType.author}>{pen_name}</div>

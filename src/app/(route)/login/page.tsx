@@ -8,8 +8,8 @@ const INTRO_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 
 export default function Page() {
   return (
-    <div className={style.wrap}>
-      <div className={style.login}>
+    <div className={`${style.wrap} login`}>
+      <div className={`${style.login} ani_floating`}>
         <div className={style.logo}>
           <div>
             <LogoIcon />
