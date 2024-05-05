@@ -42,7 +42,7 @@ const StyledList = ({ data, onClick, service, className }: StyledListProps) => {
             date: el.date,
             id: el.id,
           }}
-          onClick={() => onClick && onClick}
+          onClick={() => onClick && onClick(el.content)}
         />
       ))}
     </div>

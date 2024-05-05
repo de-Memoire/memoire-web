@@ -42,6 +42,16 @@ export const title = style({
   whiteSpace: 'pre-line',
 });
 
+export const box = style({
+  ...TEXT_STYLES.brand5R.PC,
+  width: '80%',
+  background: COLORS.grayscale.gray1,
+  margin: '0 auto',
+  padding: '10px',
+  borderRadius: '10px',
+  textAlign: 'center',
+});
+
 export const styledTextArea = style({
   ...TEXT_STYLES.brand5R.PC,
   color: COLORS.grayscale.gray8,

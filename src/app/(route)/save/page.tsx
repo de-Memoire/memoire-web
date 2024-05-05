@@ -15,6 +15,11 @@ import { postMemo } from '@/app/userApi/postMemo';
 import { getMemo, MemoResponse } from '@/app/userApi/getMemo';
 import { formatDate } from '@/app/_utils/algorithm';
 import Loading from '@/app/_components/atoms/Loading';
+import useModal from '@/app/_hooks/useModal';
+import { CircleIcon, Popup } from '@/app/_components/atoms';
+import { Modal } from '@/app/_components/Common';
+import Sentence from '/public/icon/logo_icon.svg';
+import Confirm from '@/app/_components/atoms/Confirm';
 
 const INTRO_TEXT = '작은 문장 조각을\n보관해보세요.';
 const PH =
@@ -25,18 +30,10 @@ export default function Page() {
   const [saveContent, setSaveContent] = useState<string>('');
   const [memo, setMemo] = useState<Memo[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { isShowing, toggle } = useModal();
+  const [modalContent, setModalContent] = useState<string>('');
 
   const router = useRouter();
-
-  const handleTextareaChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>,
-  ) => {
-    setSaveContent(event.target.value);
-  };
-
-  const handleSentenceClick = (data: string) => {
-    router.push(`/write?type=sentence?content=${data}`);
-  };
 
   const copyHandler = async (data: string) => {
     try {
@@ -49,10 +46,6 @@ export default function Page() {
   };
 
   const sentenceService: ServiceItem[] = [
-    {
-      icon: <PlusFile />,
-      onClick: (content: string) => handleSentenceClick(content),
-    },
     {
       icon: <Copy />,
       onClick: (content: string) => copyHandler(content),
@@ -68,11 +61,22 @@ export default function Page() {
         content: item.content,
       }));
       setMemo(transformedMemo);
-
-      console.log(_memo);
       setIsLoading(false);
     } catch (error) {
       console.error('Error fetching data:', error);
+    }
+  };
+
+  const handleSave = async () => {
+    try {
+      await postMemo({
+        content: saveContent,
+      });
+      getData();
+      setStep(1);
+      setSaveContent('');
+    } catch (error) {
+      console.error('Error posting memo:', error);
     }
   };
 
@@ -98,24 +102,51 @@ export default function Page() {
             className={styles.styledTextArea}
             placeholder={PH}
             value={saveContent}
-            onChange={handleTextareaChange}
-          />
-          <StyledButton
-            text="보관하기"
-            onClick={() => {
-              postMemo({
-                content: saveContent,
-              });
-              setStep(1);
+            onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
+              setSaveContent(event.target.value);
             }}
           />
+          <StyledButton text="보관하기" onClick={handleSave} />
         </div>
       )}
       {step == 1 && (
         <div className={style.content}>
-          <StyledList data={memo} service={sentenceService} />
+          <StyledList
+            data={memo}
+            service={sentenceService}
+            onClick={(data: string) => {
+              setModalContent(data);
+              toggle();
+            }}
+          />
         </div>
       )}
+      <Modal
+        isShowing={isShowing}
+        content={
+          <Confirm
+            onClose={() => {
+              toggle();
+            }}
+            onLeft={{
+              onClick: () =>
+                router.push(`/write?type=story?content=${modalContent}`),
+              text: '에세이로 작성하기',
+            }}
+            onRight={{
+              onClick: () =>
+                router.push(`/write?type=sentence?content=${modalContent}`),
+              text: '문장으로 작성하기',
+            }}
+          >
+            <CircleIcon type="bright">
+              <Sentence />
+            </CircleIcon>
+            <div>어떤 글을 작성하고 싶으신가요?</div>
+            <div className={styles.box}>{modalContent}</div>
+          </Confirm>
+        }
+      />
     </div>
   );
 }

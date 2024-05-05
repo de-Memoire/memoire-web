@@ -11,4 +11,5 @@ export const wrap = style({
   textAlign: 'center',
   lineHeight: '24px',
   alignItems: 'center',
+  cursor: 'pointer',
 });
