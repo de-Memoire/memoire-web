@@ -1,7 +1,7 @@
 import * as styles from './styledListEl.css';
 import StoryIcon from '/public/icon/logo_icon.svg';
 import SentenceIcon from '/public/icon/sentence_logo.svg';
-import { Memo, Sentence, Story } from '@/app/_data/storydummy';
+import { Memo, Story, Sentence } from '@/app/userApi/common/type';
 import { writeType } from '@/app/_constant/write';
 import CircleIcon from '../CircleIcon';
 import { ReactNode } from 'react';

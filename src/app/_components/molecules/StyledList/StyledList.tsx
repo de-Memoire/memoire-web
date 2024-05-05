@@ -3,7 +3,7 @@
 import * as styles from './StyledList.css';
 import StyledListEl from '../../atoms/StyledListEl';
 import { useRouter } from 'next/navigation';
-import { Memo, Sentence, Story } from '@/app/_data/storydummy';
+import { Memo, Story, Sentence } from '@/app/userApi/common/type';
 import { MemoResponse } from '@/app/userApi/getMemo';
 
 export interface ServiceItem {

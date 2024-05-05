@@ -2,7 +2,6 @@
 
 import FlexContainer from '@/app/_components/atoms/FlexContainer';
 import * as styles from './library.css';
-import { sentence } from '@/app/_data/storydummy';
 import StyledList from '@/app/_components/molecules/StyledList';
 import FlexBox from '@/app/_components/atoms/FlexBox';
 import { useRouter, useParams } from 'next/navigation';
@@ -11,7 +10,7 @@ import GrayArrow from '/public/icon/arrow-gray.svg';
 import { useEffect, useState } from 'react';
 import { Sentence, Story } from '@/app/_constant/type/model';
 import { formatDate } from '@/app/_utils/algorithm';
-import { User } from '@/app/_data/storydummy';
+import { User } from '@/app/userApi/common/type';
 import { getUserStory } from '@/app/userApi/getUserStory';
 import Loading from '@/app/_components/atoms/Loading';
 import { Footer } from '@/app/_components/Common';

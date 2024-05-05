@@ -5,7 +5,7 @@ import { useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import StoryServiceButton from '@/app/_components/molecules/StoryServiceButton';
 import { textType } from './page.css';
-import { feedback, FeedbackTagProps } from '@/app/_data/storydummy';
+import { FeedbackTagProps } from '@/app/_data/storydummy';
 import FeedbackBlackIcon from '/public/icon/feedback-black.svg';
 import FeedbackWhiteIcon from '/public/icon/feedback-white.svg';
 import Share from '/public/icon/share.svg';

@@ -2,7 +2,6 @@
 
 import FlexContainer from '@/app/_components/atoms/FlexContainer';
 import * as styles from './store.css';
-import { sentence } from '@/app/_data/storydummy';
 import StyledList from '@/app/_components/molecules/StyledList';
 import FlexBox from '@/app/_components/atoms/FlexBox';
 import { useRouter, useParams } from 'next/navigation';
@@ -12,7 +11,7 @@ import { getTemporary } from '@/app/userApi/getTemporary';
 import { useEffect, useState } from 'react';
 import { Sentence, Story } from '@/app/_constant/type/model';
 import { formatDate } from '@/app/_utils/algorithm';
-import { Temporary } from '@/app/_data/storydummy';
+import { Temporary } from '@/app/userApi/common/type';
 
 const STORY_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 
