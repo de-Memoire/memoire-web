@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import StyledButton from '@/app/_components/atoms/StyledButton';
 import StyledList from '@/app/_components/molecules/StyledList';
 import * as styles from './save.css';
-import { Memo } from '@/app/userApi/common/type';
+import { Memo, Story } from '@/app/userApi/common/type';
 import { useRouter, useParams } from 'next/navigation';
 import { ServiceItem } from '@/app/_components/molecules/StyledList/StyledList';
 import PlusFile from '/public/icon/plusFile.svg';
@@ -114,8 +114,8 @@ export default function Page() {
           <StyledList
             data={memo}
             service={sentenceService}
-            onClick={(data: string) => {
-              setModalContent(data);
+            onClick={(data) => {
+              setModalContent(data.content);
               toggle();
             }}
           />
