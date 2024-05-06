@@ -42,4 +42,8 @@ export const btn = style({
   color: COLORS.grayscale.gray1,
   height: '40px',
   opacity: '0',
+
+  ':hover': {
+    opacity: '0.5',
+  },
 });
