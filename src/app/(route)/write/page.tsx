@@ -116,6 +116,7 @@ const Page = () => {
   const searchParams = useSearchParams();
   const _type = useMemo(() => searchParams.get('type'), [searchParams]);
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [select, setSelect] = useState<string>('');
   const [step, setStep] = useState<number>(1);
@@ -125,6 +126,23 @@ const Page = () => {
     author: '',
     content: '',
   });
+
+  const handleKeyPress = (event: KeyboardEvent) => {
+    if (event.metaKey && event.key === 'm') {
+      router.push('/store');
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      handleKeyPress(event);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   const debouncedContent = useDebounce(story.content, 2000);
 
@@ -176,6 +194,10 @@ const Page = () => {
     }
   }
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <>
       <Toast>
@@ -196,13 +218,11 @@ const Page = () => {
                 <StoryTextInput
                   placeholder="제목을 입력하세요"
                   type="title"
-                  // onMouseUp={generateNewAssistantEl}
                   onTextChange={(e) => handleInputChange('title', e)}
                 />
                 <StoryTextInput
                   placeholder="저자를 입력하세요"
                   type="author"
-                  // onMouseUp={generateNewAssistantEl}
                   onTextChange={(e) => handleInputChange('author', e)}
                 />
                 <StoryTextArea
@@ -213,6 +233,11 @@ const Page = () => {
               </div>
             ) : (
               <div className={styles.writeSection}>
+                <StoryTextInput
+                  placeholder="저자를 입력하세요"
+                  type="author"
+                  onTextChange={(e) => handleInputChange('author', e)}
+                />
                 <StoryTextArea
                   placeholder="문장을 입력하세요"
                   // onMouseUp={generateNewAssistantEl}
@@ -239,14 +264,22 @@ const Page = () => {
             <div
               className={styles.btnWrapperType.bright}
               onClick={() => {
-                postTemporary({
-                  pen_name:
-                    (story.author?.length ?? 0) > 0 ? story.author : undefined,
-                  content: story.content,
-                  type: _type === 'story' ? StoryType.ESSAY : StoryType.QUOTE,
-                  title:
-                    (story.title?.length ?? 0) > 0 ? story.title : undefined,
-                });
+                try {
+                  setIsLoading(true);
+                  postTemporary({
+                    pen_name:
+                      (story.author?.length ?? 0) > 0
+                        ? story.author
+                        : undefined,
+                    content: story.content,
+                    type: _type === 'story' ? StoryType.ESSAY : StoryType.QUOTE,
+                    title:
+                      (story.title?.length ?? 0) > 0 ? story.title : undefined,
+                  });
+                  router.push('/store');
+                } catch {
+                  console.error(Error);
+                }
               }}
             >
               <div>임시저장</div>
@@ -353,6 +386,7 @@ const Page = () => {
                   className={styles.btn}
                   onClick={async () => {
                     try {
+                      setIsLoading(true);
                       const response = await fetch('/api/story', {
                         method: 'POST',
                         body: JSON.stringify({
@@ -401,6 +435,7 @@ const Page = () => {
                           }
                         }
                       }
+                      router.push(`${_type}/${result.data.id}`);
                     } catch (error) {
                       console.error(error);
                     }
