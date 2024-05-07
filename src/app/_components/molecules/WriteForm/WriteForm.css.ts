@@ -14,6 +14,19 @@ export const storyContent = style({
   gap: '15px',
   flex: 1,
 });
+
+export const wrap = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '80px',
+});
+
+export const signContent = style({
+  width: '150px',
+  marginLeft: 'auto',
+  display: 'flex',
+});
+
 export const maxWidth = style({
   maxWidth: '800px',
   margin: '0 auto',

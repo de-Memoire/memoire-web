@@ -12,6 +12,19 @@ export interface Story {
   content: string;
 }
 
+export interface StoryForm {
+  title?: string;
+  author?: string;
+  content: string;
+  image?: {
+    file: File;
+    dataUrl: string;
+  };
+  sign?: {
+    dataUrl: string;
+  };
+}
+
 export interface Sentence {
   id: number;
   date: string;
