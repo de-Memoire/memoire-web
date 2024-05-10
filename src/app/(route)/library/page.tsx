@@ -15,6 +15,7 @@ import { getUserStory } from '@/app/userApi/getUserStory';
 import Loading from '@/app/_components/atoms/Loading';
 import { Footer } from '@/app/_components/Common';
 import { StoryType } from '@/app/_constant/story';
+
 const STORY_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 
 export default function Page() {
@@ -42,6 +43,7 @@ export default function Page() {
     try {
       const _userStory = await getUserStory();
       console.log(_userStory);
+
       const transformedUserStory = _userStory.map((item: Story) => ({
         id: item.id,
         date: formatDate(item.created_at),

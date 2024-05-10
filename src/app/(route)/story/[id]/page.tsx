@@ -50,6 +50,7 @@ import Confirm from '@/app/_components/atoms/Confirm';
 import { CircleIcon } from '@/app/_components/atoms';
 import WriteForm from '@/app/_components/molecules/WriteForm';
 
+
 const MAIN_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 const FEEDBACK_TEXT = '아름다운 글을 쓰는\n지고의 노력을\n같이 응원해주세요.';
 
@@ -57,6 +58,7 @@ const Page = () => {
   const router = useRouter();
   const path = usePathname();
   const id = path.split('/')[2];
+
 
   const [isLoading, setIsLoading] = useState(true);
 

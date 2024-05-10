@@ -23,4 +23,5 @@ export const icon = style({
   ':hover': {
     opacity: '0.5',
   },
+
 });

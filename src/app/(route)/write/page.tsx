@@ -34,10 +34,22 @@ import { postTemporary } from '@/app/userApi/postTemporary';
 import Loading from '@/app/_components/atoms/Loading';
 import { StoryForm } from '@/app/userApi/common/type';
 
+
 const MAIN_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 const INTRO_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 const TOAST_TEXT =
   '임시저장 한 글이 있습니다.\n임시저장 글을 보고 싶으면 ctrl+M을 누르세요.';
+
+interface storyData {
+  title?: string;
+  author?: string;
+  content: string;
+  image?: {
+    file: File;
+    dataUrl: string;
+  };
+}
+
 
 interface AssistantSuggestionProps {
   prompt: string;
