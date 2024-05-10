@@ -48,13 +48,18 @@ import Loading from '@/app/_components/atoms/Loading';
 import Sentence from '/public/icon/logo_icon.svg';
 import Confirm from '@/app/_components/atoms/Confirm';
 import { CircleIcon } from '@/app/_components/atoms';
+import WriteForm from '@/app/_components/molecules/WriteForm';
+
 
 const MAIN_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 const FEEDBACK_TEXT = '아름다운 글을 쓰는\n지고의 노력을\n같이 응원해주세요.';
 
 const Page = () => {
   const router = useRouter();
-  const { isShowing, toggle } = useModal();
+  const path = usePathname();
+  const id = path.split('/')[2];
+
+
   const [isLoading, setIsLoading] = useState(true);
 
   const { isShowing: isFeedbackModalShowing, toggle: toggleFeedbackModal } =
@@ -67,9 +72,6 @@ const Page = () => {
   const [feedbackTagList, setFeedbackTagList] =
     useState<FeedbackTagProps[]>(defaultfeedbackTag);
   const [feedbackList, setFeedbackList] = useState<string[]>([]);
-
-  const path = usePathname();
-  const id = path.split('/')[2];
 
   const getData = async () => {
     try {
@@ -141,16 +143,20 @@ const Page = () => {
   return (
     <div className={style.wrap}>
       {/* 스토리 내용 */}
-      {story?.cover_image_url && (
-        <div className={style.imgContainer}>
-          <img src={story.cover_image_url} alt="배경이미지" />
-        </div>
-      )}
-      <div className={`${style.storyContent} ${style.maxWidth}`}>
-        <div className={textType.title}>{story?.title}</div>
-        <div className={textType.author}>{story?.pen_name}</div>
-        <div className={textType.content}>{story?.content}</div>
-      </div>
+      <WriteForm
+        image={{
+          src: story?.cover_image_url || '',
+          alt: '배경이미지',
+        }}
+        write={{
+          title: story?.title || '',
+          author: story?.pen_name || '',
+          content: story?.content || '',
+        }}
+        sign={{
+          url: story?.signature_image_url || '',
+        }}
+      />
       {/* 스토리 서비스 */}
       <div className={`${style.storyService} ${style.maxWidth} `}>
         <div className={style.title}>{MAIN_TEXT}</div>

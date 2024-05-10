@@ -22,7 +22,7 @@ dependencies:
     version: 3.0.17(react@18.2.0)(solid-js@1.8.16)(svelte@4.2.12)(vue@3.4.21)(zod@3.22.4)
   next:
     specifier: 14.1.4
-    version: 14.1.4(@babel/core@7.24.3)(react-dom@18.2.0)(react@18.2.0)
+    version: 14.1.4(@babel/core@7.12.3)(react-dom@18.2.0)(react@18.2.0)
   openai:
     specifier: 4.32.1
     version: 4.32.1
@@ -32,6 +32,9 @@ dependencies:
   react-dom:
     specifier: 18.2.0
     version: 18.2.0(react@18.2.0)
+  react-signature-canvas:
+    specifier: ^1.0.6
+    version: 1.0.6(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
   react-spinners-css:
     specifier: ^2.0.1
     version: 2.0.1(react-dom@18.2.0)(react@18.2.0)
@@ -58,6 +61,9 @@ devDependencies:
   '@types/react-dom':
     specifier: 18.2.23
     version: 18.2.23
+  '@types/react-signature-canvas':
+    specifier: ^1.0.5
+    version: 1.0.5
   '@typescript-eslint/eslint-plugin':
     specifier: 7.6.0
     version: 7.6.0(@typescript-eslint/parser@7.6.0)(eslint@8.57.0)(typescript@5.4.3)
@@ -171,7 +177,6 @@ packages:
       source-map: 0.5.7
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   /@babel/core@7.24.3:
     resolution: {integrity: sha512-5FcvN1JHw2sHJChotgx8Ek0lyuh4kCKelgMTTqhYJJtloNvUfpAFMeNQUtdlIaktwrSV9LtCdqwk48wL2wBacQ==}
@@ -315,7 +320,6 @@ packages:
       '@babel/helper-simple-access': 7.22.5
       '@babel/helper-split-export-declaration': 7.22.6
       '@babel/helper-validator-identifier': 7.22.20
-    dev: false
 
   /@babel/helper-module-transforms@7.23.3(@babel/core@7.24.3):
     resolution: {integrity: sha512-7bBs4ED9OmswdfDzpz4MpWgSrV7FXlc3zIagvLFjS5H+Mk7Snr21vQ6QwrsoCGMfNC4e4LQPdoULEt4ykz0SRQ==}
@@ -3765,6 +3769,13 @@ packages:
       '@types/react': 18.2.73
     dev: true
 
+  /@types/react-signature-canvas@1.0.5:
+    resolution: {integrity: sha512-jzqEeDR6kxxhg1Ck462zH+C+qMu8hoV5zz0hqnQCp0Q0tHuFEAN2/f0c4NlHyDUfAALX+HPi+eK5SBRdqsEeEg==}
+    dependencies:
+      '@types/react': 18.2.73
+      '@types/signature_pad': 2.3.6
+    dev: true
+
   /@types/react@18.2.73:
     resolution: {integrity: sha512-XcGdod0Jjv84HOC7N5ziY3x+qL0AfmubvKOZ9hJjJ2yd5EE+KYjWhdOjt387e9HPheHkdggF9atTifMRtyAaRA==}
     dependencies:
@@ -3780,6 +3791,10 @@ packages:
 
   /@types/semver@7.5.8:
     resolution: {integrity: sha512-I8EUhyrgfLrcTkzV3TSsGyl1tSuPrEDzr0yd5m90UgNxQkyDXULk3b6MlQqTCpZpNtWe1K0hzclnZkTcLBe2UQ==}
+    dev: true
+
+  /@types/signature_pad@2.3.6:
+    resolution: {integrity: sha512-v3j92gCQJoxomHhd+yaG4Vsf8tRS/XbzWKqDv85UsqjMGy4zhokuwKe4b6vhbgncKkh+thF+gpz6+fypTtnFqQ==}
     dev: true
 
   /@types/source-list-map@0.1.6:
@@ -4247,7 +4262,7 @@ packages:
       next: '>=12.1.7'
     dependencies:
       '@vanilla-extract/webpack-plugin': 2.3.7(@types/node@20.12.2)(webpack@5.91.0)
-      next: 14.1.4(@babel/core@7.24.3)(react-dom@18.2.0)(react@18.2.0)
+      next: 14.1.4(@babel/core@7.12.3)(react-dom@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -6488,7 +6503,6 @@ packages:
 
   /convert-source-map@1.9.0:
     resolution: {integrity: sha512-ASFBup0Mz1uyiIjANan1jzLQami9z1PoYSZCiiYW2FczPbenXc45FZdBZLzOT+r6+iciuEModtmCti+hjaAk0A==}
-    dev: false
 
   /convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
@@ -12130,7 +12144,7 @@ packages:
     resolution: {integrity: sha512-CXdUiJembsNjuToQvxayPZF9Vqht7hewsvy2sOWafLvi2awflj9mOC6bHIg50orX8IJvWKY9wYQ/zB2kogPslQ==}
     dev: false
 
-  /next@14.1.4(@babel/core@7.24.3)(react-dom@18.2.0)(react@18.2.0):
+  /next@14.1.4(@babel/core@7.12.3)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-1WTaXeSrUwlz/XcnhGTY7+8eiaFvdet5z9u3V2jb+Ek1vFo0VhHKSAIJvDWfQpttWjnyw14kBeq28TPq7bTeEQ==}
     engines: {node: '>=18.17.0'}
     hasBin: true
@@ -12153,7 +12167,7 @@ packages:
       postcss: 8.4.31
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      styled-jsx: 5.1.1(@babel/core@7.24.3)(react@18.2.0)
+      styled-jsx: 5.1.1(@babel/core@7.12.3)(react@18.2.0)
     optionalDependencies:
       '@next/swc-darwin-arm64': 14.1.4
       '@next/swc-darwin-x64': 14.1.4
@@ -13977,6 +13991,20 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
+  /react-signature-canvas@1.0.6(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-NoMHomYu9HxFeLjUGbIeV9abPdWSROfFxFNDekGdwmmaIx+w5ziOEiU2C34X0Ao4GxFnwqyUy/BpYlA4lCD1CA==}
+    peerDependencies:
+      prop-types: ^15.5.8
+      react: 0.14 - 18
+      react-dom: 0.14 - 18
+    dependencies:
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      signature_pad: 2.3.2
+      trim-canvas: 0.1.2
+    dev: false
+
   /react-spinners-css@2.0.1(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-asmHl+ZFDeXIXhYuX16O529CjL8XLR8sFsDHIU2DA5SfH1VpUAcGgIH2Iq660jjfHQD8wF9iwvTUyzUsUIKDUA==}
     peerDependencies:
@@ -14675,7 +14703,6 @@ packages:
   /semver@5.7.2:
     resolution: {integrity: sha512-cBznnQ9KjJqU67B52RMC65CMarK2600WFnbkcaiwWq3xy/5haFJlshgnpjovMVJ+Hff49d8GEn0b87C5pDQ10g==}
     hasBin: true
-    dev: false
 
   /semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
@@ -14902,6 +14929,10 @@ packages:
     engines: {node: '>=14'}
     dev: true
 
+  /signature_pad@2.3.2:
+    resolution: {integrity: sha512-peYXLxOsIY6MES2TrRLDiNg2T++8gGbpP2yaC+6Ohtxr+a2dzoaqWosWDY9sWqTAAk6E/TyQO+LJw9zQwyu5kA==}
+    dev: false
+
   /simple-swizzle@0.2.2:
     resolution: {integrity: sha512-JA//kQgZtbuY83m+xT+tXJkmJncGMTFT+C+g2h2R9uxkYIrE2yy9sgmcLhCnw57/WSD+Eh3J97FPEDFnbXnDUg==}
     dependencies:
@@ -15044,7 +15075,6 @@ packages:
   /source-map@0.5.7:
     resolution: {integrity: sha512-LbrmJOMUSdEVxIKvdcJzQC+nQhe8FUZQTXQy6+I75skNgn3OoQ0DZA8YnFa7gp8tqtL3KPf1kmo0R5DoApeSGQ==}
     engines: {node: '>=0.10.0'}
-    dev: false
 
   /source-map@0.6.1:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
@@ -15420,7 +15450,7 @@ packages:
       webpack: 4.44.2
     dev: false
 
-  /styled-jsx@5.1.1(@babel/core@7.24.3)(react@18.2.0):
+  /styled-jsx@5.1.1(@babel/core@7.12.3)(react@18.2.0):
     resolution: {integrity: sha512-pW7uC1l4mBZ8ugbiZrcIsiIvVx1UmTfw7UkC3Um2tmfUq9Bhk8IiyEIPl6F8agHgjzku6j0xQEZbfA5uSgSaCw==}
     engines: {node: '>= 12.0.0'}
     peerDependencies:
@@ -15433,7 +15463,7 @@ packages:
       babel-plugin-macros:
         optional: true
     dependencies:
-      '@babel/core': 7.24.3
+      '@babel/core': 7.12.3
       client-only: 0.0.1
       react: 18.2.0
 
@@ -15873,6 +15903,10 @@ packages:
     resolution: {integrity: sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==}
     hasBin: true
     dev: true
+
+  /trim-canvas@0.1.2:
+    resolution: {integrity: sha512-nd4Ga3iLFV94mdhW9JFMLpQbHUyCQuhFOD71PEAt1NjtMD5wbZctzhX8c3agHNybMR5zXD1XTGoIEWk995E6pQ==}
+    dev: false
 
   /tryer@1.0.1:
     resolution: {integrity: sha512-c3zayb8/kWWpycWYg87P71E1S1ZL6b6IJxfb5fvsUgsf0S2MVGaDhDXXjDMpdCpfWXqptc+4mXwmiy1ypXqRAA==}

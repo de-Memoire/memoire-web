@@ -1,6 +1,5 @@
 //API Response Data에서 실제 컨텐츠에 들어가는 타입 모음
 
-
 import { StoryType } from '@/app/_constant/story';
 
 export interface Story {
@@ -11,6 +10,19 @@ export interface Story {
   author?: string;
   type?: StoryType;
   content: string;
+}
+
+export interface StoryForm {
+  title?: string;
+  author?: string;
+  content: string;
+  image?: {
+    file: File;
+    dataUrl: string;
+  };
+  sign?: {
+    dataUrl: string;
+  };
 }
 
 export interface Sentence {

@@ -32,6 +32,8 @@ import List from '/public/icon/list.svg';
 import { CircleIcon } from '@/app/_components/atoms';
 import { postTemporary } from '@/app/userApi/postTemporary';
 import Loading from '@/app/_components/atoms/Loading';
+import { StoryForm } from '@/app/userApi/common/type';
+
 
 const MAIN_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 const INTRO_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
@@ -47,6 +49,7 @@ interface storyData {
     dataUrl: string;
   };
 }
+
 
 interface AssistantSuggestionProps {
   prompt: string;
@@ -118,11 +121,10 @@ const Page = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-
   const [select, setSelect] = useState<string>('');
   const [step, setStep] = useState<number>(1);
 
-  const [story, setStory] = useState<storyData>({
+  const [story, setStory] = useState<StoryForm>({
     title: '',
     author: '',
     content: '',
@@ -312,7 +314,18 @@ const Page = () => {
                     icon: <GrayArrow />,
                     title: '기본 서명 사용하기',
                     childrenType: writeUtilElType.MINI,
-                    children: <SignComponent />,
+                    children: (
+                      <SignComponent
+                        setImageURL={(url: string) => {
+                          setStory((prev) => ({
+                            ...prev,
+                            sign: {
+                              dataUrl: url,
+                            },
+                          }));
+                        }}
+                      />
+                    ),
                   }}
                 />
                 <input
@@ -362,13 +375,16 @@ const Page = () => {
                     children: (
                       <WriteForm
                         image={{
-                          src: story.image?.dataUrl ?? '',
+                          src: story.image?.dataUrl,
                           alt: '배경이미지',
                         }}
                         write={{
                           title: story.title,
                           author: story.author,
                           content: story.content,
+                        }}
+                        sign={{
+                          url: story.sign?.dataUrl,
                         }}
                       />
                     ),
@@ -404,6 +420,7 @@ const Page = () => {
                             (story.title?.length ?? 0) > 0
                               ? story.title
                               : undefined,
+                          signature_image_url: story.sign?.dataUrl,
                         }),
                       });
                       const result = await response.json();

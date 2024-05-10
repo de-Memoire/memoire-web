@@ -89,6 +89,7 @@ export const btnWrapperType = styleVariants({
   ],
 });
 
+
 export const btnText = style({
   width: '80%',
   textAlign: 'center',
@@ -159,22 +160,6 @@ export const btn = style({
   ':hover': {
     opacity: '0.5',
   },
-});
-
-export const toastWrap = style({
-  display: 'flex',
-  gap: '30px',
-  padding: '16px 20px',
-  background: COLORS.grayscale.gray8,
-  cursor: 'pointer',
-  borderRadius: '10px',
-  color: COLORS.grayscale.white,
-  whiteSpace: 'pre-line',
-  alignItems: 'center',
-});
-
-export const toastText = style({
-  ...TEXT_STYLES.brand5R.PC,
 });
 
 export const toastWrap = style({

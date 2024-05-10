@@ -23,7 +23,6 @@ export default function Page() {
   const [userStory, setUserStory] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-
   const handleClick = (content: User) => {
     let _type = '';
     if (content.type == StoryType.ESSAY) {
@@ -43,6 +42,8 @@ export default function Page() {
   const getData = async () => {
     try {
       const _userStory = await getUserStory();
+      console.log(_userStory);
+
       const transformedUserStory = _userStory.map((item: Story) => ({
         id: item.id,
         date: formatDate(item.created_at),
