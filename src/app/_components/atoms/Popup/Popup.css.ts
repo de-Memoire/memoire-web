@@ -18,4 +18,10 @@ export const icon = style({
   minHeight: '22px',
   marginLeft: 'auto',
   marginRight: '10px',
+  transition: '.2s',
+
+  ':hover': {
+    opacity: '0.5',
+  },
+
 });

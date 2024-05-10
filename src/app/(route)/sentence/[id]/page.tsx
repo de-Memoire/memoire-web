@@ -2,7 +2,6 @@
 
 import * as style from './page.css';
 import { useEffect, useMemo } from 'react';
-import Image from 'next/image';
 import StoryServiceButton from '@/app/_components/molecules/StoryServiceButton';
 import { textType } from './page.css';
 import { FeedbackTagProps } from '@/app/_data/storydummy';
@@ -13,12 +12,7 @@ import Wave from '/public/icon/wave.svg';
 import FeedbackList from '@/app/_components/organisms/FeedbackList/FeedbackList';
 import useModal from '@/app/_hooks/useModal';
 import Modal from '@/app/_components/Common/Modal/Modal';
-import {
-  useRouter,
-  useParams,
-  usePathname,
-  useSearchParams,
-} from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import Popup from '@/app/_components/atoms/Popup';
 import FeedbackTagList from '@/app/_components/molecules/FeedbackTag/FeedbackTagList';
 import { titleType } from './page.css';
@@ -28,21 +22,18 @@ import { StoryServiceButtonProps } from '@/app/_components/molecules/StoryServic
 import { useState } from 'react';
 import type { Story } from '@/app/_constant/type/model';
 import { getStoryId } from '@/app/userApi/getStoryId';
-import {
-  getStoryFeedbackTag,
-  FeedbackTagResponse,
-} from '@/app/userApi/getStoryFeedbackTag';
-import { getStoryFeed } from '@/app/userApi/getStoryFeed';
-import {
-  FeedbackResponse,
-  getStoryFeedback,
-} from '@/app/userApi/getStoryFeedback';
+import { getStoryFeedback } from '@/app/userApi/getStoryFeedback';
 import { extractTagValues } from '@/app/_utils/algorithm';
-import { postData } from '@/app/userApi/common/post';
-import { postFeedback } from '../../api/feedback/post';
 import { postFeedbackClient } from '@/app/userApi/postFeedback';
 import { Footer } from '@/app/_components/Common';
 import { defaultfeedbackTag } from '@/app/_data/storydummy';
+import Loading from '@/app/_components/atoms/Loading';
+import { CircleIcon } from '@/app/_components/atoms';
+import Quote from '/public/icon/quote.svg';
+import QuoteEnd from '/public/icon/quote-end.svg';
+import Sentence from '/public/icon/logo_icon.svg';
+import Confirm from '@/app/_components/atoms/Confirm';
+
 
 const MAIN_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 const FEEDBACK_TEXT = '아름다운 글을 쓰는\n지고의 노력을\n같이 응원해주세요.';
@@ -50,6 +41,13 @@ const FEEDBACK_TEXT = '아름다운 글을 쓰는\n지고의 노력을\n같이 �
 const Page = () => {
   const router = useRouter();
   const { isShowing, toggle } = useModal();
+  const [isLoading, setIsLoading] = useState(true);
+
+  const { isShowing: isFeedbackModalShowing, toggle: toggleFeedbackModal } =
+    useModal();
+  const { isShowing: isConfirmModalShowing, toggle: toggleConfirmModal } =
+    useModal();
+
 
   const [story, setStory] = useState<Story>();
   // const [feedbackTag, setFeedbackTag] = useState<FeedbackTagResponse>();
@@ -70,8 +68,8 @@ const Page = () => {
       setStory(_story);
       // setFeedbackTag(_feedbackTag);
       setFeedbackList(transformedFeedbackList);
+      setIsLoading(false);
 
-      console.log(feedbackList);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -110,14 +108,14 @@ const Page = () => {
       styleType: 'dark',
       buttonType: 'text',
       icon: <Wave />,
-      onClick: () => router.push(`/write`),
+      onClick: toggleConfirmModal,
     },
     {
       title: '피드백 하기',
       styleType: 'dark',
       buttonType: 'icon',
       icon: <FeedbackBlackIcon />,
-      onClick: toggle,
+      onClick: toggleFeedbackModal,
     },
     {
       title: '모든 사람에게 공유하고 싶어요',
@@ -128,6 +126,10 @@ const Page = () => {
     },
   ];
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <div className={style.wrap}>
       {/* 스토리 내용 */}
@@ -137,9 +139,16 @@ const Page = () => {
         </div>
       )}
       <div className={`${style.storyContent} ${style.maxWidth}`}>
-        <div className={textType.title}>{story?.title}</div>
-        <div className={textType.author}>{story?.pen_name}</div>
+        <CircleIcon type="bright">
+          <Quote />
+        </CircleIcon>
         <div className={textType.content}>{story?.content}</div>
+        <div className={textType.author}>{story?.pen_name}</div>
+        <img
+          src="/assets/books.png"
+          style={{ width: '70%', marginLeft: 'auto' }}
+        />
+
       </div>
       {/* 스토리 서비스 */}
       <div className={`${style.storyService} ${style.maxWidth} `}>
@@ -165,11 +174,11 @@ const Page = () => {
       <Footer />
       {/* 피드백 모달 */}
       <Modal
-        isShowing={isShowing}
+        isShowing={isFeedbackModalShowing}
         content={
           <Popup
             onClose={() => {
-              toggle();
+              toggleFeedbackModal();
               setSelectedTagList([]);
             }}
           >
@@ -190,7 +199,7 @@ const Page = () => {
               <div
                 className={titleType.desc}
                 onClick={() => {
-                  toggle();
+                  toggleFeedbackModal();
                   setSelectedTagList([]);
                   postFeedbackClient({
                     story_id: Number(id),
@@ -202,6 +211,29 @@ const Page = () => {
               </div>
             )}
           </Popup>
+        }
+      />
+      <Modal
+        isShowing={isConfirmModalShowing}
+        content={
+          <Confirm
+            onClose={() => {
+              toggleConfirmModal();
+            }}
+            onLeft={{
+              onClick: () => router.push(`/write?type=story`),
+              text: '에세이로 작성하기',
+            }}
+            onRight={{
+              onClick: () => router.push(`/write?type=sentence`),
+              text: '문장으로 작성하기',
+            }}
+          >
+            <CircleIcon type="bright">
+              <Sentence />
+            </CircleIcon>
+            <div>어떤 글을 작성하고 싶으신가요?</div>
+          </Confirm>
         }
       />
     </div>

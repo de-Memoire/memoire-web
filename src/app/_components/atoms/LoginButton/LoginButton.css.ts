@@ -13,7 +13,7 @@ export const wrap = style({
   transition: '0.5s',
 
   ':hover': {
-    background: COLORS.grayscale.gray4,
+    opacity: '0.5',
   },
 });
 

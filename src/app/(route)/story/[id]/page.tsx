@@ -45,6 +45,9 @@ import { Footer } from '@/app/_components/Common';
 import { defaultfeedbackTag } from '@/app/_data/storydummy';
 import { Ripple } from 'react-spinners-css';
 import Loading from '@/app/_components/atoms/Loading';
+import Sentence from '/public/icon/logo_icon.svg';
+import Confirm from '@/app/_components/atoms/Confirm';
+import { CircleIcon } from '@/app/_components/atoms';
 
 const MAIN_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 const FEEDBACK_TEXT = '아름다운 글을 쓰는\n지고의 노력을\n같이 응원해주세요.';
@@ -53,6 +56,11 @@ const Page = () => {
   const router = useRouter();
   const { isShowing, toggle } = useModal();
   const [isLoading, setIsLoading] = useState(true);
+
+  const { isShowing: isFeedbackModalShowing, toggle: toggleFeedbackModal } =
+    useModal();
+  const { isShowing: isConfirmModalShowing, toggle: toggleConfirmModal } =
+    useModal();
 
   const [story, setStory] = useState<Story>();
   // const [feedbackTag, setFeedbackTag] = useState<FeedbackTagResponse>();
@@ -112,14 +120,14 @@ const Page = () => {
       styleType: 'dark',
       buttonType: 'text',
       icon: <Wave />,
-      onClick: () => router.push(`/write`),
+      onClick: toggleConfirmModal,
     },
     {
       title: '피드백 하기',
       styleType: 'dark',
       buttonType: 'icon',
       icon: <FeedbackBlackIcon />,
-      onClick: toggle,
+      onClick: toggleFeedbackModal,
     },
     {
       title: '모든 사람에게 공유하고 싶어요',
@@ -167,11 +175,11 @@ const Page = () => {
       <Footer />
       {/* 피드백 모달 */}
       <Modal
-        isShowing={isShowing}
+        isShowing={isFeedbackModalShowing}
         content={
           <Popup
             onClose={() => {
-              toggle();
+              toggleFeedbackModal();
               setSelectedTagList([]);
             }}
           >
@@ -192,7 +200,7 @@ const Page = () => {
               <div
                 className={titleType.desc}
                 onClick={() => {
-                  toggle();
+                  toggleFeedbackModal();
                   setSelectedTagList([]);
                   postFeedbackClient({
                     story_id: Number(id),
@@ -204,6 +212,29 @@ const Page = () => {
               </div>
             )}
           </Popup>
+        }
+      />
+      <Modal
+        isShowing={isConfirmModalShowing}
+        content={
+          <Confirm
+            onClose={() => {
+              toggleConfirmModal();
+            }}
+            onLeft={{
+              onClick: () => router.push(`/write?type=story`),
+              text: '에세이로 작성하기',
+            }}
+            onRight={{
+              onClick: () => router.push(`/write?type=sentence`),
+              text: '문장으로 작성하기',
+            }}
+          >
+            <CircleIcon type="bright">
+              <Sentence />
+            </CircleIcon>
+            <div>어떤 글을 작성하고 싶으신가요?</div>
+          </Confirm>
         }
       />
     </div>

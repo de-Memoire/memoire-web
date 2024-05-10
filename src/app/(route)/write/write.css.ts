@@ -61,6 +61,11 @@ export const btnWrapper = style({
   cursor: 'pointer',
   justifyContent: 'center',
   ...TEXT_STYLES.body2R.PC,
+  transition: '.2s',
+
+  ':hover': {
+    opacity: '0.5',
+  },
 });
 
 export const btnWrapperType = styleVariants({
@@ -150,6 +155,26 @@ export const btn = style({
   background: COLORS.grayscale.black,
   color: COLORS.grayscale.gray1,
   height: '40px',
+
+  ':hover': {
+    opacity: '0.5',
+  },
+});
+
+export const toastWrap = style({
+  display: 'flex',
+  gap: '30px',
+  padding: '16px 20px',
+  background: COLORS.grayscale.gray8,
+  cursor: 'pointer',
+  borderRadius: '10px',
+  color: COLORS.grayscale.white,
+  whiteSpace: 'pre-line',
+  alignItems: 'center',
+});
+
+export const toastText = style({
+  ...TEXT_STYLES.brand5R.PC,
 });
 
 export const toastWrap = style({

@@ -6,7 +6,7 @@ export const wrap = style({
   flexDirection: 'column',
   justifyContent: 'space-between',
   height: '100%',
-  gap: '70px',
+  gap: '100px',
 });
 
 export const buttonContainer = style({
@@ -68,6 +68,7 @@ export const storyContent = style({
   flexDirection: 'column',
   gap: '15px',
   flex: 1,
+  alignItems: 'center',
 });
 
 export const storyService = style({
@@ -87,12 +88,19 @@ export const storyServiceButtonContainer = style({
 
 export const base = style({
   color: COLORS.grayscale.gray8,
+  textAlign: 'center',
 });
 
 export const textType = styleVariants({
-  title: [base, { ...TEXT_STYLES.brand2R.PC }],
-  author: [base, { ...TEXT_STYLES.brand4R.PC }],
-  content: [base, { ...TEXT_STYLES.brand5R.PC }],
+  author: [
+    base,
+    {
+      ...TEXT_STYLES.brand4R.PC,
+      paddingTop: '20px',
+      borderTop: `1px solid ${COLORS.grayscale.gray3}`,
+    },
+  ],
+  content: [base, { ...TEXT_STYLES.brand3R.PC }],
 });
 
 export const maxWidth = style({

@@ -5,9 +5,10 @@ import { Memo, Story, Sentence } from '@/app/userApi/common/type';
 import { writeType } from '@/app/_constant/write';
 import CircleIcon from '../CircleIcon';
 import { ReactNode } from 'react';
+import { StoryType } from '@/app/_constant/story';
 
 export interface styledListElProps {
-  type: 'story' | 'sentence';
+  type: StoryType;
   /** 제공 서비스 정보 */
   service?: {
     /** 서비스 아이콘 */
@@ -36,7 +37,7 @@ const styledListEl = ({
   return (
     <div className={`${styles.wrap} ${className}`} onClick={onClick}>
       <CircleIcon type="bright">
-        {type == 'story' ? <StoryIcon /> : <SentenceIcon />}
+        {type == StoryType.ESSAY ? <StoryIcon /> : <SentenceIcon />}
       </CircleIcon>
       <div className={styles.content}>
         <div className={`${styles.textType.title} ellipse`}>
