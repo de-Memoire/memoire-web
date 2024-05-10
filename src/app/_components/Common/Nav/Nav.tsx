@@ -19,6 +19,7 @@ export type UserInfoConfigType = {
 };
 
 export type NavProps = {
+  isAuth?: boolean;
   profileImageUrl?: string;
   /** 컴포넌트로 생성할 요소의 클래스명 */
   className?: string;
@@ -27,7 +28,7 @@ export type NavProps = {
 /**
  * 레이아웃 파일에서 사용할 네비 컴포넌트
  */
-const Nav = ({ className, profileImageUrl }: NavProps) => {
+const Nav = ({ className, profileImageUrl, isAuth }: NavProps) => {
   const isAuthenticated = useAuth();
   const router = useRouter();
   const [isOpenUserMenu, setIsOpenUserMenu] = useState(false);
@@ -41,8 +42,19 @@ const Nav = ({ className, profileImageUrl }: NavProps) => {
       title: '설정',
       goNavi: () => router.push(`/setting`),
     },
+    logout: {
+      title: '로그아웃',
+      goNavi: () => {},
+    },
   };
   // } as const satisfies UserInfoDataType; //TODO
+
+  const noUserInfoConfigType: UserInfoConfigType = {
+    login: {
+      title: '로그인',
+      goNavi: () => router.push(`/login`),
+    },
+  };
 
   return (
     <div className={`${styles.wrap} ${className}`}>
@@ -54,7 +66,7 @@ const Nav = ({ className, profileImageUrl }: NavProps) => {
         onClick={() => setIsOpenUserMenu(!isOpenUserMenu)}
       >
         {profileImageUrl ? (
-          <Image src={profileImageUrl} alt="profile image" fill />
+          <img src={profileImageUrl} alt="profile image" />
         ) : (
           <User />
         )}
@@ -62,13 +74,24 @@ const Nav = ({ className, profileImageUrl }: NavProps) => {
       {isOpenUserMenu && (
         <div className={styles.absoluteBox}>
           <Dropdown>
-            {Object.keys(UserInfoConfigType).map((key) => (
-              <DropdownItem
-                key={key}
-                onClick={UserInfoConfigType[key].goNavi}
-                title={UserInfoConfigType[key].title}
-              />
-            ))}
+            {Object.keys(
+              isAuth ? UserInfoConfigType : noUserInfoConfigType,
+            ).map((key) => {
+              const configType = isAuth
+                ? UserInfoConfigType
+                : noUserInfoConfigType;
+              const { goNavi, title } = configType[key];
+              return (
+                <DropdownItem
+                  key={key}
+                  onClick={() => {
+                    goNavi();
+                    setIsOpenUserMenu(false);
+                  }}
+                  title={title}
+                />
+              );
+            })}
           </Dropdown>
         </div>
       )}

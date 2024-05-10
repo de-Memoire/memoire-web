@@ -6,7 +6,7 @@ export const wrap = style({
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
-  height: '100vh',
+  height: 'calc(100vh - 70px - 50px)',
 });
 
 export const login = style({

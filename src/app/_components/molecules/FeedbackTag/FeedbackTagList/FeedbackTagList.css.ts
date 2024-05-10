@@ -7,7 +7,7 @@ export const wrap = style({
   alignItems: 'center',
   flexWrap: 'wrap',
   justifyContent: 'center',
-  padding: '30px 0px',
+  padding: '20px 0px',
 });
 
 export const title = style({

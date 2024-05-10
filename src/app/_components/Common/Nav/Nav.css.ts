@@ -15,10 +15,12 @@ export const user = style({
   position: 'relative',
   borderRadius: '24px',
   overflow: 'hidden',
+  cursor: 'pointer',
 });
 
 export const absoluteBox = style({
   position: 'absolute',
   top: '60px',
   right: '5px',
+  zIndex: '999',
 });

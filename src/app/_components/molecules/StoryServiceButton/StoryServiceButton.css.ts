@@ -7,6 +7,7 @@ export const wrap = style({
   gap: '10px',
   display: 'flex',
   alignItems: 'center',
+  cursor: 'pointer',
 });
 
 export const wrapType = styleVariants({
@@ -43,6 +44,7 @@ export const title = style({
   minWidth: '195px',
   flex: 1,
   textAlign: 'center',
+  whiteSpace: 'pre-line',
 });
 
 export const titleType = styleVariants({

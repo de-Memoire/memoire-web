@@ -6,6 +6,8 @@ export const wrap = style({
   flexDirection: 'column',
   gap: '10px',
   opacity: '0',
+  flex: 1,
+  cursor: 'pointer',
 });
 
 export const imgContainer = style({

@@ -1,7 +1,7 @@
 import React from 'react';
 import { CircleIcon } from '../../atoms';
 import * as styles from './FeedbackListEl.css';
-import FeedbackIcon from '/public/icon/feedback.svg';
+import FeedbackIcon from '/public/icon/feedback-white.svg';
 
 export interface FeedbackListElProps {
   /** 각 피드백 요소 내용 */

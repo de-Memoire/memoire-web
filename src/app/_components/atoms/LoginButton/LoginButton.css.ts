@@ -11,6 +11,10 @@ export const wrap = style({
   gap: '23px',
   cursor: 'pointer',
   transition: '0.5s',
+
+  ':hover': {
+    background: COLORS.grayscale.gray4,
+  },
 });
 
 export const icon = style({});

@@ -1,6 +1,8 @@
 import { TEXT_STYLES, COLORS } from '@/app/_constant';
 import { style, styleVariants } from '@vanilla-extract/css';
 
+export const container = style({});
+
 export const snapContainer = style({
   overflow: 'auto',
   scrollSnapType: 'y mandatory',
@@ -17,6 +19,7 @@ export const writeSection = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '10px',
+  minHeight: 'calc(100vh - 70px - 50px - 100px)',
 });
 export const assistantSection = style({
   flex: '7',
@@ -48,18 +51,40 @@ export const styledAssistantTitleType = styleVariants({
 export const btnSection = style({
   display: 'flex',
   justifyContent: 'flex-end',
+  gap: '10px',
 });
 export const btnWrapper = style({
   padding: '16px 20px',
-  background: COLORS.grayscale.black,
   borderRadius: '12px',
   display: 'flex',
-  width: '200px',
   alignItems: 'center',
-});
-export const btnText = style({
+  cursor: 'pointer',
+  justifyContent: 'center',
   ...TEXT_STYLES.body2R.PC,
-  color: COLORS.grayscale.white,
+});
+
+export const btnWrapperType = styleVariants({
+  dark: [
+    btnWrapper,
+    {
+      background: COLORS.grayscale.black,
+      color: COLORS.grayscale.white,
+      border: `1px solid ${COLORS.grayscale.black}`,
+      width: '200px',
+    },
+  ],
+  bright: [
+    btnWrapper,
+    {
+      background: COLORS.grayscale.white,
+      color: COLORS.grayscale.black,
+      border: `1px solid ${COLORS.grayscale.black}`,
+      width: '120px',
+    },
+  ],
+});
+
+export const btnText = style({
   width: '80%',
   textAlign: 'center',
   lineHeight: '24px',
@@ -125,4 +150,20 @@ export const btn = style({
   background: COLORS.grayscale.black,
   color: COLORS.grayscale.gray1,
   height: '40px',
+});
+
+export const toastWrap = style({
+  display: 'flex',
+  gap: '30px',
+  padding: '16px 20px',
+  background: COLORS.grayscale.gray8,
+  cursor: 'pointer',
+  borderRadius: '10px',
+  color: COLORS.grayscale.white,
+  whiteSpace: 'pre-line',
+  alignItems: 'center',
+});
+
+export const toastText = style({
+  ...TEXT_STYLES.brand5R.PC,
 });

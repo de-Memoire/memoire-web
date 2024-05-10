@@ -4,7 +4,7 @@ import FeedbackListEl from '../../molecules/FeedbackListEl';
 
 export interface FeedbackListProps {
   /** 스토리에 달린 피드백 문자열 리스트 */
-  contentList: string[];
+  contentList?: string[];
   /** 컴포넌트로 생성할 요소의 클래스명 */
   className: string;
 }
@@ -15,7 +15,7 @@ export interface FeedbackListProps {
 export const FeedbackList = ({ contentList, className }: FeedbackListProps) => {
   return (
     <div className={`${styles.wrap} ${className}`}>
-      {contentList.map((item, index) => (
+      {contentList?.map((item, index) => (
         <FeedbackListEl key={index} content={item} />
       ))}
     </div>

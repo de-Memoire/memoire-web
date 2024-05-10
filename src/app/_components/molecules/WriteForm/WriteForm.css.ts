@@ -5,6 +5,7 @@ export const imgContainer = style({
   flex: 1,
   overflow: 'hidden',
   borderRadius: '16px',
+  maxHeight: '250px',
 });
 
 export const storyContent = style({

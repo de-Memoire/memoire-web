@@ -1,6 +1,6 @@
 import * as styles from './SentenceEl.css';
 import Logo from '/public/icon/logo_icon.svg';
-import { Sentence } from '@/app/_data/storydummy';
+import { Sentence } from '@/app/userApi/common/type';
 
 export interface SentenceElProps {
   /** 문장 내용 */

@@ -9,6 +9,8 @@ export const wrap = style({
   justifyContent: 'center',
   height: '100px',
   overflowY: 'scroll',
+  minHeight: '44px',
+  flex: '1',
 });
 
 export const title = style({

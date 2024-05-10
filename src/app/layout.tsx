@@ -21,6 +21,7 @@ const NavServer = async () => {
 
   return (
     <Nav
+      isAuth={result.isSuccess}
       profileImageUrl={
         result.isSuccess
           ? result.user.profile_image_url ?? undefined
