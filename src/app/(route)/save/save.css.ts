@@ -52,6 +52,7 @@ export const box = style({
   textAlign: 'center',
 });
 
+
 export const styledTextArea = style({
   ...TEXT_STYLES.brand5R.PC,
   color: COLORS.grayscale.gray8,

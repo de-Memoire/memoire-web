@@ -21,6 +21,7 @@ import { Modal } from '@/app/_components/Common';
 import Sentence from '/public/icon/logo_icon.svg';
 import Confirm from '@/app/_components/atoms/Confirm';
 
+
 const INTRO_TEXT = '작은 문장 조각을\n보관해보세요.';
 const PH =
   '문득 떠오르는 문장을 기록해두세요. 작은 조각들이 모여 하나의 완성된 글을 만들 수 있어요.';
@@ -80,6 +81,7 @@ export default function Page() {
     }
   };
 
+
   useEffect(() => {
     getData();
   }, [step]);
@@ -107,6 +109,7 @@ export default function Page() {
             }}
           />
           <StyledButton text="보관하기" onClick={handleSave} />
+
         </div>
       )}
       {step == 1 && (

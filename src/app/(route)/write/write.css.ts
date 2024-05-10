@@ -176,3 +176,19 @@ export const toastWrap = style({
 export const toastText = style({
   ...TEXT_STYLES.brand5R.PC,
 });
+
+export const toastWrap = style({
+  display: 'flex',
+  gap: '30px',
+  padding: '16px 20px',
+  background: COLORS.grayscale.gray8,
+  cursor: 'pointer',
+  borderRadius: '10px',
+  color: COLORS.grayscale.white,
+  whiteSpace: 'pre-line',
+  alignItems: 'center',
+});
+
+export const toastText = style({
+  ...TEXT_STYLES.brand5R.PC,
+});

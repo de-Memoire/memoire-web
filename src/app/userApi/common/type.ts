@@ -1,5 +1,6 @@
 //API Response Data에서 실제 컨텐츠에 들어가는 타입 모음
 
+
 import { StoryType } from '@/app/_constant/story';
 
 export interface Story {

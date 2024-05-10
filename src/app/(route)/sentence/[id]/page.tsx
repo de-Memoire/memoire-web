@@ -34,6 +34,7 @@ import QuoteEnd from '/public/icon/quote-end.svg';
 import Sentence from '/public/icon/logo_icon.svg';
 import Confirm from '@/app/_components/atoms/Confirm';
 
+
 const MAIN_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 const FEEDBACK_TEXT = '아름다운 글을 쓰는\n지고의 노력을\n같이 응원해주세요.';
 
@@ -46,6 +47,7 @@ const Page = () => {
     useModal();
   const { isShowing: isConfirmModalShowing, toggle: toggleConfirmModal } =
     useModal();
+
 
   const [story, setStory] = useState<Story>();
   // const [feedbackTag, setFeedbackTag] = useState<FeedbackTagResponse>();
@@ -67,6 +69,7 @@ const Page = () => {
       // setFeedbackTag(_feedbackTag);
       setFeedbackList(transformedFeedbackList);
       setIsLoading(false);
+
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -126,6 +129,7 @@ const Page = () => {
   if (isLoading) {
     return <Loading />;
   }
+
   return (
     <div className={style.wrap}>
       {/* 스토리 내용 */}
@@ -144,6 +148,7 @@ const Page = () => {
           src="/assets/books.png"
           style={{ width: '70%', marginLeft: 'auto' }}
         />
+
       </div>
       {/* 스토리 서비스 */}
       <div className={`${style.storyService} ${style.maxWidth} `}>

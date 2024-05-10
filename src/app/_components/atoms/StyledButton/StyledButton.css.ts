@@ -12,4 +12,5 @@ export const wrap = style({
   lineHeight: '24px',
   alignItems: 'center',
   cursor: 'pointer',
+
 });
