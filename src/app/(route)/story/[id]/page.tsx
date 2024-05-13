@@ -32,54 +32,47 @@ import Confirm from '@/app/_components/atoms/Confirm';
 import { CircleIcon } from '@/app/_components/atoms';
 import WriteForm from '@/app/_components/molecules/WriteForm';
 
-
 const MAIN_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 const FEEDBACK_TEXT = '아름다운 글을 쓰는\n지고의 노력을\n같이 응원해주세요.';
 
 const Page = () => {
+  /*---- router ----*/
   const router = useRouter();
   const path = usePathname();
   const id = path.split('/')[2];
-
-
+  /*---- loading ----*/
   const [isLoading, setIsLoading] = useState(true);
-
+  if (isLoading) {
+    return <Loading />;
+  }
+  /*---- hooks ----*/
   const { isShowing: isFeedbackModalShowing, toggle: toggleFeedbackModal } =
     useModal();
   const { isShowing: isConfirmModalShowing, toggle: toggleConfirmModal } =
     useModal();
-
+  /*---- state ----*/
   const [story, setStory] = useState<Story>();
-  // const [feedbackTag, setFeedbackTag] = useState<FeedbackTagResponse>();
   const [feedbackTagList, setFeedbackTagList] =
     useState<FeedbackTagProps[]>(defaultfeedbackTag);
   const [feedbackList, setFeedbackList] = useState<string[]>([]);
-
+  const [selectedTagList, setSelectedTagList] = useState<FeedbackTagProps[]>(
+    [],
+  );
+  /*---- api call function ----*/
   const getData = async () => {
     try {
       const _story = await getStoryId(id);
-      // const _feedbackTag = await getStoryFeedbackTag();
       const _feedbackList = await getStoryFeedback(id);
       const transformedFeedbackList = await extractTagValues(_feedbackList);
 
       setStory(_story);
-      // setFeedbackTag(_feedbackTag);
       setFeedbackList(transformedFeedbackList);
       setIsLoading(false);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  // feedback tag list state
-  const [selectedTagList, setSelectedTagList] = useState<FeedbackTagProps[]>(
-    [],
-  );
-
+  /*---- function ----*/
   const handleTagSelect = (selectedTag: FeedbackTagProps) => {
     if (selectedTagList.includes(selectedTag)) {
       setSelectedTagList((prev) => prev.filter((tag) => tag !== selectedTag));
@@ -87,17 +80,16 @@ const Page = () => {
       setSelectedTagList((prev) => [...prev, selectedTag]);
     }
   };
-
+  /*---- useEffect ----*/
+  useEffect(() => {
+    getData();
+  }, []);
   useEffect(() => {
     if (selectedTagList.length != 0) {
       setSelectedTagList([]);
     }
   }, []);
-
-  if (isLoading) {
-    return <Loading />;
-  }
-
+  /*---- configs ----*/
   const StoryServiceButtonConfigs: StoryServiceButtonProps[] = [
     {
       title: '영감받아 글을 작성할게요',

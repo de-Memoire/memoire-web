@@ -8,11 +8,13 @@ import ReactDOM from 'react-dom';
 import { useRouter } from 'next/navigation';
 
 export default function Page() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(1);
-  const ref = useRef<HTMLDivElement>(null);
-
+  /*---- router ----*/
   const router = useRouter();
-
+  /*---- ref ----*/
+  const ref = useRef<HTMLDivElement>(null);
+  /*---- state ----*/
+  const [currentImageIndex, setCurrentImageIndex] = useState(1);
+  /*---- function ----*/
   const imgHandler = (type: string) => {
     scrollToTop();
     if (currentImageIndex === 9) {
@@ -29,7 +31,6 @@ export default function Page() {
       }
     }
   };
-
   const scrollToTop = () => {
     if (ref.current) {
       ref.current.scrollTop = 0;

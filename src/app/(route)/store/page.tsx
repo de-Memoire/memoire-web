@@ -12,28 +12,21 @@ import { useEffect, useState } from 'react';
 import { Sentence, Story } from '@/app/_constant/type/model';
 import { formatDate } from '@/app/_utils/algorithm';
 import { Temporary } from '@/app/userApi/common/type';
+import Loading from '@/app/_components/atoms/Loading';
 
 const STORY_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 
 export default function Page() {
+  /*---- router ----*/
   const router = useRouter();
-  const [temporary, setTemporary] = useState<Temporary[]>([]);
-
-  const handleClick = (data: string) => {
-    router.push(`/write?id=${data}`);
-  };
-
-  const sentenceService: ServiceItem[] = [
-    {
-      icon: <GrayArrow />,
-      onClick: () => handleClick,
-    },
-  ];
-
-  function goback() {
-    router.push('/write');
+  /*---- loading ----*/
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <Loading />;
   }
-
+  /*---- state ----*/
+  const [temporary, setTemporary] = useState<Temporary[]>([]);
+  /*---- api call function ----*/
   const getData = async () => {
     try {
       const _temporary = await getTemporary();
@@ -44,15 +37,29 @@ export default function Page() {
         author: item.pen_name,
       }));
       setTemporary(transformedTemporary);
+      setIsLoading(false);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
-
+  /*---- function ----*/
+  const handleClick = (data: string) => {
+    router.push(`/write?id=${data}`);
+  };
+  function goback() {
+    router.push('/write');
+  }
+  /*---- useEffect ----*/
   useEffect(() => {
     getData();
   }, []);
-
+  /*---- configs ----*/
+  const sentenceService: ServiceItem[] = [
+    {
+      icon: <GrayArrow />,
+      onClick: () => handleClick,
+    },
+  ];
   return (
     <>
       <FlexContainer flexDirection="row">

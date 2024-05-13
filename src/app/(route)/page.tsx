@@ -50,11 +50,12 @@ const MainServiceButtonConfigs: MainServiceButtonProps[] = [
 ];
 
 export default function Page() {
+  /*---- router ----*/
   const router = useRouter();
-
+  /*---- state ----*/
   const [stories, setStories] = useState<Story[]>([]);
   const [quotes, setQuotes] = useState<Story[]>([]);
-
+  /*---- api call function ----*/
   const getData = async () => {
     try {
       const _stories = await getStoryFeed(StoryType.ESSAY);
@@ -65,7 +66,7 @@ export default function Page() {
       console.error('Error fetching data:', error);
     }
   };
-
+  /*---- useEffect ----*/
   useEffect(() => {
     getData();
   }, []);

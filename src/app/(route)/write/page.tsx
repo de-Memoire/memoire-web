@@ -34,22 +34,10 @@ import { postTemporary } from '@/app/userApi/postTemporary';
 import Loading from '@/app/_components/atoms/Loading';
 import { StoryForm } from '@/app/userApi/common/type';
 
-
 const MAIN_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 const INTRO_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 const TOAST_TEXT =
   '임시저장 한 글이 있습니다.\n임시저장 글을 보고 싶으면 ctrl+M을 누르세요.';
-
-interface storyData {
-  title?: string;
-  author?: string;
-  content: string;
-  image?: {
-    file: File;
-    dataUrl: string;
-  };
-}
-
 
 interface AssistantSuggestionProps {
   prompt: string;
@@ -116,41 +104,63 @@ const AssistantChat = () => {
 };
 
 const Page = () => {
+  /*---- router ----*/
   const searchParams = useSearchParams();
-  const _type = useMemo(() => searchParams.get('type'), [searchParams]);
   const router = useRouter();
+  /*---- loading ----*/
   const [isLoading, setIsLoading] = useState(false);
-
+  if (isLoading) {
+    return <Loading />;
+  }
+  /*---- ref ----*/
+  const imageInputRef = useRef<HTMLInputElement>(null);
+  /*---- memoization ----*/
+  const _type = useMemo(() => searchParams.get('type'), [searchParams]);
+  /*---- state ----*/
   const [select, setSelect] = useState<string>('');
   const [step, setStep] = useState<number>(1);
-
   const [story, setStory] = useState<StoryForm>({
     title: '',
     author: '',
     content: '',
   });
-
+  const [assistantEl, setAssistantEl] = useState<JSX.Element[]>([]);
+  /*---- hooks ----*/
+  const debouncedContent = useDebounce(story.content, 2000);
+  const debouncedSelect = useDebounce(select, 1000);
+  /*---- function ----*/
   const handleKeyPress = (event: KeyboardEvent) => {
     if (event.metaKey && event.key === 'm') {
       router.push('/store');
     }
   };
-
+  const handleInputChange = (key: string, value: string) => {
+    setStory((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+  function generateNewAssistantEl() {
+    const _select = window.getSelection()?.toString().trim();
+    if (typeof _select === 'string') {
+      setSelect(_select);
+    }
+  }
+  function UploadHandler(isOpened: boolean) {
+    if (isOpened) {
+      imageInputRef.current?.click();
+    }
+  }
+  /*---- useEffect ----*/
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       handleKeyPress(event);
     };
-
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
-
-  const debouncedContent = useDebounce(story.content, 2000);
-
-  const debouncedSelect = useDebounce(select, 1000);
-
   useEffect(() => {
     const contentToAnalyze = debouncedContent.trim();
     if (_type === 'sentence' && contentToAnalyze.length > 0) {
@@ -161,23 +171,6 @@ const Page = () => {
       setAssistantEl((prev) => [...prev, newAssistantSuggestionEl]);
     }
   }, [debouncedContent]);
-
-  const [assistantEl, setAssistantEl] = useState<JSX.Element[]>([]);
-
-  const handleInputChange = (key: string, value: string) => {
-    setStory((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
-  };
-
-  function generateNewAssistantEl() {
-    const _select = window.getSelection()?.toString().trim();
-    if (typeof _select === 'string') {
-      setSelect(_select);
-    }
-  }
-
   useEffect(() => {
     const contentToAnalyze = debouncedSelect;
     if (_type === 'story' && contentToAnalyze.length > 0) {
@@ -188,18 +181,6 @@ const Page = () => {
       setAssistantEl((prev) => [...prev, newAssistantSuggestionEl]);
     }
   }, [debouncedSelect]);
-
-  const imageInputRef = useRef<HTMLInputElement>(null);
-
-  function UploadHandler(isOpened: boolean) {
-    if (isOpened) {
-      imageInputRef.current?.click();
-    }
-  }
-
-  if (isLoading) {
-    return <Loading />;
-  }
 
   return (
     <>

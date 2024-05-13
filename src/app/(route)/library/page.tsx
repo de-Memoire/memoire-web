@@ -19,26 +19,16 @@ import { StoryType } from '@/app/_constant/story';
 const STORY_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 
 export default function Page() {
+  /*---- router ----*/
   const router = useRouter();
-  const [userStory, setUserStory] = useState<User[]>([]);
+  /*---- loading ----*/
   const [isLoading, setIsLoading] = useState(true);
-
-  const handleClick = (content: User) => {
-    let _type = '';
-    if (content.type == StoryType.ESSAY) {
-      _type = 'story';
-    } else if (content.type == StoryType.QUOTE) {
-      _type = 'sentence';
-    }
-    router.push(`/${_type}/${content.id}`);
-  };
-
-  const sentenceService: ServiceItem[] = [
-    {
-      icon: <GrayArrow />,
-    },
-  ];
-
+  if (isLoading) {
+    return <Loading />;
+  }
+  /*---- state ----*/
+  const [userStory, setUserStory] = useState<User[]>([]);
+  /*---- api call function ----*/
   const getData = async () => {
     try {
       const _userStory = await getUserStory();
@@ -57,14 +47,26 @@ export default function Page() {
       console.error('Error fetching data:', error);
     }
   };
-
+  /*---- function ----*/
+  const handleClick = (content: User) => {
+    let _type = '';
+    if (content.type == StoryType.ESSAY) {
+      _type = 'story';
+    } else if (content.type == StoryType.QUOTE) {
+      _type = 'sentence';
+    }
+    router.push(`/${_type}/${content.id}`);
+  };
+  /*---- useEffect ----*/
   useEffect(() => {
     getData();
   }, []);
-
-  if (isLoading) {
-    return <Loading />;
-  }
+  /*---- configs ----*/
+  const sentenceService: ServiceItem[] = [
+    {
+      icon: <GrayArrow />,
+    },
+  ];
 
   return (
     <>
