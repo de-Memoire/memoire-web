@@ -1,6 +1,6 @@
 import React, { type ChangeEventHandler } from 'react';
 import * as styles from './AssistantChatEl.css';
-import AssistantInput from '../../../atoms/Assistant/AssistantInput';
+import AssistantInput from '@/app/_components/atoms/Assistant/AssistantInput';
 
 export interface AssistantChatElProps {
   /** 인풋 placeholder */

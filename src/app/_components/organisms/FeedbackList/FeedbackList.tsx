@@ -1,6 +1,6 @@
 import React from 'react';
 import * as styles from './FeedbackList.css';
-import FeedbackListEl from '../../molecules/FeedbackListEl';
+import FeedbackListEl from '@/app/_components/molecules/FeedbackListEl';
 
 export interface FeedbackListProps {
   /** 스토리에 달린 피드백 문자열 리스트 */

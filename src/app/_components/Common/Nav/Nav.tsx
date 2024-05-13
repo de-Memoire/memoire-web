@@ -6,10 +6,9 @@ import { useAuth } from '@/app/_hooks/useAuth';
 import User from '/public/icon/user.svg';
 import Logo from '/public/icon/logo.svg';
 import { useState } from 'react';
-import { Dropdown } from '../../molecules';
-import { DropdownItem } from '../../atoms';
+import { Dropdown } from '@/app/_components/molecules';
+import { DropdownItem } from '@/app/_components/atoms';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 
 export type UserInfoConfigType = {
   [key: string]: {
