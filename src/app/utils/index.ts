@@ -23,3 +23,15 @@ export const shareHandler = () => {
     alert('공유하기가 지원되지 않는 환경 입니다.');
   }
 };
+/**
+ * 복사하기 기능 컴포넌트
+ */
+export const copyHandler = async (data: string) => {
+  try {
+    await navigator.clipboard.writeText(data);
+    alert('Copied to clipboard!');
+  } catch (error) {
+    console.error('Failed to copy:', error);
+    alert('Failed to copy to clipboard');
+  }
+};
