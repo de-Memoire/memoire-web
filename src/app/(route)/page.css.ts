@@ -47,3 +47,24 @@ export const btn = style({
     opacity: '0.5',
   },
 });
+
+export const tutorial = style({
+  position: 'fixed',
+  bottom: '0',
+  height: '60px',
+  left: '0',
+  background: COLORS.grayscale.gray8,
+  width: '100%',
+  zIndex: '9999',
+});
+
+export const start = style({
+  ...TEXT_STYLES.body1R.PC,
+  background: COLORS.grayscale.white,
+  position: 'absolute',
+  padding: '10px 30px',
+  color: COLORS.grayscale.black,
+  right: '20px',
+  bottom: '10px',
+  borderRadius: '100px',
+});
