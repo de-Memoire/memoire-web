@@ -23,9 +23,6 @@ export default function Page() {
   const router = useRouter();
   /*---- loading ----*/
   const [isLoading, setIsLoading] = useState(true);
-  if (isLoading) {
-    return <Loading />;
-  }
   /*---- state ----*/
   const [userStory, setUserStory] = useState<User[]>([]);
   /*---- api call function ----*/
@@ -67,7 +64,10 @@ export default function Page() {
       icon: <GrayArrow />,
     },
   ];
-
+  /*---- jsx ----*/
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <>
       <div className={styles.box}></div>

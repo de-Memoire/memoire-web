@@ -109,9 +109,6 @@ const Page = () => {
   const router = useRouter();
   /*---- loading ----*/
   const [isLoading, setIsLoading] = useState(false);
-  if (isLoading) {
-    return <Loading />;
-  }
   /*---- ref ----*/
   const imageInputRef = useRef<HTMLInputElement>(null);
   /*---- memoization ----*/
@@ -182,6 +179,10 @@ const Page = () => {
     }
   }, [debouncedSelect]);
 
+  /*---- jsx ----*/
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <>
       <Toast>

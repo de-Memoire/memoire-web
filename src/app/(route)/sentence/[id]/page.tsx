@@ -44,9 +44,6 @@ const Page = () => {
   const id = path.split('/')[2];
   /*---- loading ----*/
   const [isLoading, setIsLoading] = useState(true);
-  if (isLoading) {
-    return <Loading />;
-  }
   /*---- hooks ----*/
   const { isShowing: isFeedbackModalShowing, toggle: toggleFeedbackModal } =
     useModal();
@@ -115,7 +112,10 @@ const Page = () => {
       onClick: shareHandler,
     },
   ];
-
+  /*---- jsx ----*/
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div className={style.wrap}>
       {/* 스토리 내용 */}

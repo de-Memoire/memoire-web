@@ -21,9 +21,6 @@ export default function Page() {
   const router = useRouter();
   /*---- loading ----*/
   const [isLoading, setIsLoading] = useState(true);
-  if (isLoading) {
-    return <Loading />;
-  }
   /*---- state ----*/
   const [temporary, setTemporary] = useState<Temporary[]>([]);
   /*---- api call function ----*/
@@ -60,6 +57,10 @@ export default function Page() {
       onClick: () => handleClick,
     },
   ];
+  /*---- jsx ----*/
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <>
       <FlexContainer flexDirection="row">
