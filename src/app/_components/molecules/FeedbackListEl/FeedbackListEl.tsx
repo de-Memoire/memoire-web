@@ -1,5 +1,5 @@
 import React from 'react';
-import { CircleIcon } from '../../atoms';
+import { CircleIcon } from '@/app/_components/atoms';
 import * as styles from './FeedbackListEl.css';
 import FeedbackIcon from '/public/icon/feedback-white.svg';
 

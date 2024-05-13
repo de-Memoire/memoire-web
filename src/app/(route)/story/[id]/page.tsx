@@ -2,23 +2,15 @@
 
 import * as style from './page.css';
 import { useEffect, useMemo } from 'react';
-import Image from 'next/image';
 import StoryServiceButton from '@/app/_components/molecules/StoryServiceButton';
-import { textType } from './page.css';
 import { FeedbackTagProps } from '@/app/_data/storydummy';
 import FeedbackBlackIcon from '/public/icon/feedback-black.svg';
-import FeedbackWhiteIcon from '/public/icon/feedback-white.svg';
 import Share from '/public/icon/share.svg';
 import Wave from '/public/icon/wave.svg';
 import FeedbackList from '@/app/_components/organisms/FeedbackList/FeedbackList';
 import useModal from '@/app/_hooks/useModal';
 import Modal from '@/app/_components/Common/Modal/Modal';
-import {
-  useRouter,
-  useParams,
-  usePathname,
-  useSearchParams,
-} from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import Popup from '@/app/_components/atoms/Popup';
 import FeedbackTagList from '@/app/_components/molecules/FeedbackTag/FeedbackTagList';
 import { titleType } from './page.css';
@@ -28,22 +20,12 @@ import { StoryServiceButtonProps } from '@/app/_components/molecules/StoryServic
 import { useState } from 'react';
 import type { Story } from '@/app/_constant/type/model';
 import { getStoryId } from '@/app/userApi/getStoryId';
-import {
-  getStoryFeedbackTag,
-  FeedbackTagResponse,
-} from '@/app/userApi/getStoryFeedbackTag';
 import { getStoryFeed } from '@/app/userApi/getStoryFeed';
-import {
-  FeedbackResponse,
-  getStoryFeedback,
-} from '@/app/userApi/getStoryFeedback';
+import { getStoryFeedback } from '@/app/userApi/getStoryFeedback';
 import { extractTagValues } from '@/app/_utils/algorithm';
-import { postData } from '@/app/userApi/common/post';
-import { postFeedback } from '../../api/feedback/post';
 import { postFeedbackClient } from '@/app/userApi/postFeedback';
 import { Footer } from '@/app/_components/Common';
 import { defaultfeedbackTag } from '@/app/_data/storydummy';
-import { Ripple } from 'react-spinners-css';
 import Loading from '@/app/_components/atoms/Loading';
 import Sentence from '/public/icon/logo_icon.svg';
 import Confirm from '@/app/_components/atoms/Confirm';

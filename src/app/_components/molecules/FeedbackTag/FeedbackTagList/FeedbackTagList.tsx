@@ -1,6 +1,6 @@
 import React from 'react';
 import * as styles from './FeedbackTagList.css';
-import { FeedbackTag } from '../../../atoms';
+import { FeedbackTag } from '@/app/_components/atoms';
 import { FeedbackTagProps } from '@/app/_data/storydummy';
 export interface FeedbackTagListProps {
   /** 피드백 태그 데이터 */

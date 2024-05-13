@@ -1,6 +1,6 @@
 import React from 'react';
 import * as styles from './SelectedFeedbackTag.css';
-import { FeedbackTag } from '../../../atoms';
+import { FeedbackTag } from '@/app/_components/atoms';
 import { FeedbackTagProps } from '@/app/_data/storydummy';
 
 export interface SelectedFeedbackTagListProps {

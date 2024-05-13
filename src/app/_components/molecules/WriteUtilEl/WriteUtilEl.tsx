@@ -1,6 +1,6 @@
 import React, { ReactNode, useState } from 'react';
 import * as styles from './WriteUtilEl.css';
-import { CircleIcon } from '../../atoms';
+import { CircleIcon } from '@/app/_components/atoms';
 import { writeUtilElType } from '@/app/_constant/write';
 
 export interface WriteUtilElProps {

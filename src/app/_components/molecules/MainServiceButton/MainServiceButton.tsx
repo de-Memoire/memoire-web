@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { CircleIcon } from '../../atoms';
+import { CircleIcon } from '@/app/_components/atoms';
 import * as styles from './MainServiceButton.css';
 import BlackArrow from '/public/icon/arrow-black.svg';
 import WhiteArrow from '/public/icon/arrow-white.svg';

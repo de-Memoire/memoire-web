@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import * as styles from './Dropdown.css';
-import { DropdownItemProps } from '../../atoms/DropdownItem';
+import { DropdownItemProps } from '@/app/_components/atoms/DropdownItem';
 export interface DropdownProps {
   /** 자식 노드 컴포넌트 */
   children: ReactNode;

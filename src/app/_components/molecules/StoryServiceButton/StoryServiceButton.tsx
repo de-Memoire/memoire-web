@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { CircleIcon } from '../../atoms';
+import { CircleIcon } from '@/app/_components/atoms';
 import * as styles from './StoryServiceButton.css';
 import { wrapType, titleType } from './StoryServiceButton.css';
 
