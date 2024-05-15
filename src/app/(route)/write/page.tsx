@@ -111,14 +111,14 @@ const Page = () => {
   /*---- ref ----*/
   const imageInputRef = useRef<HTMLInputElement>(null);
   /*---- memoization ----*/
-  const _type = useMemo(() => searchParams.get('type'), [searchParams]);
+  const _type = searchParams.get('type');
   /*---- state ----*/
   const [select, setSelect] = useState<string>('');
   const [step, setStep] = useState<number>(1);
   const [story, setStory] = useState<StoryForm>({
-    title: '',
-    author: '',
-    content: '',
+    title: searchParams.get('title') || '',
+    author: searchParams.get('author') || '',
+    content: searchParams.get('content') || '',
   });
   const [assistantEl, setAssistantEl] = useState<JSX.Element[]>([]);
   /*---- hooks ----*/
@@ -199,15 +199,19 @@ const Page = () => {
                 <StoryTextInput
                   placeholder="제목을 입력하세요"
                   type="title"
+                  value={story.title}
                   onTextChange={(e) => handleInputChange('title', e)}
                 />
                 <StoryTextInput
                   placeholder="저자를 입력하세요"
                   type="author"
+                  value={story.author}
                   onTextChange={(e) => handleInputChange('author', e)}
                 />
                 <StoryTextArea
                   placeholder="내용을 입력하세요"
+                  type="content"
+                  value={story.content}
                   onMouseUp={generateNewAssistantEl}
                   onTextChange={(e) => handleInputChange('content', e)}
                 />
@@ -221,6 +225,8 @@ const Page = () => {
                 />
                 <StoryTextArea
                   placeholder="문장을 입력하세요"
+                  type="content"
+                  value={story.content}
                   // onMouseUp={generateNewAssistantEl}
                   onTextChange={(e) => handleInputChange('content', e)}
                 />
