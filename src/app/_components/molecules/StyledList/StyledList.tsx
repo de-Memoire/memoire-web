@@ -1,7 +1,7 @@
 'use client';
 
 import * as styles from './StyledList.css';
-import StyledListEl from '@/app/_components/atoms/StyledListEl';
+import StyledListEl from '../../atoms/StyledListEl';
 import { useRouter } from 'next/navigation';
 import { Memo, Story, Sentence, User } from '@/app/userApi/common/type';
 import { MemoResponse } from '@/app/userApi/getMemo';
