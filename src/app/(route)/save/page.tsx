@@ -20,39 +20,27 @@ import { CircleIcon, Popup } from '@/app/_components/atoms';
 import { Modal } from '@/app/_components/Common';
 import Sentence from '/public/icon/logo_icon.svg';
 import Confirm from '@/app/_components/atoms/Confirm';
+import { copyHandler } from '@/app/utils';
 
 const INTRO_TEXT = '작은 문장 조각을\n보관해보세요.';
 const PH =
   '문득 떠오르는 문장을 기록해두세요. 작은 조각들이 모여 하나의 완성된 글을 만들 수 있어요.';
 
 export default function Page() {
+  /*---- router ----*/
+  const router = useRouter();
+  /*---- loading ----*/
+  const [isLoading, setIsLoading] = useState(false);
+  /*---- hooks ----*/
+  const { isShowing, toggle } = useModal();
+  /*---- state ----*/
   const [step, setStep] = useState<number>(0);
   const [saveContent, setSaveContent] = useState<string>('');
-  const [memo, setMemo] = useState<Memo[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const { isShowing, toggle } = useModal();
   const [modalContent, setModalContent] = useState<string>('');
-
-  const router = useRouter();
-
-  const copyHandler = async (data: string) => {
-    try {
-      await navigator.clipboard.writeText(data);
-      alert('Copied to clipboard!');
-    } catch (error) {
-      console.error('Failed to copy:', error);
-      alert('Failed to copy to clipboard');
-    }
-  };
-
-  const sentenceService: ServiceItem[] = [
-    {
-      icon: <Copy />,
-      onClick: (content: string) => copyHandler(content),
-    },
-  ];
-
+  const [memo, setMemo] = useState<Memo[]>([]);
+  /*---- api call function ----*/
   const getData = async () => {
+    setIsLoading(true);
     try {
       const _memo = await getMemo();
       const transformedMemo = _memo.map((item: MemoResponse) => ({
@@ -63,30 +51,36 @@ export default function Page() {
       setMemo(transformedMemo);
       setIsLoading(false);
     } catch (error) {
+      router.push('/login');
       console.error('Error fetching data:', error);
     }
   };
-
+  /*---- function ----*/
   const handleSave = async () => {
     try {
       await postMemo({
         content: saveContent,
       });
-      getData();
       setStep(1);
       setSaveContent('');
     } catch (error) {
+      router.push('/login');
       console.error('Error posting memo:', error);
     }
   };
-
+  /*---- useEffect ----*/
   useEffect(() => {
-    getData();
+    if (step === 1) {
+      getData();
+    }
   }, [step]);
-
-  if (isLoading) {
-    return <Loading />;
-  }
+  /*---- configs ----*/
+  const sentenceService: ServiceItem[] = [
+    {
+      icon: <Copy />,
+      onClick: (content: string) => copyHandler(content),
+    },
+  ];
 
   return (
     <div className={style.wrap}>
@@ -111,6 +105,7 @@ export default function Page() {
       )}
       {step == 1 && (
         <div className={style.content}>
+          {isLoading && <Loading />}
           <StyledList
             data={memo}
             service={sentenceService}

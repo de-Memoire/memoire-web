@@ -1,15 +1,14 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import * as styles from './Nav.css';
 import { useAuth } from '@/app/_hooks/useAuth';
 import User from '/public/icon/user.svg';
 import Logo from '/public/icon/logo.svg';
-import { useState } from 'react';
-import { Dropdown } from '../../molecules';
-import { DropdownItem } from '../../atoms';
+import { Dropdown } from '@/app/_components/molecules';
+import { DropdownItem } from '@/app/_components/atoms';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+import { postLogout } from '@/app/userApi/postLogout';
 
 export type UserInfoConfigType = {
   [key: string]: {
@@ -25,13 +24,17 @@ export type NavProps = {
   className?: string;
 };
 
-/**
- * 레이아웃 파일에서 사용할 네비 컴포넌트
- */
 const Nav = ({ className, profileImageUrl, isAuth }: NavProps) => {
-  const isAuthenticated = useAuth();
   const router = useRouter();
   const [isOpenUserMenu, setIsOpenUserMenu] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      await postLogout();
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
 
   const UserInfoConfigType: UserInfoConfigType = {
     library: {
@@ -44,10 +47,9 @@ const Nav = ({ className, profileImageUrl, isAuth }: NavProps) => {
     },
     logout: {
       title: '로그아웃',
-      goNavi: () => {},
+      goNavi: handleLogout,
     },
   };
-  // } as const satisfies UserInfoDataType; //TODO
 
   const noUserInfoConfigType: UserInfoConfigType = {
     login: {

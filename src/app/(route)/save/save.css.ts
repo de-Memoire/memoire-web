@@ -23,6 +23,7 @@ export const wrap = style({
 export const content = style({
   flex: '1',
   height: '100%',
+  position: 'relative',
 });
 
 export const buttonContainer = style({
@@ -51,7 +52,6 @@ export const box = style({
   borderRadius: '10px',
   textAlign: 'center',
 });
-
 
 export const styledTextArea = style({
   ...TEXT_STYLES.brand5R.PC,

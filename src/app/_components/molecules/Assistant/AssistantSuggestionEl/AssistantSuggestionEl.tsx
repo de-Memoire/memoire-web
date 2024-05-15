@@ -1,8 +1,8 @@
 import React from 'react';
 import * as styles from './AssistantSuggestionEl.css';
-import AssistantInput from '../../../atoms/Assistant/AssistantInput';
-import AssistantContent from '../../../atoms/Assistant/AssistantContent';
-import { AssistantContentProps } from '../../../atoms/Assistant/AssistantContent';
+import AssistantInput from '@/app/_components/atoms/Assistant/AssistantInput';
+import AssistantContent from '@/app/_components/atoms/Assistant/AssistantContent';
+import { AssistantContentProps } from '@/app/_components/atoms/Assistant/AssistantContent';
 
 export interface AssistantSuggestionElProps {
   /** 드래그를 통해 바뀔 인풋 value */

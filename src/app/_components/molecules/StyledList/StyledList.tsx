@@ -1,7 +1,5 @@
-'use client';
-
 import * as styles from './StyledList.css';
-import StyledListEl from '../../atoms/StyledListEl';
+import StyledListEl from '@/app/_components/atoms/StyledListElTemp';
 import { useRouter } from 'next/navigation';
 import { Memo, Story, Sentence, User } from '@/app/userApi/common/type';
 import { MemoResponse } from '@/app/userApi/getMemo';
@@ -40,7 +38,7 @@ const StyledList = ({ data, onClick, service, className }: StyledListProps) => {
           content={{
             content: el.content,
             author: 'author' in el ? el.author : '',
-            date: el.date,
+            date: 'date' in el ? el.date : '',
             id: el.id,
           }}
           onClick={() => onClick && onClick(el)}

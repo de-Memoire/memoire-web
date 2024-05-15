@@ -1,4 +1,4 @@
-import * as styles from './styledListEl.css';
+import * as styles from './StyledListElTemp.css';
 import StoryIcon from '/public/icon/logo_icon.svg';
 import SentenceIcon from '/public/icon/sentence_logo.svg';
 import { Memo, Story, Sentence } from '@/app/userApi/common/type';
@@ -7,7 +7,7 @@ import CircleIcon from '../CircleIcon';
 import { ReactNode } from 'react';
 import { StoryType } from '@/app/_constant/story';
 
-export interface styledListElProps {
+export interface StyledListElTempProps {
   type: StoryType;
   /** 제공 서비스 정보 */
   service?: {
@@ -27,13 +27,13 @@ export interface styledListElProps {
 /**
  * 기본 리스트 요소 컴포넌트
  */
-const styledListEl = ({
+const StyledListElTemp = ({
   type,
   content,
   className,
   service,
   onClick,
-}: styledListElProps) => {
+}: StyledListElTempProps) => {
   return (
     <div className={`${styles.wrap} ${className}`} onClick={onClick}>
       <CircleIcon type="bright">
@@ -59,4 +59,4 @@ const styledListEl = ({
   );
 };
 
-export default styledListEl;
+export default StyledListElTemp;

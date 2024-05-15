@@ -38,49 +38,42 @@ const MAIN_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 const FEEDBACK_TEXT = '아름다운 글을 쓰는\n지고의 노력을\n같이 응원해주세요.';
 
 const Page = () => {
+  /*---- router ----*/
   const router = useRouter();
-  const { isShowing, toggle } = useModal();
+  const path = usePathname();
+  const id = path.split('/')[2];
+  /*---- loading ----*/
   const [isLoading, setIsLoading] = useState(true);
-
+  /*---- hooks ----*/
   const { isShowing: isFeedbackModalShowing, toggle: toggleFeedbackModal } =
     useModal();
   const { isShowing: isConfirmModalShowing, toggle: toggleConfirmModal } =
     useModal();
-
+  /*---- state ----*/
   const [story, setStory] = useState<Story>();
-  // const [feedbackTag, setFeedbackTag] = useState<FeedbackTagResponse>();
   const [feedbackTagList, setFeedbackTagList] =
     useState<FeedbackTagProps[]>(defaultfeedbackTag);
   const [feedbackList, setFeedbackList] = useState<string[]>([]);
-
-  const path = usePathname();
-  const id = path.split('/')[2];
-
+  const [selectedTagList, setSelectedTagList] = useState<FeedbackTagProps[]>(
+    [],
+  );
+  const [randomImageSrc, setRandomImageSrc] = useState<number>();
+  /*---- api call function ----*/
   const getData = async () => {
     try {
       const _story = await getStoryId(id);
-      // const _feedbackTag = await getStoryFeedbackTag();
       const _feedbackList = await getStoryFeedback(id);
       const transformedFeedbackList = await extractTagValues(_feedbackList);
 
       setStory(_story);
-      // setFeedbackTag(_feedbackTag);
       setFeedbackList(transformedFeedbackList);
       setIsLoading(false);
     } catch (error) {
+      router.push('/login');
       console.error('Error fetching data:', error);
     }
   };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  // feedback tag list state
-  const [selectedTagList, setSelectedTagList] = useState<FeedbackTagProps[]>(
-    [],
-  );
-
+  /*---- function ----*/
   const handleTagSelect = (selectedTag: FeedbackTagProps) => {
     if (selectedTagList.includes(selectedTag)) {
       setSelectedTagList((prev) => prev.filter((tag) => tag !== selectedTag));
@@ -88,17 +81,18 @@ const Page = () => {
       setSelectedTagList((prev) => [...prev, selectedTag]);
     }
   };
-
+  /*---- useEffect ----*/
+  useEffect(() => {
+    const imageSrc = Math.floor(Math.random() * 5) + 1;
+    setRandomImageSrc(imageSrc);
+    getData();
+  }, []);
   useEffect(() => {
     if (selectedTagList.length != 0) {
       setSelectedTagList([]);
     }
   }, []);
-
-  useEffect(() => {
-    console.log(selectedTagList);
-  }, [selectedTagList]);
-
+  /*---- configs ----*/
   const StoryServiceButtonConfigs: StoryServiceButtonProps[] = [
     {
       title: '영감받아 글을 작성할게요',
@@ -122,30 +116,36 @@ const Page = () => {
       onClick: shareHandler,
     },
   ];
-
+  /*---- jsx ----*/
   if (isLoading) {
     return <Loading />;
   }
   return (
     <div className={style.wrap}>
-      {/* 스토리 내용 */}
-      {story?.cover_image_url && (
-        <div className={style.imgContainer}>
-          <img src={story.cover_image_url} alt="배경이미지" />
+      {/* 문장 내용 템플릿 */}
+      <div className={`${style.storyContent} ani_floating`}>
+        <div className={style.post}>
+          <div className={style.postImg}>
+            <img src={`/assets/postcard/${randomImageSrc}.jpeg`} />
+          </div>
+          <div className={style.postCaption}>
+            <div>2024.05.17. - 2024.05.19. </div>
+            <div>Global Media Graduation Exhibition Bloom</div>
+          </div>
         </div>
-      )}
-      <div className={`${style.storyContent} ${style.maxWidth}`}>
-        <CircleIcon type="bright">
-          <Quote />
-        </CircleIcon>
-        <div className={textType.content}>{story?.content}</div>
-        <div className={textType.author}>{story?.pen_name}</div>
-        <img
-          src="/assets/books.png"
-          style={{ width: '70%', marginLeft: 'auto' }}
-        />
+        <div className={style.lineImg}>
+          <img src="/assets/postLine.png" />
+        </div>
+        <div className={style.contentContainer}>
+          <div className={style.quoteImg}>
+            <img src="/assets/quote.png" />
+          </div>
+          <div className={textType.content}>{story?.content}</div>
+          <div className={textType.author}>From.{story?.pen_name}</div>
+          <div className={textType.author}>{story?.signature_image_url}</div>
+        </div>
       </div>
-      {/* 스토리 서비스 */}
+      {/* 문장 서비스 */}
       <div className={`${style.storyService} ${style.maxWidth} `}>
         <div className={style.title}>{MAIN_TEXT}</div>
         <div className={style.storyServiceButtonContainer}>

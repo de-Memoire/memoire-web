@@ -34,22 +34,9 @@ import { postTemporary } from '@/app/userApi/postTemporary';
 import Loading from '@/app/_components/atoms/Loading';
 import { StoryForm } from '@/app/userApi/common/type';
 
-
 const MAIN_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 const INTRO_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
-const TOAST_TEXT =
-  '임시저장 한 글이 있습니다.\n임시저장 글을 보고 싶으면 ctrl+M을 누르세요.';
-
-interface storyData {
-  title?: string;
-  author?: string;
-  content: string;
-  image?: {
-    file: File;
-    dataUrl: string;
-  };
-}
-
+const TOAST_TEXT = '임시저장 보관함은 ctrl+M으로 이동할 수 있어요.';
 
 interface AssistantSuggestionProps {
   prompt: string;
@@ -116,41 +103,60 @@ const AssistantChat = () => {
 };
 
 const Page = () => {
+  /*---- router ----*/
   const searchParams = useSearchParams();
-  const _type = useMemo(() => searchParams.get('type'), [searchParams]);
   const router = useRouter();
+  /*---- loading ----*/
   const [isLoading, setIsLoading] = useState(false);
-
+  /*---- ref ----*/
+  const imageInputRef = useRef<HTMLInputElement>(null);
+  /*---- memoization ----*/
+  const _type = useMemo(() => searchParams.get('type'), [searchParams]);
+  /*---- state ----*/
   const [select, setSelect] = useState<string>('');
   const [step, setStep] = useState<number>(1);
-
   const [story, setStory] = useState<StoryForm>({
     title: '',
     author: '',
     content: '',
   });
-
+  const [assistantEl, setAssistantEl] = useState<JSX.Element[]>([]);
+  /*---- hooks ----*/
+  const debouncedContent = useDebounce(story.content, 2000);
+  const debouncedSelect = useDebounce(select, 1000);
+  /*---- function ----*/
   const handleKeyPress = (event: KeyboardEvent) => {
     if (event.metaKey && event.key === 'm') {
       router.push('/store');
     }
   };
-
+  const handleInputChange = (key: string, value: string) => {
+    setStory((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+  function generateNewAssistantEl() {
+    const _select = window.getSelection()?.toString().trim();
+    if (typeof _select === 'string') {
+      setSelect(_select);
+    }
+  }
+  function UploadHandler(isOpened: boolean) {
+    if (isOpened) {
+      imageInputRef.current?.click();
+    }
+  }
+  /*---- useEffect ----*/
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       handleKeyPress(event);
     };
-
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
-
-  const debouncedContent = useDebounce(story.content, 2000);
-
-  const debouncedSelect = useDebounce(select, 1000);
-
   useEffect(() => {
     const contentToAnalyze = debouncedContent.trim();
     if (_type === 'sentence' && contentToAnalyze.length > 0) {
@@ -161,23 +167,6 @@ const Page = () => {
       setAssistantEl((prev) => [...prev, newAssistantSuggestionEl]);
     }
   }, [debouncedContent]);
-
-  const [assistantEl, setAssistantEl] = useState<JSX.Element[]>([]);
-
-  const handleInputChange = (key: string, value: string) => {
-    setStory((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
-  };
-
-  function generateNewAssistantEl() {
-    const _select = window.getSelection()?.toString().trim();
-    if (typeof _select === 'string') {
-      setSelect(_select);
-    }
-  }
-
   useEffect(() => {
     const contentToAnalyze = debouncedSelect;
     if (_type === 'story' && contentToAnalyze.length > 0) {
@@ -189,25 +178,14 @@ const Page = () => {
     }
   }, [debouncedSelect]);
 
-  const imageInputRef = useRef<HTMLInputElement>(null);
-
-  function UploadHandler(isOpened: boolean) {
-    if (isOpened) {
-      imageInputRef.current?.click();
-    }
-  }
-
+  /*---- jsx ----*/
   if (isLoading) {
     return <Loading />;
   }
-
   return (
     <>
       <Toast>
         <div className={styles.toastWrap} onClick={() => router.push(`/store`)}>
-          <CircleIcon type="bright">
-            <List />
-          </CircleIcon>
           <div className={styles.toastText}>{TOAST_TEXT}</div>
         </div>
       </Toast>
@@ -268,20 +246,39 @@ const Page = () => {
               className={styles.btnWrapperType.bright}
               onClick={() => {
                 try {
-                  setIsLoading(true);
-                  postTemporary({
-                    pen_name:
-                      (story.author?.length ?? 0) > 0
-                        ? story.author
-                        : undefined,
-                    content: story.content,
-                    type: _type === 'story' ? StoryType.ESSAY : StoryType.QUOTE,
-                    title:
-                      (story.title?.length ?? 0) > 0 ? story.title : undefined,
-                  });
-                  router.push('/store');
-                } catch {
-                  console.error(Error);
+                  if (story.content) {
+                    setIsLoading(true);
+                    postTemporary({
+                      pen_name:
+                        (story.author?.length ?? 0) > 0
+                          ? story.author
+                          : undefined,
+                      content: story.content,
+                      type:
+                        _type === 'story' ? StoryType.ESSAY : StoryType.QUOTE,
+                      title:
+                        (story.title?.length ?? 0) > 0
+                          ? story.title
+                          : undefined,
+                    })
+                      .then(() => {
+                        setIsLoading(false);
+                        router.push('/store');
+                      })
+                      .catch((error) => {
+                        console.error('Error occurred:', error);
+                        router.push('/login');
+                      });
+                  } else {
+                    if (_type === writeType.STORY) {
+                      alert('제목과 내용을 입력해주세요');
+                    } else {
+                      alert('내용을 입력해주세요');
+                    }
+                  }
+                } catch (error) {
+                  console.error('Unhandled error occurred:', error);
+                  router.push('/');
                 }
               }}
             >
@@ -289,7 +286,9 @@ const Page = () => {
             </div>
             <div
               className={styles.btnWrapperType.dark}
-              onClick={() => setStep(2)}
+              onClick={() =>
+                story.content ? setStep(2) : alert('내용을 입력해주세요')
+              }
             >
               <div className={styles.btnText}>다음 단계</div>
               <div className={styles.btnIcon}>
@@ -305,14 +304,14 @@ const Page = () => {
             <ProgressBar weight={WEIGHT} curr={step} />
             <FlexContainer flexDirection="col">
               <div className={styles.title}>{INTRO_TEXT}</div>
-              <div className={styles.writeUtilElWrapper}>
+              <div className={`${styles.writeUtilElWrapper} scroll`}>
                 <WriteUtilEl
                   icon={<SignIcon />}
                   subtitle="step 01"
                   title="서명하기"
                   dropDown={{
                     icon: <GrayArrow />,
-                    title: '기본 서명 사용하기',
+                    title: '서명하기',
                     childrenType: writeUtilElType.MINI,
                     children: (
                       <SignComponent
@@ -350,20 +349,23 @@ const Page = () => {
                     }
                   }}
                 />
-                <WriteUtilEl
-                  icon={<ImageIcon />}
-                  subtitle="step 02"
-                  title="이미지 등록하기"
-                  dropDown={{
-                    icon: <File />,
-                    title: '파일 찾기',
-                    onClick: UploadHandler,
-                    children: story.image ? (
-                      <img src={story.image.dataUrl} alt="" />
-                    ) : undefined,
-                    childrenType: writeUtilElType.MINI,
-                  }}
-                />
+
+                {_type === writeType.STORY && (
+                  <WriteUtilEl
+                    icon={<ImageIcon />}
+                    subtitle="step 02"
+                    title="이미지 등록하기"
+                    dropDown={{
+                      icon: <File />,
+                      title: '파일 찾기',
+                      onClick: UploadHandler,
+                      children: story.image ? (
+                        <img src={story.image.dataUrl} alt="" />
+                      ) : undefined,
+                      childrenType: writeUtilElType.MINI,
+                    }}
+                  />
+                )}
                 <WriteUtilEl
                   icon={<PreviewIcon />}
                   subtitle="step 03"
@@ -455,6 +457,7 @@ const Page = () => {
                       }
                       router.push(`${_type}/${result.data.id}`);
                     } catch (error) {
+                      router.push('/login');
                       console.error(error);
                     }
                   }}
