@@ -8,6 +8,7 @@ import { z } from 'zod';
 
 const requestSchema = z.object({
   type: z.enum(StoryTypeList),
+  limit: z.number().min(1).optional(),
 });
 
 export const GET = async (request: NextRequest) => {
@@ -15,11 +16,16 @@ export const GET = async (request: NextRequest) => {
 
   const validationResult = parseRequest(requestSchema, {
     type: searchParams.get('type') as StoryType,
+    limit: searchParams.get('limit')
+      ? Number(searchParams.get('limit'))
+      : undefined,
   });
 
   if (!validationResult.isSuccess) {
     return validationResult.response;
   }
+
+  const { limit = 4 } = validationResult.data;
 
   const supabase = createSupabaseServerClient();
 
@@ -42,12 +48,12 @@ export const GET = async (request: NextRequest) => {
 
   const stories = result.data;
 
-  if (stories.length < 4) {
+  if (stories.length < limit) {
     return NextResponse.json(new ApiResponse(stories), { status: 200 });
   }
 
   return NextResponse.json(
-    new ApiResponse(getShuffledArray(stories).slice(0, 4)),
+    new ApiResponse(getShuffledArray(stories).slice(0, limit)),
     { status: 200 },
   );
 };
