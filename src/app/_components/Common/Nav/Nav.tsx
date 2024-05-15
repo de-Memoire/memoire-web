@@ -60,7 +60,7 @@ const Nav = ({ className, profileImageUrl, isAuth }: NavProps) => {
 
   return (
     <div className={`${styles.wrap} ${className}`}>
-      <div className={styles.logo}>
+      <div className={styles.logo} onClick={() => router.push(`/`)}>
         <Logo />
       </div>
       <div

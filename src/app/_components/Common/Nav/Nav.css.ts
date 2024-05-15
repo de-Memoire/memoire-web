@@ -7,7 +7,9 @@ export const wrap = style({
   position: 'relative',
 });
 
-export const logo = style({});
+export const logo = style({
+  cursor: 'pointer',
+});
 
 export const user = style({
   width: '48px',
