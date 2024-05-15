@@ -37,14 +37,16 @@ export const btn = style({
   borderRadius: '50px',
   display: 'inline-block',
   cursor: 'pointer',
-  transition: '0.5s',
   background: COLORS.grayscale.black,
   color: COLORS.grayscale.gray1,
   height: '40px',
   opacity: '0',
 
+  transition: '.5s',
+
   ':hover': {
-    opacity: '0.5',
+    opacity: '0.6',
+    transform: 'scale(1.05)',
   },
 });
 

@@ -18,6 +18,13 @@ export const imgContainer = style({
 
 export const base = style({
   color: COLORS.grayscale.gray8,
+
+  transition: '.5s',
+
+  ':hover': {
+    opacity: '0.6',
+    transform: 'scale(1.05)',
+  },
 });
 
 export const textType = styleVariants({

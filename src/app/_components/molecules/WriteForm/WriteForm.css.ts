@@ -22,7 +22,7 @@ export const wrap = style({
 });
 
 export const signContent = style({
-  width: '150px',
+  width: '100px',
   marginLeft: 'auto',
   display: 'flex',
 });
