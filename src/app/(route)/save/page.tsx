@@ -125,12 +125,12 @@ export default function Page() {
             }}
             onLeft={{
               onClick: () =>
-                router.push(`/write?type=story?content=${modalContent}`),
+                router.push(`/write?type=story&content=${modalContent}`),
               text: '에세이로 작성하기',
             }}
             onRight={{
               onClick: () =>
-                router.push(`/write?type=sentence?content=${modalContent}`),
+                router.push(`/write?type=sentence&content=${modalContent}`),
               text: '문장으로 작성하기',
             }}
           >

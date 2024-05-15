@@ -11,10 +11,11 @@ export const wrap = style({
   borderRadius: '12px',
   border: `1px solid ${COLORS.grayscale.gray1}`,
   cursor: 'pointer',
-  transition: '.2s',
+  transition: '.5s',
 
   ':hover': {
-    background: COLORS.grayscale.gray1,
+    opacity: '0.6',
+    transform: 'scale(1.05)',
   },
 });
 

@@ -5,8 +5,8 @@ import { StoryType } from '@/app/_constant/story';
 export interface Story {
   id: number;
   img?: string;
-  date: string;
-  title: string;
+  date?: string;
+  title?: string;
   author?: string;
   type?: StoryType;
   content: string;

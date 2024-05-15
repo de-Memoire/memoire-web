@@ -11,8 +11,11 @@ const inter = Inter({ subsets: ['latin'] });
 export const runtime = 'edge';
 
 export const metadata: Metadata = {
-  title: 'memoire',
+  title: 'memoire | 타인에게서 자신의 이야기를 발견하세요 ',
   description: 'memoire app',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 const NavServer = async () => {

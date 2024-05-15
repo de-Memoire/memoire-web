@@ -36,6 +36,7 @@ const StyledList = ({ data, onClick, service, className }: StyledListProps) => {
             onClick: () => item.onClick && item.onClick(el.content),
           }))}
           content={{
+            title: 'title' in el ? el.title : '',
             content: el.content,
             author: 'author' in el ? el.author : '',
             date: 'date' in el ? el.date : '',
