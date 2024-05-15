@@ -1,5 +1,3 @@
-'use client';
-
 import * as styles from './StyledList.css';
 import StyledListEl from '@/app/_components/atoms/StyledListEl';
 import { useRouter } from 'next/navigation';
