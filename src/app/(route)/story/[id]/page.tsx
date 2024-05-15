@@ -172,20 +172,25 @@ const Page = () => {
               selectedFeedbackTagList={selectedTagList}
               isSelected={true}
             />
-            {selectedTagList.length < 1 ? (
+            {selectedTagList.length < 2 ? (
               <div className={titleType.desc}>
                 *2개 이상의 어절을 선택해주세요
               </div>
             ) : (
               <div
                 className={titleType.desc}
-                onClick={() => {
-                  toggleFeedbackModal();
-                  setSelectedTagList([]);
-                  postFeedbackClient({
-                    story_id: Number(id),
-                    tags: selectedTagList.map((tag) => tag.id),
-                  });
+                onClick={async () => {
+                  try {
+                    toggleFeedbackModal();
+                    setSelectedTagList([]);
+                    await postFeedbackClient({
+                      story_id: Number(id),
+                      tags: selectedTagList.map((tag) => tag.id),
+                    });
+                    getData();
+                  } catch (error) {
+                    alert('다시 시도해주세요');
+                  }
                 }}
               >
                 응원하기
