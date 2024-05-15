@@ -27,7 +27,7 @@ export interface StoryForm {
 
 export interface Sentence {
   id: number;
-  date: string;
+  date?: string;
   author?: string;
   content: string;
   type?: StoryType;
@@ -35,14 +35,14 @@ export interface Sentence {
 
 export interface Temporary {
   id: number;
-  date: string;
+  date?: string;
   author?: string;
   content: string;
 }
 
 export interface User {
   id: number;
-  date: string;
+  date?: string;
   author?: string;
   type?: StoryType;
   content: string;
