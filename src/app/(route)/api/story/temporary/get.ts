@@ -11,7 +11,7 @@ export const getTemporaryStory = async (request: NextRequest) => {
     return authorizationResult.response;
   }
 
-  const user = authorizationResult.user;
+  const { user } = authorizationResult;
 
   const result = await supabase
     .from('temporary_story')
@@ -30,7 +30,7 @@ export const getTemporaryStory = async (request: NextRequest) => {
     );
   }
 
-  return NextResponse.json(new ApiResponse(result.data.at(0) ?? null), {
+  return NextResponse.json(new ApiResponse(result.data), {
     status: 200,
   });
 };
