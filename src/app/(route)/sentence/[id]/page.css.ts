@@ -65,8 +65,6 @@ export const imgContainer = style({
 
 export const storyContent = style({
   display: 'flex',
-  flexDirection: 'column',
-  gap: '15px',
   flex: 1,
   alignItems: 'center',
 });
@@ -88,7 +86,6 @@ export const storyServiceButtonContainer = style({
 
 export const base = style({
   color: COLORS.grayscale.gray8,
-  textAlign: 'center',
 });
 
 export const textType = styleVariants({
@@ -96,15 +93,49 @@ export const textType = styleVariants({
     base,
     {
       ...TEXT_STYLES.brand4R.PC,
-      paddingTop: '20px',
-      borderTop: `1px solid ${COLORS.grayscale.gray3}`,
     },
   ],
-  content: [base, { ...TEXT_STYLES.brand3R.PC }],
+  content: [
+    base,
+    { fontFamily: 'KoPubWorldBatang', fontSize: '30px', lineHeight: '180%' },
+  ],
 });
 
 export const maxWidth = style({
   maxWidth: '800px',
   margin: '0 auto',
   width: '100%',
+});
+
+export const post = style({
+  display: 'flex',
+  flexDirection: 'column',
+  padding: '30px',
+  gap: '30px',
+  flex: '1',
+  height: '600px',
+});
+export const postImg = style({
+  width: '100%',
+  height: '500px',
+});
+export const lineImg = style({
+  width: '56px',
+  height: '600px',
+});
+export const quoteImg = style({
+  width: '44px',
+  height: '44px',
+});
+export const postCaption = style({
+  ...TEXT_STYLES.brand5R.PC,
+});
+export const contentContainer = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '10px',
+  justifyContent: 'center',
+  flex: '1',
+  padding: '0px 70px',
+  height: '600px',
 });

@@ -57,6 +57,7 @@ const Page = () => {
   const [selectedTagList, setSelectedTagList] = useState<FeedbackTagProps[]>(
     [],
   );
+  const [randomImageSrc, setRandomImageSrc] = useState<number>();
   /*---- api call function ----*/
   const getData = async () => {
     try {
@@ -68,6 +69,7 @@ const Page = () => {
       setFeedbackList(transformedFeedbackList);
       setIsLoading(false);
     } catch (error) {
+      router.push('/login');
       console.error('Error fetching data:', error);
     }
   };
@@ -81,6 +83,8 @@ const Page = () => {
   };
   /*---- useEffect ----*/
   useEffect(() => {
+    const imageSrc = Math.floor(Math.random() * 5) + 1;
+    setRandomImageSrc(imageSrc);
     getData();
   }, []);
   useEffect(() => {
@@ -118,24 +122,30 @@ const Page = () => {
   }
   return (
     <div className={style.wrap}>
-      {/* 스토리 내용 */}
-      {story?.cover_image_url && (
-        <div className={style.imgContainer}>
-          <img src={story.cover_image_url} alt="배경이미지" />
+      {/* 문장 내용 템플릿 */}
+      <div className={`${style.storyContent} ani_floating`}>
+        <div className={style.post}>
+          <div className={style.postImg}>
+            <img src={`/assets/postcard/${randomImageSrc}.jpeg`} />
+          </div>
+          <div className={style.postCaption}>
+            <div>2024.05.17. - 2024.05.19. </div>
+            <div>Global Media Graduation Exhibition Bloom</div>
+          </div>
         </div>
-      )}
-      <div className={`${style.storyContent} ${style.maxWidth}`}>
-        <CircleIcon type="bright">
-          <Quote />
-        </CircleIcon>
-        <div className={textType.content}>{story?.content}</div>
-        <div className={textType.author}>{story?.pen_name}</div>
-        <img
-          src="/assets/books.png"
-          style={{ width: '70%', marginLeft: 'auto' }}
-        />
+        <div className={style.lineImg}>
+          <img src="/assets/postLine.png" />
+        </div>
+        <div className={style.contentContainer}>
+          <div className={style.quoteImg}>
+            <img src="/assets/quote.png" />
+          </div>
+          <div className={textType.content}>{story?.content}</div>
+          <div className={textType.author}>From.{story?.pen_name}</div>
+          <div className={textType.author}>{story?.signature_image_url}</div>
+        </div>
       </div>
-      {/* 스토리 서비스 */}
+      {/* 문장 서비스 */}
       <div className={`${style.storyService} ${style.maxWidth} `}>
         <div className={style.title}>{MAIN_TEXT}</div>
         <div className={style.storyServiceButtonContainer}>
