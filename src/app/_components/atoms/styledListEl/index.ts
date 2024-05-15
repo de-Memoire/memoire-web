@@ -1,4 +1,4 @@
-import styledListEl from './styledListEl';
+import StyledListEl from './StyledListEl';
 
-export default styledListEl;
-export type { styledListElProps } from './styledListEl';
+export default StyledListEl;
+export type { StyledListElProps } from './StyledListEl';
