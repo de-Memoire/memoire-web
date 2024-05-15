@@ -38,7 +38,7 @@ export const WriteForm = ({
   className,
 }: WriteFormProps) => {
   return (
-    <div className={styles.wrap}>
+    <div className={`${styles.wrap} ani_floating`}>
       {image && image.src && image.alt && (
         <div className={`${styles.imgContainer} ${className}`}>
           <img src={image.src} width={1280} height={300} alt={image.alt} />

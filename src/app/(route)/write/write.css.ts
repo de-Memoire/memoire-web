@@ -12,6 +12,7 @@ export const snapContainer = style({
 export const snapEl = style({
   scrollSnapAlign: 'start',
   scrollSnapStop: 'always',
+  minHeight: 'calc(100vh - 70px - 50px - 100px)',
 });
 
 export const writeSection = style({
@@ -89,7 +90,6 @@ export const btnWrapperType = styleVariants({
   ],
 });
 
-
 export const btnText = style({
   width: '80%',
   textAlign: 'center',
@@ -107,6 +107,7 @@ export const writeUtilElWrapper = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '10px',
+  overflow: 'scroll',
 });
 export const line = style({
   marginLeft: '30px',
@@ -164,8 +165,7 @@ export const btn = style({
 
 export const toastWrap = style({
   display: 'flex',
-  gap: '30px',
-  padding: '16px 20px',
+  padding: '20px 40px',
   background: COLORS.grayscale.gray8,
   cursor: 'pointer',
   borderRadius: '10px',
@@ -175,5 +175,5 @@ export const toastWrap = style({
 });
 
 export const toastText = style({
-  ...TEXT_STYLES.brand5R.PC,
+  ...TEXT_STYLES.body2R.PC,
 });
