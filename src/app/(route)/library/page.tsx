@@ -41,6 +41,7 @@ export default function Page() {
       setUserStory(transformedUserStory);
       setIsLoading(false);
     } catch (error) {
+      router.push('/login');
       console.error('Error fetching data:', error);
     }
   };

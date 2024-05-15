@@ -36,8 +36,7 @@ import { StoryForm } from '@/app/userApi/common/type';
 
 const MAIN_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 const INTRO_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
-const TOAST_TEXT =
-  '임시저장 한 글이 있습니다.\n임시저장 글을 보고 싶으면 ctrl+M을 누르세요.';
+const TOAST_TEXT = '임시저장 보관함은 ctrl+M으로 이동할 수 있어요.';
 
 interface AssistantSuggestionProps {
   prompt: string;
@@ -187,9 +186,6 @@ const Page = () => {
     <>
       <Toast>
         <div className={styles.toastWrap} onClick={() => router.push(`/store`)}>
-          <CircleIcon type="bright">
-            <List />
-          </CircleIcon>
           <div className={styles.toastText}>{TOAST_TEXT}</div>
         </div>
       </Toast>
@@ -250,20 +246,39 @@ const Page = () => {
               className={styles.btnWrapperType.bright}
               onClick={() => {
                 try {
-                  setIsLoading(true);
-                  postTemporary({
-                    pen_name:
-                      (story.author?.length ?? 0) > 0
-                        ? story.author
-                        : undefined,
-                    content: story.content,
-                    type: _type === 'story' ? StoryType.ESSAY : StoryType.QUOTE,
-                    title:
-                      (story.title?.length ?? 0) > 0 ? story.title : undefined,
-                  });
-                  router.push('/store');
-                } catch {
-                  console.error(Error);
+                  if (story.content) {
+                    setIsLoading(true);
+                    postTemporary({
+                      pen_name:
+                        (story.author?.length ?? 0) > 0
+                          ? story.author
+                          : undefined,
+                      content: story.content,
+                      type:
+                        _type === 'story' ? StoryType.ESSAY : StoryType.QUOTE,
+                      title:
+                        (story.title?.length ?? 0) > 0
+                          ? story.title
+                          : undefined,
+                    })
+                      .then(() => {
+                        setIsLoading(false);
+                        router.push('/store');
+                      })
+                      .catch((error) => {
+                        console.error('Error occurred:', error);
+                        router.push('/login');
+                      });
+                  } else {
+                    if (_type === writeType.STORY) {
+                      alert('제목과 내용을 입력해주세요');
+                    } else {
+                      alert('내용을 입력해주세요');
+                    }
+                  }
+                } catch (error) {
+                  console.error('Unhandled error occurred:', error);
+                  router.push('/');
                 }
               }}
             >
@@ -271,7 +286,9 @@ const Page = () => {
             </div>
             <div
               className={styles.btnWrapperType.dark}
-              onClick={() => setStep(2)}
+              onClick={() =>
+                story.content ? setStep(2) : alert('내용을 입력해주세요')
+              }
             >
               <div className={styles.btnText}>다음 단계</div>
               <div className={styles.btnIcon}>
@@ -287,14 +304,14 @@ const Page = () => {
             <ProgressBar weight={WEIGHT} curr={step} />
             <FlexContainer flexDirection="col">
               <div className={styles.title}>{INTRO_TEXT}</div>
-              <div className={styles.writeUtilElWrapper}>
+              <div className={`${styles.writeUtilElWrapper} scroll`}>
                 <WriteUtilEl
                   icon={<SignIcon />}
                   subtitle="step 01"
                   title="서명하기"
                   dropDown={{
                     icon: <GrayArrow />,
-                    title: '기본 서명 사용하기',
+                    title: '서명하기',
                     childrenType: writeUtilElType.MINI,
                     children: (
                       <SignComponent
@@ -332,20 +349,23 @@ const Page = () => {
                     }
                   }}
                 />
-                <WriteUtilEl
-                  icon={<ImageIcon />}
-                  subtitle="step 02"
-                  title="이미지 등록하기"
-                  dropDown={{
-                    icon: <File />,
-                    title: '파일 찾기',
-                    onClick: UploadHandler,
-                    children: story.image ? (
-                      <img src={story.image.dataUrl} alt="" />
-                    ) : undefined,
-                    childrenType: writeUtilElType.MINI,
-                  }}
-                />
+
+                {_type === writeType.STORY && (
+                  <WriteUtilEl
+                    icon={<ImageIcon />}
+                    subtitle="step 02"
+                    title="이미지 등록하기"
+                    dropDown={{
+                      icon: <File />,
+                      title: '파일 찾기',
+                      onClick: UploadHandler,
+                      children: story.image ? (
+                        <img src={story.image.dataUrl} alt="" />
+                      ) : undefined,
+                      childrenType: writeUtilElType.MINI,
+                    }}
+                  />
+                )}
                 <WriteUtilEl
                   icon={<PreviewIcon />}
                   subtitle="step 03"
@@ -437,6 +457,7 @@ const Page = () => {
                       }
                       router.push(`${_type}/${result.data.id}`);
                     } catch (error) {
+                      router.push('/login');
                       console.error(error);
                     }
                   }}

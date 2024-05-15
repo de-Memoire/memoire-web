@@ -51,7 +51,7 @@ export default function Page() {
       setMemo(transformedMemo);
       setIsLoading(false);
     } catch (error) {
-      router.push('/');
+      router.push('/login');
       console.error('Error fetching data:', error);
     }
   };

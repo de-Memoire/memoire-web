@@ -36,6 +36,7 @@ export default function Page() {
       setTemporary(transformedTemporary);
       setIsLoading(false);
     } catch (error) {
+      router.push('/login');
       console.error('Error fetching data:', error);
     }
   };
