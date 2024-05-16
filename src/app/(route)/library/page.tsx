@@ -16,7 +16,7 @@ import Loading from '@/app/_components/atoms/Loading';
 import { Footer } from '@/app/_components/Common';
 import { StoryType } from '@/app/_constant/story';
 
-const STORY_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
+const STORY_TEXT = '내 서재';
 
 export default function Page() {
   /*---- router ----*/
@@ -71,9 +71,8 @@ export default function Page() {
   }
   return (
     <>
-      <div className={styles.box}></div>
-      <FlexContainer flexDirection="row">
-        <FlexBox val={3}>
+      <FlexContainer flexDirection="row" className={styles.maxWidth}>
+        <FlexBox val={2}>
           <div className={styles.title}>{STORY_TEXT}</div>
         </FlexBox>
         <FlexBox val={7}>
