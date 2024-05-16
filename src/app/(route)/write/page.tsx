@@ -33,6 +33,7 @@ import { CircleIcon } from '@/app/_components/atoms';
 import { postTemporary } from '@/app/userApi/postTemporary';
 import Loading from '@/app/_components/atoms/Loading';
 import { StoryForm } from '@/app/userApi/common/type';
+import Link from 'next/link';
 
 const MAIN_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 const INTRO_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
@@ -59,9 +60,30 @@ const AssistantSuggestion = ({ prompt }: AssistantSuggestionProps) => {
       initialInput: prompt,
     });
 
+  const [recommendedSentences, setRecommendedSentences] = useState<
+    { sentence: string; story_id: number }[]
+  >([]);
+
   useEffect(() => {
     completeExpressiveness(prompt);
     completeReadability(prompt);
+
+    const getSentenceRecommendation = async () => {
+      try {
+        const response = await fetch('/api/sentence/recommendation', {
+          method: 'POST',
+          body: JSON.stringify({
+            sentence: prompt,
+          }),
+        });
+        const result = await response.json();
+        setRecommendedSentences(result.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getSentenceRecommendation();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prompt]);
 
@@ -76,6 +98,23 @@ const AssistantSuggestion = ({ prompt }: AssistantSuggestionProps) => {
         {
           title: '표현력을 높인 문장 제안',
           desc: expressivenessCompletion,
+        },
+        {
+          title: '다른 스토리에서 영감 얻기',
+          desc: (
+            <ul>
+              {recommendedSentences.map((item) => (
+                <Link
+                  key={item.sentence}
+                  href={`/story/${item.story_id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <li>{item.sentence}</li>
+                </Link>
+              ))}
+            </ul>
+          ),
         },
       ]}
     />
