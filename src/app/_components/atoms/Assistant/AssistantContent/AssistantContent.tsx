@@ -4,7 +4,7 @@ export interface AssistantContentProps {
   /** 어시스턴트 요소 내 제안할 제목 */
   title: string;
   /** 어시스턴트 요소 내 제안할 내용 */
-  desc: string;
+  desc: string | JSX.Element;
   /** 컴포넌트로 생성할 요소의 클래스명 */
   className?: string;
 }

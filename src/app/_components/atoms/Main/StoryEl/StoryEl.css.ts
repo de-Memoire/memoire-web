@@ -31,6 +31,7 @@ export const base = style({
   color: COLORS.grayscale.gray8,
 
   transition: '.5s',
+
 });
 
 export const textType = styleVariants({
