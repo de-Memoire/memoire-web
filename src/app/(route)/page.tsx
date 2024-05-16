@@ -59,7 +59,7 @@ export default function Page() {
   const getData = async () => {
     try {
       const _stories = await getStoryFeed(StoryType.ESSAY);
-      const _quotes = await getStoryFeed(StoryType.QUOTE);
+      const _quotes = await getStoryFeed(StoryType.QUOTE, 6);
       setStories(_stories);
       setQuotes(_quotes);
     } catch (error) {
