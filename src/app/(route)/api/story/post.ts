@@ -50,13 +50,13 @@ export const postStory = async (request: NextRequest) => {
     messages: [
       {
         role: 'system',
-        content: `당신은 수필 전문가입니다. 수필이 주어지면, 우선 수필을 문장 단위로 나누어 주세요. 그리고 각 문장을 보고 그 문장이 속한 카테고리를 소재 측면, 문학적 표현 방식 측면에서 나열해 주세요. 응답은 다음 JSON 형식으로 해주세요:
+        content: `당신은 수필 전문가입니다. 수필이 주어지면, 우선 수필을 문장 단위로 나누어 주세요. 그리고 각 문장을 보고 그 문장이 속한 카테고리를 소재 측면에서 나열해 주세요. 응답은 다음 JSON 형식으로 해주세요:
         {
           "sentences": [
             {
               "content": "문장",
-              "a": ["소재 측면 카테고리"],
-              "b": ["문학적 표현 방식 측면 카테고리"],
+              "categories": ["소재 측면 카테고리"],
+            },
           ],
         }`,
       },
@@ -98,19 +98,13 @@ export const postStory = async (request: NextRequest) => {
   const sentences = JSON.parse(tagAiResponse.choices[0].message.content ?? '{}')
     .sentences as {
     content: string;
-    a: string[];
-    b: string[];
+    categories: string[];
   }[];
 
   const tagSet = new Set<string>();
   const tagTypeMap: Record<string, 'topic' | 'form'> = {};
   sentences.forEach((item) => {
-    item.b.forEach((value) => {
-      tagSet.add(value);
-      tagTypeMap[value] = 'form';
-    });
-    // 중복되는 경우 topic을 우선시
-    item.a.forEach((value) => {
+    item.categories.forEach((value) => {
       tagSet.add(value);
       tagTypeMap[value] = 'topic';
     });
@@ -189,11 +183,7 @@ export const postStory = async (request: NextRequest) => {
         .reduce(
           (prev, cur) => [
             ...prev,
-            ...cur.a.map((item) => ({
-              sentence_id: sentenceIdMap[cur.content] ?? -1,
-              tag_id: tagIdMap[item] ?? -1,
-            })),
-            ...cur.b.map((item) => ({
+            ...cur.categories.map((item) => ({
               sentence_id: sentenceIdMap[cur.content] ?? -1,
               tag_id: tagIdMap[item] ?? -1,
             })),
