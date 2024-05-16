@@ -33,6 +33,11 @@ import { CircleIcon } from '@/app/_components/atoms';
 import { postTemporary } from '@/app/userApi/postTemporary';
 import Loading from '@/app/_components/atoms/Loading';
 import { StoryForm } from '@/app/userApi/common/type';
+import useModal from '@/app/_hooks/useModal';
+import { Footer, Modal } from '@/app/_components/Common';
+import Confirm from '@/app/_components/atoms/Confirm';
+import Sentence from '/public/icon/logo_icon.svg';
+import { postSentence } from '@/app/userApi/postSentence';
 
 const MAIN_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 const INTRO_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
@@ -124,6 +129,7 @@ const Page = () => {
   /*---- hooks ----*/
   const debouncedContent = useDebounce(story.content, 2000);
   const debouncedSelect = useDebounce(select, 1000);
+  const { isShowing: isShowing, toggle: toggleModal } = useModal();
   /*---- function ----*/
   const handleKeyPress = (event: KeyboardEvent) => {
     if (event.metaKey && event.key === 'm') {
@@ -147,6 +153,7 @@ const Page = () => {
       imageInputRef.current?.click();
     }
   }
+
   /*---- useEffect ----*/
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -221,6 +228,7 @@ const Page = () => {
                 <StoryTextInput
                   placeholder="저자를 입력하세요"
                   type="author"
+                  value={story.author}
                   onTextChange={(e) => handleInputChange('author', e)}
                 />
                 <StoryTextArea
@@ -292,9 +300,13 @@ const Page = () => {
             </div>
             <div
               className={styles.btnWrapperType.dark}
-              onClick={() =>
-                story.content ? setStep(2) : alert('내용을 입력해주세요')
-              }
+              onClick={() => {
+                if (_type === writeType.SENTENCE) {
+                  story.content ? toggleModal() : alert('내용을 입력해주세요');
+                } else {
+                  story.content ? setStep(2) : alert('내용을 입력해주세요');
+                }
+              }}
             >
               <div className={styles.btnText}>다음 단계</div>
               <div className={styles.btnIcon}>
@@ -399,16 +411,9 @@ const Page = () => {
                   }}
                 />
               </div>
-            </FlexContainer>
-          </div>
-          <div className={`${styles.snapEl}`}>
-            <ProgressBar weight={WEIGHT} curr={3} />
-            <FlexContainer flexDirection="col">
-              <div className={`${styles.wrap} final ani_leftToRight`}>
-                <div className={styles.text}>{MAIN_TEXT}</div>
-                <div className={styles.vertiline} />
+              <div className={styles.btnSection}>
                 <div
-                  className={styles.btn}
+                  className={styles.btnWrapperType.dark}
                   onClick={async () => {
                     try {
                       setIsLoading(true);
@@ -468,13 +473,76 @@ const Page = () => {
                     }
                   }}
                 >
-                  흘려보내기
+                  <div className={styles.btnText}>다음 단계</div>
+                  <div className={styles.btnIcon}>
+                    <Arrow />
+                  </div>
                 </div>
               </div>
             </FlexContainer>
           </div>
         </div>
       )}
+      <Footer />
+      <Modal
+        isShowing={isShowing}
+        content={
+          <Confirm
+            onClose={() => {
+              toggleModal();
+            }}
+            onLeft={{
+              onClick: toggleModal,
+              text: '문장 다시 작성하기',
+            }}
+            onRight={{
+              onClick: () => {
+                setIsLoading(true);
+                try {
+                  postSentence({
+                    pen_name:
+                      (story.author?.length ?? 0) > 0
+                        ? story.author
+                        : undefined,
+                    content: story.content,
+                    type: _type === 'story' ? StoryType.ESSAY : StoryType.QUOTE,
+                    signature_image_url: story.sign?.dataUrl,
+                  })
+                    .then((result) => {
+                      if (result) {
+                        router.push(`/sentence/${result.id}`);
+                      } else {
+                        console.error("Returned data doesn't contain ID.");
+                        router.push('/error');
+                      }
+                    })
+                    .catch(() => {
+                      router.push('/login');
+                    });
+                } catch {
+                  router.push('/login');
+                }
+              },
+              text: '문장 흘려보내기',
+            }}
+          >
+            <CircleIcon type="bright">
+              <Sentence />
+            </CircleIcon>
+            <div>니만의 시그니처 사인을 더해주세요</div>
+            <SignComponent
+              setImageURL={(url: string) => {
+                setStory((prev) => ({
+                  ...prev,
+                  sign: {
+                    dataUrl: url,
+                  },
+                }));
+              }}
+            />
+          </Confirm>
+        }
+      />
     </>
   );
 };

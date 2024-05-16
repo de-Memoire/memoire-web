@@ -44,7 +44,9 @@ const StyledListElTemp = ({
           {content.content}
         </div>
         <div className={styles.textType.desc}>
-          {'author' in content && <span>{content.author} | </span>}
+          {'author' in content && content.author !== '' && (
+            <span>{content.author} | </span>
+          )}
           <span>{content.date}</span>
         </div>
       </div>

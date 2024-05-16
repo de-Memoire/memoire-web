@@ -6,21 +6,21 @@ export const IS_SCROLL_HEIGHT = 50;
 /**
  * progress 총 레벨
  */
-export const WEIGHT = 3;
+export const WEIGHT = 2;
 
 /**
  * web share api 함수
  */
 //TODO ios+chrome 예외 처리
-export const shareHandler = () => {
+export const shareHandler = (url: string) => {
   if (navigator.share) {
     navigator.share({
       title: 'memoire',
       text: '타인에게서 자신의 이야기를 발견하세요.',
-      url: 'http://localhost:3000/main',
+      url: `https://7a07848e.memoire-web.pages.dev${url}`,
     });
   } else {
-    alert('공유하기가 지원되지 않는 환경 입니다.');
+    copyHandler(`https://7a07848e.memoire-web.pages.dev${url}`);
   }
 };
 /**
@@ -29,9 +29,9 @@ export const shareHandler = () => {
 export const copyHandler = async (data: string) => {
   try {
     await navigator.clipboard.writeText(data);
-    alert('Copied to clipboard!');
+    alert('📑 클립보드에 복사되었습니다.');
   } catch (error) {
     console.error('Failed to copy:', error);
-    alert('Failed to copy to clipboard');
+    alert('클립보드 복사에 실패하였습니다.');
   }
 };

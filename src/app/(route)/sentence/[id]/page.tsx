@@ -113,7 +113,7 @@ const Page = () => {
       styleType: 'bright',
       buttonType: 'text',
       icon: <Share />,
-      onClick: shareHandler,
+      onClick: () => shareHandler(path),
     },
   ];
   /*---- jsx ----*/
@@ -142,7 +142,9 @@ const Page = () => {
           </div>
           <div className={textType.content}>{story?.content}</div>
           <div className={textType.author}>From.{story?.pen_name}</div>
-          <div className={textType.author}>{story?.signature_image_url}</div>
+          {story?.signature_image_url && (
+            <img src={story?.signature_image_url} className={style.sign} />
+          )}
         </div>
       </div>
       {/* 문장 서비스 */}
@@ -193,13 +195,18 @@ const Page = () => {
             ) : (
               <div
                 className={titleType.desc}
-                onClick={() => {
-                  toggleFeedbackModal();
-                  setSelectedTagList([]);
-                  postFeedbackClient({
-                    story_id: Number(id),
-                    tags: selectedTagList.map((tag) => tag.id),
-                  });
+                onClick={async () => {
+                  try {
+                    toggleFeedbackModal();
+                    setSelectedTagList([]);
+                    await postFeedbackClient({
+                      story_id: Number(id),
+                      tags: selectedTagList.map((tag) => tag.id),
+                    });
+                    getData();
+                  } catch (error) {
+                    alert('다시 시도해주세요');
+                  }
                 }}
               >
                 응원하기

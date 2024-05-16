@@ -41,10 +41,6 @@ const Nav = ({ className, profileImageUrl, isAuth }: NavProps) => {
       title: '내 서재',
       goNavi: () => router.push(`/library`),
     },
-    setting: {
-      title: '설정',
-      goNavi: () => router.push(`/setting`),
-    },
     logout: {
       title: '로그아웃',
       goNavi: handleLogout,
