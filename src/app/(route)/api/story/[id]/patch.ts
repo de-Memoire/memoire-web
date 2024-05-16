@@ -56,8 +56,6 @@ export const patchStory = async (
     );
   }
 
-  console.log(storyResponse.data);
-
   if (user.id !== storyResponse.data.user_id) {
     return NextResponse.json(
       new ErrorResponse({

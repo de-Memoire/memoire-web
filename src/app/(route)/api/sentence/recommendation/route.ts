@@ -44,8 +44,6 @@ export const POST = async (request: NextRequest) => {
   );
   const tags: string[] = tagAiJsonResult.categories;
 
-  console.log(tags);
-
   const sentencesResponse = await supabase
     .from('sentence_tag')
     .select(
@@ -74,7 +72,6 @@ export const POST = async (request: NextRequest) => {
 
   const sentenceStoryIdMap: Record<string, number> = {};
   sentencesResponse.data.forEach((tagItem) => {
-    console.log(tagItem.value);
     tagItem.sentence_tag_log.forEach((tagLogItem) => {
       if (tagLogItem.sentence) {
         sentenceStoryIdMap[tagLogItem.sentence.content] =
