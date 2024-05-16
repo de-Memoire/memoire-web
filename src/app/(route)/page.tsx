@@ -21,8 +21,9 @@ import Write from '/public/icon/write.svg';
 import Sentence from '/public/icon/sentence.svg';
 import { Story } from '../_constant/type/model';
 
-const STORY_TEXT = '타인에게서\n자신의 이야기를 발견하세요.';
-const SENTENCE_TEXT = '타인에게서 자신의 이야기를 발견하세요.';
+const STORY_TEXT =
+  '끝없는 노력에 숨결을 불어넣은,\n지고의 아름다운 글귀를 탐색해보세요.';
+const SENTENCE_TEXT = '한 문장 속 씁쓸함과 아름다움을 느껴보세요.';
 const MAIN_TEXT = '타인에게서\n자신의 이야기를\n발견하세요.';
 
 import { getStoryFeed } from '../userApi/getStoryFeed';
