@@ -107,7 +107,7 @@ const Page = () => {
       styleType: 'bright',
       buttonType: 'text',
       icon: <Share />,
-      onClick: shareHandler,
+      onClick: () => shareHandler(path),
     },
   ];
   /*---- jsx ----*/

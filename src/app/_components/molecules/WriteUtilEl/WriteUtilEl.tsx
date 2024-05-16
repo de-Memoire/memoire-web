@@ -76,7 +76,6 @@ const WriteUtilEl = ({
             <div className={styles.childrenBox}> </div>
           </div>
           {dropDown.children}
-          <div className={styles.lineBoxType.long}></div>
         </>
       )}
     </>

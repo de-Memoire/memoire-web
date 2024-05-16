@@ -27,5 +27,10 @@ export const buttonEl = style({
   flex: '1',
   textAlign: 'center',
   cursor: 'pointer',
-  lineHeight: '12px',
+
+  transition: '0.5s',
+
+  ':hover': {
+    opacity: '0.5',
+  },
 });

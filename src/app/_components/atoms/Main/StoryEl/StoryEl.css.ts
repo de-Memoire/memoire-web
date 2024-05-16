@@ -8,12 +8,23 @@ export const wrap = style({
   opacity: '0',
   flex: 1,
   cursor: 'pointer',
+  background: COLORS.grayscale.white,
+
+  ':hover': {
+    transition: '.5s',
+    transform: 'scale(1.05)',
+  },
 });
 
 export const imgContainer = style({
   height: '200px',
   width: '100%',
   paddingBottom: '20px',
+
+  ':hover': {
+    transition: '.5s',
+    transform: 'scale(1.05)',
+  },
 });
 
 export const base = style({
@@ -21,10 +32,6 @@ export const base = style({
 
   transition: '.5s',
 
-  ':hover': {
-    opacity: '0.6',
-    transform: 'scale(1.05)',
-  },
 });
 
 export const textType = styleVariants({

@@ -63,6 +63,13 @@ export const imgContainer = style({
   maxHeight: '250px',
 });
 
+export const sign = style({
+  width: '120px',
+  height: '80px',
+  marginLeft: 'auto',
+  objectFit: 'contain',
+});
+
 export const storyContent = style({
   display: 'flex',
   flex: 1,

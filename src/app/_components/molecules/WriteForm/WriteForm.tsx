@@ -44,7 +44,7 @@ export const WriteForm = ({
           <img src={image.src} width={1280} height={300} alt={image.alt} />
         </div>
       )}
-      <div className={`${styles.storyContent} ${styles.maxWidth}`}>
+      <div className={`${styles.storyContent} ${styles.maxWidth} ani_floating`}>
         <div className={styles.textType.title}>{write.title}</div>
         <div className={styles.textType.author}>{write.author}</div>
         <div className={styles.textType.content}>{write.content}</div>

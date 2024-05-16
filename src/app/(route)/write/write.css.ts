@@ -3,17 +3,9 @@ import { style, styleVariants } from '@vanilla-extract/css';
 
 export const container = style({});
 
-export const snapContainer = style({
-  overflow: 'auto',
-  scrollSnapType: 'y mandatory',
-  height: 'calc(100vh - 70px - 50px - 15px)',
-});
+export const snapContainer = style({});
 
-export const snapEl = style({
-  scrollSnapAlign: 'start',
-  scrollSnapStop: 'always',
-  minHeight: 'calc(100vh - 70px - 50px - 100px)',
-});
+export const snapEl = style({});
 
 export const writeSection = style({
   flex: '10',
@@ -53,6 +45,7 @@ export const btnSection = style({
   display: 'flex',
   justifyContent: 'flex-end',
   gap: '10px',
+  padding: '30px 0px 50px 0px',
 });
 export const btnWrapper = style({
   padding: '16px 20px',
