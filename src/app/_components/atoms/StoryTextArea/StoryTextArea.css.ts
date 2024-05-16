@@ -8,8 +8,9 @@ export const styledTextArea = style({
   border: 'none',
 
   resize: 'none',
-  overflowY: 'hidden',
-  height: '100%',
+  minHeight: '100%',
+
+  overflow: 'scroll',
 
   ':focus': {
     outline: 'none',

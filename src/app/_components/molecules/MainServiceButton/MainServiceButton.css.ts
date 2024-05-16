@@ -14,7 +14,6 @@ export const wrap = style({
   transition: '.5s',
 
   ':hover': {
-    opacity: '0.6',
     transform: 'scale(1.05)',
   },
 });

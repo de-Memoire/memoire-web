@@ -22,8 +22,10 @@ export const wrap = style({
 });
 
 export const signContent = style({
-  width: '100px',
+  width: '120px',
+  height: '80px',
   marginLeft: 'auto',
+  objectFit: 'contain',
   display: 'flex',
 });
 

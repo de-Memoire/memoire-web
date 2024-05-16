@@ -6,9 +6,7 @@ export const title = style({
   whiteSpace: 'pre-line',
 });
 
-export const box = style({
-  width: '100%',
-  height: '140px',
-  borderRadius: '12px',
-  background: COLORS.grayscale.black,
+export const maxWidth = style({
+  width: '1000px',
+  margin: '0 auto',
 });
