@@ -32,6 +32,7 @@ export const GET = async (request: NextRequest) => {
   const result = await supabase
     .from('story')
     .select('*')
+    .in('id', [69, 74, 75, 76, 79, 80, 81, 82, 83, 84])
     .eq('type', validationResult.data.type)
     .is('deleted_at', null);
 
