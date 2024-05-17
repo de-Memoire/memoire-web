@@ -33,7 +33,7 @@ const StoryTextArea = ({
 
   return (
     <textarea
-      className={`${styledTextArea} ${className}`}
+      className={`${styledTextArea} ${className} scroll`}
       placeholder={placeholder}
       onChange={onChange}
       {...textareaProps}
