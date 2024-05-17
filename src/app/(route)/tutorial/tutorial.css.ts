@@ -2,7 +2,7 @@ import { TEXT_STYLES, COLORS } from '@/app/_constant';
 import { style, styleVariants } from '@vanilla-extract/css';
 
 export const imgWrap = style({
-  width: '1200px',
+  width: '100%',
   minHeight: '100vh',
   overflow: 'scroll',
   overflowX: 'hidden',
@@ -18,7 +18,7 @@ export const buttonContainer = style({
   position: 'fixed',
   top: '0',
   zIndex: '9999',
-  width: '1200px',
+  width: '100%',
   textAlign: 'right',
   padding: '10px 50px',
 
@@ -61,4 +61,5 @@ export const ModalLayOut = style({
   justifyContent: 'space-between',
   borderRadius: '10px',
   position: 'relative',
+  width: '100%',
 });
