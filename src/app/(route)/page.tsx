@@ -91,6 +91,7 @@ export default function Page() {
         }}
         modules={[Mousewheel, Pagination, Autoplay]}
         className="mySwiper"
+        autoplay={{ delay: 3000 }}
       >
         <SwiperSlide>
           <Layout title={MAIN_TEXT} type="big" bg={true}>
