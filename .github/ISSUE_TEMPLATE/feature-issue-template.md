@@ -1,16 +1,16 @@
 ---
 name: FEATURE ISSUE TEMPLATE
 about: 어떤 기능에 대한 개발인가요?
-title: ""
-labels: ""
-assignees: ""
+title: ''
+labels: ''
+assignees: ''
 ---
 
-## 📌 어떤 기능에 대한 개발인가요?
+## 어떤 기능에 대한 개발인가요?
 
-## 🗓️ Due date
+## Due date
 
-## ✅ Check List
+## Check List
 
 - [ ] 담당자 등록
 - [ ] 라벨 등록

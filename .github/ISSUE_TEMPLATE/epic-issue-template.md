@@ -2,15 +2,15 @@
 name: EPIC ISSUE TEMPLATE
 about: 어떤 EPIC/Milestone 인가요?
 title: EPIC ISSUE TEMPLATE
-labels: ""
-assignees: ""
+labels: ''
+assignees: ''
 ---
 
-## 📌 어떤 EPIC/Milestone 인가요?
+## 어떤 EPIC/Milestone 인가요?
 
-## 🗓️ Due date
+## Due date
 
-## 🌈 Feature List
+## Feature List
 
 - [ ] todo1
 - [ ] todo2
