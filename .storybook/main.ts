@@ -48,6 +48,20 @@ const config: StorybookConfig = {
       }
     });
 
+    // 기존의 SVG 처리 rule 제거
+    if (config.module?.rules) {
+      config.module.rules = config.module.rules.filter((rule: any) => {
+        return !(rule?.test instanceof RegExp && rule.test.test('.svg'));
+      });
+    }
+
+    // SVG 파일을 React 컴포넌트로 처리
+    config.module?.rules?.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+      issuer: /\.[jt]sx?$/,
+    });
+
     return config;
   },
 
