@@ -4,7 +4,6 @@ import { style, styleVariants } from '@vanilla-extract/css';
 export const wrap = style({
   borderRadius: '10px',
   width: '510px',
-  height: '700px',
   justifyContent: 'center',
   display: 'flex',
   flexDirection: 'column',
@@ -23,5 +22,4 @@ export const icon = style({
   ':hover': {
     opacity: '0.5',
   },
-
 });
