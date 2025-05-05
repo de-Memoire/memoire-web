@@ -1,0 +1,21 @@
+._1q6sjtn0 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 150%;
+  font-family: KoPubWorldBatang;
+  padding: 10px 30px;
+  border-radius: 50px;
+  display: inline-block;
+  cursor: pointer;
+  transition: 0.5s;
+}
+._1q6sjtn1 {
+  background: #F5F5F5;
+  color: #000000;
+}
+._1q6sjtn2 {
+  background: #000000;
+  color: #F5F5F5;
+}
+
+/*# sourceMappingURL=app-_components-atoms-FeedbackTag-FeedbackTag-stories.css.map*/

@@ -1,0 +1,31 @@
+.ajvo5v0 {
+  color: #424242;
+  width: 100%;
+  border: none;
+}
+.ajvo5v0:focus {
+  outline: none;
+}
+.ajvo5v0::placeholder {
+  color: #616161;
+}
+.ajvo5v1 {
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 150%;
+  font-family: KoPubWorldBatang;
+}
+.ajvo5v2 {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 150%;
+  font-family: KoPubWorldBatang;
+}
+.ajvo5v3 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 150%;
+  font-family: KoPubWorldBatang;
+}
+
+/*# sourceMappingURL=app-_components-atoms-StoryTextInput-StoryTextInput-stories.css.map*/

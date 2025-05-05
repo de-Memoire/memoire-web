@@ -1,0 +1,20 @@
+._1on9zcs0 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 150%;
+  font-family: KoPubWorldBatang;
+  color: #424242;
+  width: 100%;
+  border: none;
+  resize: none;
+  min-height: 100%;
+  overflow: scroll;
+}
+._1on9zcs0:focus {
+  outline: none;
+}
+._1on9zcs0::placeholder {
+  color: #616161;
+}
+
+/*# sourceMappingURL=app-_components-atoms-StoryTextArea-StoryTextArea-stories.css.map*/

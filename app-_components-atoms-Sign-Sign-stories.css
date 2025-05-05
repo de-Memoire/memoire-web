@@ -1,0 +1,33 @@
+._14l4uft0 {
+  height: 160px;
+  width: 400px;
+  margin: 0 auto;
+  border: 1px dashed #C2C2C2;
+  border-radius: 5px;
+  position: relative;
+}
+._14l4uft1 {
+  padding: 10px;
+}
+._14l4uft2 {
+  height: 20px;
+  width: 100%;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+}
+._14l4uft3 {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 120%;
+  font-family: pretendard;
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.5s;
+}
+._14l4uft3:hover {
+  opacity: 0.5;
+}
+
+/*# sourceMappingURL=app-_components-atoms-Sign-Sign-stories.css.map*/

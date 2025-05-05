@@ -1,0 +1,56 @@
+._5r6xw50 {
+  border-radius: 10px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px 0px 0px;
+  overflow: hidden;
+  max-width: 500px;
+}
+._5r6xw51 {
+  display: flex;
+  margin-top: 10px;
+  height: 80px;
+}
+._5r6xw52 {
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 120%;
+  font-family: pretendard;
+}
+._5r6xw53 {
+  text-align: right;
+  width: 22px;
+  min-height: 22px;
+  margin-left: auto;
+  margin-right: 10px;
+  cursor: pointer;
+}
+._5r6xw53:hover {
+  opacity: 0.5;
+}
+._5r6xw54 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 80px;
+  font-family: KoPubWorldBatang;
+  flex: 1;
+  text-align: center;
+  min-width: 255px;
+  cursor: pointer;
+  transition: .2s;
+}
+._5r6xw54:hover {
+  opacity: 0.5;
+}
+._5r6xw55 {
+  color: #000000;
+  background: #E0E0E0;
+}
+._5r6xw56 {
+  color: #FFFFFF;
+  background: #424242;
+}
+
+/*# sourceMappingURL=app-_components-atoms-Confirm-Confirm-stories.css.map*/

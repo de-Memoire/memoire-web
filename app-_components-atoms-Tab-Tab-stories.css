@@ -1,0 +1,23 @@
+.uhy5yj0 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.uhy5yj1 {
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+  height: 42px;
+  line-height: 42px;
+}
+.uhy5yj2 {
+  border-bottom: 3px solid #EDEDED;
+  color: #C2C2C2;
+}
+.uhy5yj3 {
+  border-bottom: 3px solid #000000 ;
+  color: #000000;
+}
+
+/*# sourceMappingURL=app-_components-atoms-Tab-Tab-stories.css.map*/

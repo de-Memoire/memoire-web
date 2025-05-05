@@ -1,0 +1,21 @@
+._16achxx0 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+._16achxx1 {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 120%;
+  font-family: pretendard;
+  color: #000000;
+}
+._16achxx2 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 120%;
+  font-family: pretendard;
+  color: #424242;
+}
+
+/*# sourceMappingURL=app-_components-atoms-Assistant-AssistantContent-AssistantContent-stories.css.map*/

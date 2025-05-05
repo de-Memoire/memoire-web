@@ -1,0 +1,25 @@
+._12wcp3p0 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px;
+  border-radius: 100px;
+  border: 1px solid #424242;
+  gap: 23px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+._12wcp3p0:hover {
+  opacity: 0.5;
+}
+._12wcp3p2 {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 120%;
+  font-family: pretendard;
+  color: #424242;
+  text-align: center;
+  width: 150px;
+}
+
+/*# sourceMappingURL=app-_components-atoms-LoginButton-LoginButton-stories.css.map*/

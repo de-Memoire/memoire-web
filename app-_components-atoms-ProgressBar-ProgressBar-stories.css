@@ -1,0 +1,20 @@
+.qxfvap0 {
+  gap: 10px;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding-bottom: 10px;
+}
+.qxfvap1 {
+  width: 60px;
+  height: 5px;
+  border-radius: 10px;
+}
+.qxfvap2 {
+  background: #424242;
+}
+.qxfvap3 {
+  background: #EDEDED;
+}
+
+/*# sourceMappingURL=app-_components-atoms-ProgressBar-ProgressBar-stories.css.map*/
