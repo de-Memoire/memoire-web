@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { wrap } from './FeedbackTag.css';
 
 export interface FeedbackTagProps {
@@ -25,12 +25,17 @@ const FeedbackTag = ({
 }: FeedbackTagProps) => {
   const [selected, setSelected] = useState<boolean>(isSelected);
 
+  useEffect(() => {
+    setSelected(isSelected);
+  }, [isSelected]);
+
   const handleClick = () => {
     if (onSelect) {
       setSelected(!selected);
       onSelect(text);
     }
   };
+
   return (
     <div
       className={`${wrap[`${selected}`]} ${className}`}
